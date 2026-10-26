@@ -10,3 +10,9 @@ Unit = start/goal pair. Success: mean paired difference with 95% bootstrap inter
 | smac2d | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.3 (-5.2 to -1.8), 19 | real decrease | -0.52 (-0.88 to -0.21), 19 | real decrease |
 | smac2d | A-C | 60 | -0.08 (-0.17 to +0.00) | no clear effect | -8.0 (-10.6 to -5.8), 50 | real decrease | -0.91 (-1.28 to -0.58), 50 | real decrease |
 | smac2d | A-D | 80 | -0.07 (-0.14 to -0.01) | no clear effect | -6.7 (-8.7 to -5.0), 69 | real decrease | -0.80 (-1.09 to -0.55), 69 | real decrease |
+| thetastar | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -5.6 (-8.6 to -2.9), 20 | real decrease | -0.78 (-1.41 to -0.25), 20 | real decrease |
+| thetastar | world_b | 20 | +0.15 (+0.00 to +0.30) | no clear effect | -5.0 (-10.9 to +0.5), 16 | no clear effect | -0.81 (-1.75 to -0.05), 16 | real decrease |
+| thetastar | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -9.9 (-14.9 to -5.9), 20 | real decrease | -0.72 (-1.20 to -0.35), 20 | real decrease |
+| thetastar | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.4 (-5.2 to -1.9), 19 | real decrease | -0.56 (-0.93 to -0.25), 19 | real decrease |
+| thetastar | A-C | 60 | +0.05 (+0.00 to +0.12) | no clear effect | -7.0 (-9.6 to -4.5), 56 | real decrease | -0.76 (-1.14 to -0.42), 56 | real decrease |
+| thetastar | A-D | 80 | +0.03 (-0.03 to +0.07) | no clear effect | -6.1 (-8.1 to -4.1), 75 | real decrease | -0.71 (-1.01 to -0.45), 75 | real decrease |
