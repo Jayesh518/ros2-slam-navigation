@@ -28,9 +28,12 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 | dwb | world_d | 20/20 | 20 | 1.00 (0.84 to 1.00) | 41.2 | 7.96 | 0.00 | 0.05 | 0.087 |
 | dwb | A-C | 60/60 | 51 | 0.85 (0.74 to 0.92) | 52.9 | 10.44 | 0.00 | 0.82 | 0.233 |
 | dwb | A-D | 80/80 | 71 | 0.89 (0.80 to 0.94) | 48.0 | 9.64 | 0.00 | 0.62 | 0.196 |
-| rpp | world_a | 1/1 | 1 | 1.00 (0.21 to 1.00) | 71.2 | 13.09 | 0.00 | 0.00 | 0.126 |
-| rpp | A-C | 1/1 | 1 | 1.00 (0.21 to 1.00) | 71.2 | 13.09 | 0.00 | 0.00 | 0.126 |
-| rpp | A-D | 1/1 | 1 | 1.00 (0.21 to 1.00) | 71.2 | 13.09 | 0.00 | 0.00 | 0.126 |
+| rpp | world_a | 20/20 | 19 | 0.95 (0.76 to 0.99) | 45.4 | 8.44 | 0.00 | 0.15 | 0.138 |
+| rpp | world_b | 20/20 | 11 | 0.55 (0.34 to 0.74) | 56.5 | 11.48 | 0.00 | 1.70 | 0.458 |
+| rpp | world_c | 20/20 | 20 | 1.00 (0.84 to 1.00) | 60.1 | 11.17 | 0.00 | 0.90 | 0.142 |
+| rpp | world_d | 20/20 | 20 | 1.00 (0.84 to 1.00) | 51.5 | 9.41 | 0.00 | 0.10 | 0.112 |
+| rpp | A-C | 60/60 | 50 | 0.83 (0.72 to 0.91) | 54.6 | 9.88 | 0.00 | 0.92 | 0.246 |
+| rpp | A-D | 80/80 | 70 | 0.88 (0.78 to 0.93) | 54.0 | 9.64 | 0.00 | 0.71 | 0.212 |
 
 ## Failure reasons (valid trials)
 
@@ -40,6 +43,10 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 | baseline | world_b | timeout | 3 |
 | dwb | world_b | nav2_aborted | 4 |
 | dwb | world_b | timeout | 5 |
+| rpp | world_a | goal_not_reached_by_ground_truth | 1 |
+| rpp | world_b | goal_not_reached_by_ground_truth | 2 |
+| rpp | world_b | nav2_aborted | 6 |
+| rpp | world_b | timeout | 1 |
 | smac2d | world_b | nav2_aborted | 8 |
 | smac2d | world_b | timeout | 1 |
 | smac2d | world_d | nav2_aborted | 1 |

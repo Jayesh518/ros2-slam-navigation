@@ -4,7 +4,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-26
-- Phase: 4 in progress (owner: option b + go, 2026-10-26). World D added (post-hoc, protocol change (l)): world, map, alignment, 20 pairs done; next baseline D, then smac2d, thetastar, dwb, rpp over four worlds. Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Worlds A1/B1/C1 generated and checked; Nav2 configs generated (`configs/nav2/`); SLAM Toolbox maps for all three worlds saved (`maps/`). Left: map-to-world alignment, start/goal pairs, trial runner, metric tests, CI, factor check with own robot.
+- Phase: 4 done (gate 2026-10-27): 400 trials, report `docs/results.md`. Phase 5 (diagnosis) next, awaiting owner go-ahead. Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Worlds A1/B1/C1 generated and checked; Nav2 configs generated (`configs/nav2/`); SLAM Toolbox maps for all three worlds saved (`maps/`). Left: map-to-world alignment, start/goal pairs, trial runner, metric tests, CI, factor check with own robot.
 - Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
@@ -13,7 +13,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 - [x] Phase 1: `scripts/check_env.sh` run, result in `docs/environment.md`, missing items installed, smoke test works
 - [x] Phase 2: robot, worlds, trial runner, tests, CI
 - [x] Phase 3: baseline
-- [ ] Phase 4: intervention
+- [x] Phase 4: intervention
 - [ ] Phase 5: diagnosis
 - [ ] Phase 6: extension
 - [ ] Phase 7: report and release
@@ -45,8 +45,8 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - (resolved 2026-10-26: own robot modelled on TurtleBot 3 Burger.)
 
 ## Next steps
-1. Owner decides how to handle the ceiling in worlds A and C (see Ideas / Plan changes, PROPOSED: add a harder fourth world, or accept that H2 is untestable in C1).
-2. Phase 4: run `scripts/run_config.sh <config>` for smac2d, thetastar, dwb, rpp (4 x 60 trials, about 1 h each); the custom recovery node (config `recovery`) must be written first (Phase 6 item pulled forward, or run the 5 others first).
+1. Phase 5: explain the world-B failures (smac2d aborts, dwb/rpp localisation loss) from logs; needs short per-trial traces (the runner stores only summaries) - see proposal in the gate report.
+2. Phase 6: custom recovery node + `recovery` configuration (a second Nav2 config file with the node, then 80 trials, same pairs); H2 can then be tested only in B (post-hoc choice) because A, C, D are at the ceiling.
 3. (done:) Nav2 baseline config for our robot (`configs/`), then the trial runner (explicit zero cmd_vel at the end), metric unit tests, CI.
 3. Repeat the real-time-factor check with our robot and baseline, then log the chosen factor in the protocol change log.
 4. Owner: open `cad/nav_study_robot_v1.step` in Fusion 360 and report anything odd.
@@ -69,3 +69,4 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-26 (Ubuntu): Phase 3 baseline complete: 60 trials, 56 succeeded; failures all in world B (3 timeouts, 1 abort; 2 with AMCL error above 0.5 m). Zero collisions. `docs/baseline.md` written, figure `phase3-baseline-success.png`. Open: world-C ceiling (proposal above).
 - 2026-10-26 (Ubuntu): Owner chose option (b): world D (dense random clutter, seed 20261027) added after the baseline; mapped (41/43 waypoints), aligned (0.5 deg), 20 pairs. Protocol change log (l); analyse.py now reports pooled A-C (original design) and A-D (with post-hoc D). Grid is now 480 trials.
 - 2026-10-26 (Ubuntu): Baseline in world D: 20/20 (median time 38.5 s, mean AMCL error 0.08 m, no collisions). So the post-hoc world D did NOT create headroom: baseline success is 20/20 in A, C and D; only B (16/20) leaves room. Consequence for H2: untestable in C1 and D; B is the only world with failures to remove (a post-hoc choice of test world, to be labelled as such). Phase 4 runs continue (`scripts/run_phase4.sh`, started 16:48 UTC, about 5 to 6 h): comparisons of time, path and recoveries remain meaningful, and any drop in success is detectable.
+- 2026-10-27 (Ubuntu): Phase 4 complete: smac2d, thetastar, dwb, rpp over A to D (400 trials incl. baseline; 0 invalid, 0 collisions). Decision rule applied: success no clear effect for any variant except rpp A to C (-0.10, at threshold); smac2d and thetastar real decreases in time (-6.7, -6.1 s) and path (-0.80, -0.71 m); rpp real increase in time (+4.4 s). H1, H3 not supported; H2 not tested. Per-world rows are labelled suggestive in the tables. Report `docs/results.md`; figures phase4-*. Checked report numbers against the data (fixed 8 to 7 for dwb loc-failures; path saving 7 percent).

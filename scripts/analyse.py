@@ -78,13 +78,14 @@ if "baseline" in configs:
                 continue
             d_succ = (cur.loc[idx, "success"] - base.loc[idx, "success"]).to_numpy()
             both = [i for i in idx if cur.loc[i, "success"] == 1 and base.loc[i, "success"] == 1]
+            soften = (lambda v: v) if scope in POOLED else (lambda v: v.replace("real ", "suggestive "))  # protocol section 8: per-world results are never "real"
             res = {"config": c, "scope": scope, "label": ("primary, original design" if scope == "A-C" else "primary, with post-hoc world D") if scope in POOLED else ("suggestive (per world; D is post-hoc)" if scope == "world_d" else "suggestive (per world)")}
             r = analysis.decide_success(d_succ)
-            res.update({"success_diff": r["mean_diff"], "success_lo": r["ci_lo"], "success_hi": r["ci_hi"], "n_pairs": r["n_pairs"], "success_verdict": r["verdict"]})
+            res.update({"success_diff": r["mean_diff"], "success_lo": r["ci_lo"], "success_hi": r["ci_hi"], "n_pairs": r["n_pairs"], "success_verdict": soften(r["verdict"])})
             for col in ("time_s", "path_m"):
                 dd = (cur.loc[both, col] - base.loc[both, col]).to_numpy()
                 rc = analysis.decide_continuous(dd, base.loc[both, col].to_numpy())
-                res.update({f"{col}_diff": rc["mean_diff"], f"{col}_lo": rc["ci_lo"], f"{col}_hi": rc["ci_hi"], f"{col}_n": rc["n_pairs"], f"{col}_verdict": rc["verdict"]})
+                res.update({f"{col}_diff": rc["mean_diff"], f"{col}_lo": rc["ci_lo"], f"{col}_hi": rc["ci_hi"], f"{col}_n": rc["n_pairs"], f"{col}_verdict": soften(rc["verdict"])})
             paired_rows.append(res)
     if paired_rows:
         pr = pd.DataFrame(paired_rows)
@@ -99,6 +100,26 @@ if "baseline" in configs:
                       f"{r.time_s_diff:+.1f} ({r.time_s_lo:+.1f} to {r.time_s_hi:+.1f}), {r.time_s_n} | {r.time_s_verdict} | "
                       f"{r.path_m_diff:+.2f} ({r.path_m_lo:+.2f} to {r.path_m_hi:+.2f}), {r.path_m_n} | {r.path_m_verdict} |")
         (ROOT / "results/paired_vs_baseline.md").write_text("\n".join(pm) + "\n")
+
+# figure 2: paired differences to the baseline, pooled (A-C original design, A-D with world D), with 95% bootstrap intervals
+if paired_rows:
+    pr = pd.DataFrame(paired_rows)
+    fig2, axs = plt.subplots(1, 3, figsize=(13, 3.8))
+    for ax, (col, lab) in zip(axs, (("success", "success rate difference"), ("time_s", "time to goal difference (s)"), ("path_m", "path length difference (m)"))):
+        for k, scope in enumerate(("A-C", "A-D")):
+            sub = pr[pr.scope == scope].set_index("config")
+            cs = [c for c in ORDER if c in sub.index]
+            y = np.arange(len(cs)) + (k - 0.5) * 0.3
+            m = np.array([sub.loc[c, f"{col}_diff"] for c in cs]); lo = np.array([sub.loc[c, f"{col}_lo"] for c in cs]); hi = np.array([sub.loc[c, f"{col}_hi"] for c in cs])
+            ax.errorbar(m, y, xerr=[m - lo, hi - m], fmt="o", color=("#4c78a8", "#444444")[k], capsize=3, label=("A to C (original design)", "A to D (incl. post-hoc D)")[k])
+        ax.axvline(0, color="k", lw=0.8)
+        if col == "success":
+            ax.axvspan(-0.10, 0.10, color="#cccccc", alpha=0.4)  # below the 10-point threshold: never 'real'
+        ax.set_yticks(range(len(cs))); ax.set_yticklabels(cs); ax.set_xlabel(lab); ax.grid(axis="x", alpha=0.3)
+    axs[1].legend(fontsize=8, loc="upper left")
+    fig2.suptitle("Paired differences to the baseline (per start/goal pair; 95% bootstrap intervals; time and path on pairs where both succeeded)", fontsize=10)
+    fig2.tight_layout()
+    fig2.savefig(ROOT / "docs/figures/paired-differences.png", dpi=110)
 
 # figure: success rate by configuration and world
 fig, ax = plt.subplots(figsize=(9, 4.6))

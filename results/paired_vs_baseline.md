@@ -4,24 +4,27 @@ Unit = start/goal pair. Success: mean paired difference with 95% bootstrap inter
 
 | config | scope | n pairs | success diff (95% CI) | verdict | time diff s (95% CI), n | verdict | path diff m (95% CI), n | verdict |
 |---|---|---|---|---|---|---|---|---|
-| smac2d | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -6.5 (-9.5 to -3.9), 20 | real decrease | -0.98 (-1.60 to -0.46), 20 | real decrease |
-| smac2d | world_b | 20 | -0.25 (-0.50 to +0.00) | no clear effect | -4.2 (-5.6 to -2.9), 10 | real decrease | -0.50 (-0.68 to -0.31), 10 | real decrease |
-| smac2d | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -11.4 (-16.8 to -6.8), 20 | real decrease | -1.04 (-1.72 to -0.49), 20 | real decrease |
-| smac2d | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.3 (-5.2 to -1.8), 19 | real decrease | -0.52 (-0.88 to -0.21), 19 | real decrease |
+| smac2d | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -6.5 (-9.5 to -3.9), 20 | suggestive decrease | -0.98 (-1.60 to -0.46), 20 | suggestive decrease |
+| smac2d | world_b | 20 | -0.25 (-0.50 to +0.00) | no clear effect | -4.2 (-5.6 to -2.9), 10 | suggestive decrease | -0.50 (-0.68 to -0.31), 10 | suggestive decrease |
+| smac2d | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -11.4 (-16.8 to -6.8), 20 | suggestive decrease | -1.04 (-1.72 to -0.49), 20 | suggestive decrease |
+| smac2d | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.3 (-5.2 to -1.8), 19 | suggestive decrease | -0.52 (-0.88 to -0.21), 19 | suggestive decrease |
 | smac2d | A-C | 60 | -0.08 (-0.17 to +0.00) | no clear effect | -8.0 (-10.6 to -5.8), 50 | real decrease | -0.91 (-1.28 to -0.58), 50 | real decrease |
 | smac2d | A-D | 80 | -0.07 (-0.14 to -0.01) | no clear effect | -6.7 (-8.7 to -5.0), 69 | real decrease | -0.80 (-1.09 to -0.55), 69 | real decrease |
-| thetastar | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -5.6 (-8.6 to -2.9), 20 | real decrease | -0.78 (-1.41 to -0.25), 20 | real decrease |
-| thetastar | world_b | 20 | +0.15 (+0.00 to +0.30) | no clear effect | -5.0 (-10.9 to +0.5), 16 | no clear effect | -0.81 (-1.75 to -0.05), 16 | real decrease |
-| thetastar | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -9.9 (-14.9 to -5.9), 20 | real decrease | -0.72 (-1.20 to -0.35), 20 | real decrease |
-| thetastar | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.4 (-5.2 to -1.9), 19 | real decrease | -0.56 (-0.93 to -0.25), 19 | real decrease |
+| thetastar | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -5.6 (-8.6 to -2.9), 20 | suggestive decrease | -0.78 (-1.41 to -0.25), 20 | suggestive decrease |
+| thetastar | world_b | 20 | +0.15 (+0.00 to +0.30) | no clear effect | -5.0 (-10.9 to +0.5), 16 | no clear effect | -0.81 (-1.75 to -0.05), 16 | suggestive decrease |
+| thetastar | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -9.9 (-14.9 to -5.9), 20 | suggestive decrease | -0.72 (-1.20 to -0.35), 20 | suggestive decrease |
+| thetastar | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.4 (-5.2 to -1.9), 19 | suggestive decrease | -0.56 (-0.93 to -0.25), 19 | suggestive decrease |
 | thetastar | A-C | 60 | +0.05 (+0.00 to +0.12) | no clear effect | -7.0 (-9.6 to -4.5), 56 | real decrease | -0.76 (-1.14 to -0.42), 56 | real decrease |
 | thetastar | A-D | 80 | +0.03 (-0.03 to +0.07) | no clear effect | -6.1 (-8.1 to -4.1), 75 | real decrease | -0.71 (-1.01 to -0.45), 75 | real decrease |
 | dwb | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +1.2 (-1.0 to +3.9), 20 | no clear effect | +0.07 (-0.09 to +0.29), 20 | no clear effect |
 | dwb | world_b | 20 | -0.25 (-0.50 to +0.00) | no clear effect | +2.6 (-0.4 to +7.4), 10 | no clear effect | -0.07 (-0.23 to +0.11), 10 | no clear effect |
 | dwb | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -0.4 (-3.7 to +3.1), 20 | no clear effect | +0.15 (-0.03 to +0.37), 20 | no clear effect |
-| dwb | world_d | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +3.2 (+1.1 to +6.3), 20 | real increase | +0.07 (-0.10 to +0.29), 20 | no clear effect |
+| dwb | world_d | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +3.2 (+1.1 to +6.3), 20 | suggestive increase | +0.07 (-0.10 to +0.29), 20 | no clear effect |
 | dwb | A-C | 60 | -0.08 (-0.17 to +0.00) | no clear effect | +0.9 (-1.0 to +2.8), 50 | no clear effect | +0.08 (-0.03 to +0.21), 50 | no clear effect |
 | dwb | A-D | 80 | -0.06 (-0.12 to +0.00) | no clear effect | +1.5 (-0.0 to +3.2), 70 | no clear effect | +0.07 (-0.02 to +0.18), 70 | no clear effect |
-| rpp | world_a | 1 | +0.00 (+0.00 to +0.00) | no clear effect | +13.7 (+13.7 to +13.7), 1 | real increase | +1.02 (+1.02 to +1.02), 1 | real increase |
-| rpp | A-C | 1 | +0.00 (+0.00 to +0.00) | no clear effect | +13.7 (+13.7 to +13.7), 1 | real increase | +1.02 (+1.02 to +1.02), 1 | real increase |
-| rpp | A-D | 1 | +0.00 (+0.00 to +0.00) | no clear effect | +13.7 (+13.7 to +13.7), 1 | real increase | +1.02 (+1.02 to +1.02), 1 | real increase |
+| rpp | world_a | 20 | -0.05 (-0.15 to +0.00) | no clear effect | +2.5 (+0.0 to +5.2), 19 | suggestive increase | +0.06 (-0.28 to +0.35), 19 | no clear effect |
+| rpp | world_b | 20 | -0.25 (-0.45 to -0.05) | suggestive decrease | +9.9 (+2.8 to +18.4), 11 | suggestive increase | +0.37 (-0.08 to +1.03), 11 | no clear effect |
+| rpp | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +1.7 (-2.0 to +5.4), 20 | no clear effect | +0.08 (-0.20 to +0.37), 20 | no clear effect |
+| rpp | world_d | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +5.7 (+2.9 to +8.9), 20 | suggestive increase | +0.47 (+0.01 to +1.03), 20 | suggestive increase |
+| rpp | A-C | 60 | -0.10 (-0.18 to -0.03) | real decrease | +3.8 (+1.4 to +6.6), 50 | real increase | +0.14 (-0.06 to +0.36), 50 | no clear effect |
+| rpp | A-D | 80 | -0.07 (-0.14 to -0.03) | no clear effect | +4.4 (+2.4 to +6.5), 70 | real increase | +0.23 (+0.03 to +0.46), 70 | no clear effect |
