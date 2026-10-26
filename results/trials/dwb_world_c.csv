@@ -1,0 +1,9 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+dwb-c20-r1,dwb,world_c,c20,1,13001,1,,SUCCEEDED,63.43,10.135,0.268,1,1,0,0,0.161,0.115,0,78.51,70.5,2026-10-26T20:21:09+00:00
+dwb-c07-r1,dwb,world_c,c07,1,13002,1,,SUCCEEDED,31.92,6.404,0.197,1,1,0,0,0.175,0.119,0,117.35,38.9,2026-10-26T20:22:20+00:00
+dwb-c16-r1,dwb,world_c,c16,1,13003,1,,SUCCEEDED,90.44,17.578,0.076,1,1,0,2,0.379,0.175,0,214.71,97.5,2026-10-26T20:22:59+00:00
+dwb-c17-r1,dwb,world_c,c17,1,13004,1,,SUCCEEDED,32.96,6.596,0.261,1,1,0,0,0.188,0.113,0,254.61,40.0,2026-10-26T20:24:36+00:00
+dwb-c01-r1,dwb,world_c,c01,1,13005,1,,SUCCEEDED,52.94,10.436,0.21,1,1,0,0,0.302,0.172,0,314.47,60.0,2026-10-26T20:25:16+00:00
+dwb-c19-r1,dwb,world_c,c19,1,13006,1,,SUCCEEDED,97.12,19.095,0.285,1,1,0,2,0.421,0.156,0,418.5,104.1,2026-10-26T20:26:16+00:00
+dwb-c18-r1,dwb,world_c,c18,1,13007,1,,SUCCEEDED,77.38,16.222,0.104,1,1,0,0,0.188,0.138,0,502.81,84.4,2026-10-26T20:28:00+00:00
+dwb-c15-r1,dwb,world_c,c15,1,13008,1,,SUCCEEDED,98.96,16.726,0.247,1,1,0,2,0.824,0.181,0,608.7,106.0,2026-10-26T20:29:25+00:00
