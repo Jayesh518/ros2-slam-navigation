@@ -4,7 +4,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-26
-- Phase: 2 in progress (started 2026-10-26). Done so far: `scripts/env.sh` (clean env wrapper, workspace rebuilt clean), timing test.
+- Phase: 2 in progress (started 2026-10-26). Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Left: worlds A1/B1/C1, Nav2 baseline config, trial runner, metric tests, CI, factor check with own robot.
 - Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
@@ -39,8 +39,10 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - (resolved 2026-10-26: own robot modelled on TurtleBot 3 Burger.)
 
 ## Next steps
-1. Compare success at real-time factor 1 vs 10 on a fixed set of trials (see environment.md Timing) before fixing the factor for the grid.
-2. Own robot description modelled on the TurtleBot 3 Burger (owner decision); build worlds A1/B1/C1; trial runner; metric unit tests; CI.
+1. Worlds A1, B1, C1 in `src/nav_study_bringup/worlds` (same system block as `test_arena.sdf`); map each with SLAM Toolbox.
+2. Nav2 baseline config for our robot (`configs/`), then the trial runner (explicit zero cmd_vel at the end), metric unit tests, CI.
+3. Repeat the real-time-factor check with our robot and baseline, then log the chosen factor in the protocol change log.
+4. Owner: open `cad/nav_study_robot_v1.step` in Fusion 360 and report anything odd.
 
 ## Session log
 - 2026-10-26 (Windows laptop): wrote `PLAN.md`, `CLAUDE.md`, `PHASES.md` update, `scripts/check_env.sh`, this journal and `docs/restore-prompt.md`. No code run yet.
@@ -51,3 +53,4 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-26 (Ubuntu): second smoke run; Claude took desktop screenshots: RViz showed map, scan, AMCL particles, Nav2 active; goal SUCCEEDED twice. Phase 1 gate passed. Note: stock tb3 world is a hexagon with 9 pillars, a useful reference for world C1.
 - 2026-10-26 (Ubuntu): added `docs/figures/` (Phase 1 figure, captions index), README figure section, and a CLAUDE.md rule: one final cropped screenshot per phase, temporary ones deleted after use. Temporary screenshots from the smoke test were deleted.
 - 2026-10-26 (Ubuntu): Phase 2 started. `scripts/env.sh` written; found the repo's first colcon build had baked `articuno_ws` into `install/` prefix chain, rebuilt in the clean env. Timing: headless stock sim runs at real-time factor 1 by default (59 s for one goal); raising to 10 via `gz service set_physics` gave 56 sim-s in 5.7 s wall. Owner chose TurtleBot 3 Burger as reference for the robot.
+- 2026-10-26 (Ubuntu): real-time factor on stock robot: 1, 2, 4 reach 6/6 goals; 10 only 3/6 (earlier 2/6) so 10 is out. Built `nav_study_robot` (params YAML as single source, URDF, SDF, bridge) and `nav_study_bringup` (sim launch, test arena). Fixed contact topics (scoped names) in the bridge. Created `cad/make_robot_cad.py` and `cad/nav_study_robot_v1.step` (20 solids, 178 x 192 mm, self-check OK). Protocol change log: robot, noise 0.01 m, contact rule, factor to be set. Installed cadquery 2.8.0 into the repo `.venv`.

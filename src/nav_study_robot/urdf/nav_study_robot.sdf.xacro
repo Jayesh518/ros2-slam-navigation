@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!-- Gazebo model of the robot. All numbers come from config/robot_params.yaml (single source, shared with the URDF and the CAD).
+     Layout and plugin set follow the stock Nav2 TurtleBot 3 model (Apache-2.0); dimensions follow the TurtleBot 3 Burger. -->
+<sdf version="1.6" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="p" value="${xacro.load_yaml('$(find nav_study_robot)/config/robot_params.yaml')}"/>
+  <xacro:property name="R" value="${p['wheel']['radius']}"/>
+  <xacro:property name="half_sep" value="${p['wheel']['separation'] / 2}"/>
+  <xacro:property name="W" value="${p['wheel']['width']}"/>
+  <xacro:property name="L" value="${p['body']['plate_length']}"/>
+  <xacro:property name="Wd" value="${p['body']['plate_width']}"/>
+  <xacro:property name="cx" value="${p['body']['plate_center_x']}"/>
+  <xacro:property name="z_clear" value="${p['body']['motor']['z0']}"/>
+  <xacro:property name="z_top" value="${p['body']['plate_z0'][2] + p['body']['plate_thickness']}"/>
+  <xacro:property name="H" value="${z_top - z_clear}"/>
+  <xacro:property name="body_z" value="${(z_top + z_clear) / 2 - R}"/>
+  <xacro:property name="m" value="${p['body']['mass']}"/>
+  <xacro:property name="lidar_z" value="${p['lidar']['sensor_z']}"/>
+  <xacro:property name="lidar_cz" value="${p['lidar']['z0'] + p['lidar']['height'] / 2 - lidar_z}"/>
+  <model name="${p['robot_name']}">
+    <pose>0 0 0 0 0 0</pose>
+    <link name="base_footprint"/>
+
+    <link name="base_link">
+      <pose>0 0 ${R} 0 0 0</pose>
+      <inertial>
+        <pose>${cx} 0 ${body_z} 0 0 0</pose>
+        <mass>${m}</mass>
+        <inertia>
+          <ixx>${m * (Wd*Wd + H*H) / 12}</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>${m * (L*L + H*H) / 12}</iyy><iyz>0</iyz>
+          <izz>${m * (L*L + Wd*Wd) / 12}</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_collision">
+        <pose>${cx} 0 ${body_z} 0 0 0</pose>
+        <geometry><box><size>${L} ${Wd} ${H}</size></box></geometry>
+      </collision>
+      <visual name="base_visual">
+        <pose>${cx} 0 ${body_z} 0 0 0</pose>
+        <geometry><box><size>${L} ${Wd} ${H}</size></box></geometry>
+        <material><diffuse>0.2 0.2 0.22 1</diffuse></material>
+      </visual>
+      <sensor name="base_contact" type="contact">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <contact><collision>base_collision</collision></contact>
+      </sensor>
+    </link>
+
+    <link name="imu_link">
+      <pose>-0.032 0 0.101 0 0 0</pose>
+      <sensor name="imu" type="imu">
+        <always_on>true</always_on>
+        <update_rate>${p['imu']['update_rate']}</update_rate>
+        <topic>imu</topic>
+        <gz_frame_id>imu_link</gz_frame_id>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><mean>0.0</mean><stddev>2e-4</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0.0</mean><stddev>2e-4</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0.0</mean><stddev>2e-4</stddev></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><mean>0.0</mean><stddev>1.7e-2</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0.0</mean><stddev>1.7e-2</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0.0</mean><stddev>1.7e-2</stddev></noise></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </link>
+
+    <link name="base_scan">
+      <pose>${p['lidar']['x']} 0 ${lidar_z} 0 0 0</pose>
+      <inertial>
+        <mass>0.114</mass>
+        <inertia><ixx>0.0001</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.0001</iyy><iyz>0</iyz><izz>0.0001</izz></inertia>
+      </inertial>
+      <collision name="lidar_collision">
+        <pose>0 0 ${lidar_cz} 0 0 0</pose>
+        <geometry><cylinder><radius>${p['lidar']['radius']}</radius><length>${p['lidar']['height']}</length></cylinder></geometry>
+      </collision>
+      <visual name="lidar_visual">
+        <pose>0 0 ${lidar_cz} 0 0 0</pose>
+        <geometry><cylinder><radius>${p['lidar']['radius']}</radius><length>${p['lidar']['height']}</length></cylinder></geometry>
+        <material><diffuse>0.05 0.05 0.05 1</diffuse></material>
+      </visual>
+      <sensor name="lidar_contact" type="contact">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <contact><collision>lidar_collision</collision></contact>
+      </sensor>
+      <sensor name="lds" type="gpu_lidar">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <update_rate>${p['lidar']['update_rate']}</update_rate>
+        <topic>scan</topic>
+        <gz_frame_id>base_scan</gz_frame_id>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>${p['lidar']['samples']}</samples>
+              <resolution>1.000000</resolution>
+              <min_angle>0.000000</min_angle>
+              <max_angle>6.280000</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>${p['lidar']['min_range']}</min>
+            <max>${p['lidar']['max_range']}</max>
+            <resolution>0.015000</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>${p['lidar']['noise_stddev']}</stddev>
+          </noise>
+        </ray>
+      </sensor>
+    </link>
+
+    <xacro:macro name="wheel" params="side sign">
+      <link name="wheel_${side}_link">
+        <pose>0 ${sign * half_sep} ${R} -1.5707963 0 0</pose>
+        <inertial>
+          <mass>${p['wheel']['mass']}</mass>
+          <inertia>
+            <ixx>${p['wheel']['mass'] * (3*R*R + W*W) / 12}</ixx><ixy>0</ixy><ixz>0</ixz>
+            <iyy>${p['wheel']['mass'] * (3*R*R + W*W) / 12}</iyy><iyz>0</iyz>
+            <izz>${p['wheel']['mass'] * R*R / 2}</izz>
+          </inertia>
+        </inertial>
+        <collision name="wheel_${side}_collision">
+          <geometry><cylinder><radius>${R}</radius><length>${W}</length></cylinder></geometry>
+          <surface>
+            <friction><ode><mu>${p['wheel']['mu']}</mu><mu2>${p['wheel']['mu']}</mu2><slip1>0.035</slip1><slip2>0</slip2><fdir1>0 0 1</fdir1></ode></friction>
+            <contact><ode><soft_cfm>0</soft_cfm><soft_erp>0.2</soft_erp><kp>1e+5</kp><kd>1</kd><max_vel>0.01</max_vel><min_depth>0.001</min_depth></ode></contact>
+          </surface>
+        </collision>
+        <visual name="wheel_${side}_visual">
+          <geometry><cylinder><radius>${R}</radius><length>${W}</length></cylinder></geometry>
+          <material><diffuse>0.1 0.1 0.1 1</diffuse></material>
+        </visual>
+        <sensor name="wheel_${side}_contact" type="contact">
+          <always_on>true</always_on>
+          <update_rate>50</update_rate>
+          <contact><collision>wheel_${side}_collision</collision></contact>
+        </sensor>
+      </link>
+      <joint name="wheel_${side}_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>wheel_${side}_link</child>
+        <axis><xyz>0 0 1</xyz></axis>
+      </joint>
+    </xacro:macro>
+    <xacro:wheel side="left" sign="1"/>
+    <xacro:wheel side="right" sign="-1"/>
+
+    <link name="caster_link">
+      <pose>${p['caster']['x']} 0 ${p['caster']['radius']} 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass>
+        <inertia><ixx>0.00001</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.00001</iyy><iyz>0</iyz><izz>0.00001</izz></inertia>
+      </inertial>
+      <collision name="caster_collision">
+        <geometry><sphere><radius>${p['caster']['radius']}</radius></sphere></geometry>
+        <surface>
+          <friction><ode><mu>0</mu><mu2>0</mu2></ode></friction>
+          <contact><ode><soft_cfm>0</soft_cfm><soft_erp>0.2</soft_erp><kp>1e+5</kp><kd>1</kd><max_vel>0.01</max_vel><min_depth>0.001</min_depth></ode></contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+      <parent>base_footprint</parent>
+      <child>base_link</child>
+    </joint>
+    <joint name="caster_joint" type="ball">
+      <parent>base_link</parent>
+      <child>caster_link</child>
+    </joint>
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>base_scan</child>
+    </joint>
+    <joint name="imu_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>imu_link</child>
+    </joint>
+
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <left_joint>wheel_left_joint</left_joint>
+      <right_joint>wheel_right_joint</right_joint>
+      <wheel_separation>${p['wheel']['separation']}</wheel_separation>
+      <wheel_radius>${R}</wheel_radius>
+      <max_linear_acceleration>${p['limits']['max_linear_acceleration']}</max_linear_acceleration>
+      <min_linear_acceleration>-${p['limits']['max_linear_acceleration']}</min_linear_acceleration>
+      <max_angular_acceleration>${p['limits']['max_angular_acceleration']}</max_angular_acceleration>
+      <min_angular_acceleration>-${p['limits']['max_angular_acceleration']}</min_angular_acceleration>
+      <max_linear_velocity>${p['limits']['max_linear_velocity']}</max_linear_velocity>
+      <min_linear_velocity>-${p['limits']['max_linear_velocity']}</min_linear_velocity>
+      <max_angular_velocity>${p['limits']['max_angular_velocity']}</max_angular_velocity>
+      <min_angular_velocity>-${p['limits']['max_angular_velocity']}</min_angular_velocity>
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+      <tf_topic>tf</tf_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_footprint</child_frame_id>
+      <odom_publish_frequency>30</odom_publish_frequency>
+    </plugin>
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <joint_name>wheel_left_joint</joint_name>
+      <joint_name>wheel_right_joint</joint_name>
+      <topic>joint_states</topic>
+      <update_rate>30</update_rate>
+    </plugin>
+    <!-- Ground truth for the trial runner: perfect pose of the robot in the world frame, not used by Nav2. -->
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>world</odom_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+      <odom_topic>ground_truth</odom_topic>
+      <tf_topic>ground_truth_tf</tf_topic>
+      <dimensions>3</dimensions>
+      <odom_publish_frequency>30</odom_publish_frequency>
+    </plugin>
+  </model>
+</sdf>

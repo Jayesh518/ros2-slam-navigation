@@ -49,3 +49,16 @@ Command: `scripts/smoke_test.sh` (launches `nav2_bringup tb3_simulation_launch.p
 - The cap can be lifted at run time: `gz service -s /world/default/set_physics --reqtype gz.msgs.Physics --reptype gz.msgs.Boolean --timeout 3000 --req 'real_time_factor: 10'`. Measured real-time factor 10.0; the return goal then took 5.7 s wall for 56 s simulated time.
 - Consequence: a 120 s simulated timeout costs about 12 s wall at factor 10. The 360-trial grid is about 1.2 h of trial time plus stack start-up (about 30 s per launch; reuse one running stack per configuration and world rather than relaunching per trial). Higher factors, and whether results change with the physics step at high factors, are to be checked before the baseline.
 - Open check: a higher real-time factor can change controller behaviour if the CPU cannot keep up (sensor and control rates are in simulated time, but the Nav2 nodes use the wall CPU). Compare success on a fixed set of trials at factor 1 and factor 10 before using factor 10 for the grid.
+
+### Real-time factor check on the stock robot (`scripts/rtf_compare.sh`, `results/rtf_compare.csv`, 2026-10-26)
+Same 6 goals in a fixed cycle (3 distinct goals, each twice), stock Nav2 TurtleBot 3, headless, default Nav2 parameters, one run per factor. Sample is small (6 goals per factor, one run each), so it detects only large effects.
+| Factor | Goals reached | Wall time for the 6 goals |
+|---|---|---|
+| 1 | 6 of 6 | 183 s |
+| 2 | 6 of 6 | 84 s |
+| 4 | 6 of 6 | 46 s |
+| 10 | 3 of 6 (an earlier run: 2 of 6) | 34 s |
+Reading: factor 10 changes navigation outcomes, so it is out. Factors 2 and 4 matched factor 1 on this sample. The value for the study is chosen after repeating this with our own robot and the baseline configuration (Phase 2), with more goals.
+
+### Robot checks (2026-10-26, headless test arena)
+`/scan` 5.0 Hz, `/imu` 200 Hz, `/odom` and `/ground_truth` about 28 Hz (in the 30 Hz range, wall-clock limited), `/joint_states` about 28 Hz. Driving straight at 0.2 m/s reached the far wall; odometry and ground truth agreed. The Gazebo drive plugin keeps the last velocity command with no timeout, so the trial runner must publish an explicit zero at the end of a trial. Contact sensors publish on scoped topics (`/world/default/model/nav_study_robot/link/<link>/sensor/<name>/contact`), bridged to `/contact/base`, `/contact/lidar`, `/contact/wheel_left`, `/contact/wheel_right`; a wheel touching a wall appears as `walls::link::e`, ground contact as `ground_plane::link::collision`.

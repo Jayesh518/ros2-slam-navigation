@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!-- Kinematic description for robot_state_publisher and RViz. Same numbers as the SDF (config/robot_params.yaml); primitives only, no meshes. -->
+<robot name="nav_study_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="p" value="${xacro.load_yaml('$(find nav_study_robot)/config/robot_params.yaml')}"/>
+  <xacro:property name="R" value="${p['wheel']['radius']}"/>
+  <xacro:property name="half_sep" value="${p['wheel']['separation'] / 2}"/>
+  <xacro:property name="L" value="${p['body']['plate_length']}"/>
+  <xacro:property name="Wd" value="${p['body']['plate_width']}"/>
+  <xacro:property name="z_clear" value="${p['body']['motor']['z0']}"/>
+  <xacro:property name="z_top" value="${p['body']['plate_z0'][2] + p['body']['plate_thickness']}"/>
+  <xacro:property name="H" value="${z_top - z_clear}"/>
+
+  <link name="base_footprint"/>
+  <link name="base_link">
+    <visual>
+      <origin xyz="${p['body']['plate_center_x']} 0 ${(z_top + z_clear) / 2 - R}"/>
+      <geometry><box size="${L} ${Wd} ${H}"/></geometry>
+      <material name="body"><color rgba="0.2 0.2 0.22 1"/></material>
+    </visual>
+  </link>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/><child link="base_link"/>
+    <origin xyz="0 0 ${R}"/>
+  </joint>
+
+  <xacro:macro name="wheel" params="side sign">
+    <link name="wheel_${side}_link">
+      <visual>
+        <geometry><cylinder radius="${R}" length="${p['wheel']['width']}"/></geometry>
+        <material name="tyre"><color rgba="0.1 0.1 0.1 1"/></material>
+      </visual>
+    </link>
+    <joint name="wheel_${side}_joint" type="continuous">
+      <parent link="base_link"/><child link="wheel_${side}_link"/>
+      <origin xyz="0 ${sign * half_sep} 0" rpy="-1.5707963 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+  </xacro:macro>
+  <xacro:wheel side="left" sign="1"/>
+  <xacro:wheel side="right" sign="-1"/>
+
+  <link name="caster_link">
+    <visual>
+      <geometry><sphere radius="${p['caster']['radius']}"/></geometry>
+    </visual>
+  </link>
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/><child link="caster_link"/>
+    <origin xyz="${p['caster']['x']} 0 ${p['caster']['radius'] - R}"/>
+  </joint>
+
+  <link name="base_scan">
+    <visual>
+      <origin xyz="0 0 ${p['lidar']['z0'] + p['lidar']['height'] / 2 - p['lidar']['sensor_z']}"/>
+      <geometry><cylinder radius="${p['lidar']['radius']}" length="${p['lidar']['height']}"/></geometry>
+      <material name="lidar"><color rgba="0.05 0.05 0.05 1"/></material>
+    </visual>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/><child link="base_scan"/>
+    <origin xyz="${p['lidar']['x']} 0 ${p['lidar']['sensor_z'] - R}"/>
+  </joint>
+
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/><child link="imu_link"/>
+    <origin xyz="-0.032 0 ${0.101 - R}"/>
+  </joint>
+</robot>
