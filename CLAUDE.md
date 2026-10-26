@@ -3,7 +3,7 @@
 Personal robotics project by Jayesh Chaudhari (GitHub `Jayesh518`): a Nav2 configuration study in simulation. This repo is public. It is part of a personal AI/ML and robotics portfolio.
 
 ## On session start
-Read `docs/progress.md` (the journal), then `PLAN.md` and `PHASES.md`. If the drive crashed or the session was restarted, follow `docs/restore-prompt.md`. Give the owner a short briefing (where we stopped, what is done, the proposed next step) and wait for a go-ahead before doing work.
+Read `docs/progress.md` (the journal), then `PLAN.md` (start with section 0, the scenario: what we are building and why) and `PHASES.md`. If the drive crashed or the session was restarted, follow `docs/restore-prompt.md`. Give the owner a short briefing (where we stopped, what is done, the proposed next step) and wait for a go-ahead before doing work.
 
 ## Rules (always)
 - Work in phases with exit gates (`PHASES.md`, plan in `PLAN.md`). At the end of a phase: update `PHASES.md`, commit and push, then stop and propose the next phase. Do not start the next phase without the owner's go-ahead.

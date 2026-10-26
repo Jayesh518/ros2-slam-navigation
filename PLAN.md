@@ -2,6 +2,34 @@
 
 Written 2026-10-26 on the Windows laptop, to be read first by whoever (the owner or Claude Code) continues on the Ubuntu drive. Nothing here has been run yet. Everything marked **DRAFT** is finalised and committed in Phase 0, **before any trial is run**.
 
+## 0. The scenario: what we are building and why
+
+**Who and what for.** Jayesh Chaudhari (GitHub `Jayesh518`) is building a research-grade portfolio of three personal AI and robotics projects. The portfolio is read by people judging his ability to do real engineering and research (graduate programme reviewers and professors). Each project must therefore show evidence, not demos: a pre-registered question, controlled experiments, honest uncertainty and a report that says what the results cannot claim. All three projects are fully personal; none uses employer material.
+
+**The three-project arc.**
+1. `robust-computer-vision` (finished): how much a pretrained YOLO detector loses in rain, dark and blur, and which cheap fix helps. Its habits are the standard for this project too: phases with gates, hypotheses and decision rules fixed before the runs, confidence intervals, negative results reported, one-command reproduction.
+2. **`ros2-slam-navigation` (this project):** the navigation half of a robot, studied in simulation.
+3. `autonomous-rescue-rover` (planned): a small, low-speed, personally owned rover that combines a camera detector with range sensing and the navigation approach learned here, tested in a controlled indoor course. It is an independent personal build.
+
+**What we are building here.** A simulated differential-drive robot in Gazebo that builds a map of an unknown world (SLAM Toolbox), localises itself on that map (AMCL) and drives to goals while avoiding obstacles (Nav2). On top of that stack we build four things of our own:
+- the robot and world descriptions (the robot with a LiDAR and odometry, three worlds of rising difficulty);
+- an **automated trial runner** that sends a goal, watches ground truth, applies a timeout and writes one CSV row per trial;
+- one or more **custom ROS 2 nodes** (a waypoint-mission node and a custom recovery behaviour);
+- the **experiment and analysis**: how do planner and controller choices and the custom recovery behaviour change navigation success, collisions, time to goal and path length across the worlds.
+
+**Why this project exists.**
+- To show that the owner understands how a navigation stack fits together (maps, transforms, sensors, localisation, planning, control) and where it breaks, by measuring it rather than only running a tutorial. Most people can launch Nav2; few can say, with trial counts and intervals, what a configuration change does.
+- To produce the tools and knowledge Project 3 needs: the trial-runner design, a tuned Nav2 configuration, the transform-tree layout and the habit of logging every run. Doing it in simulation first means mistakes cost nothing before a real robot is involved.
+- To add a second, different kind of evidence to the portfolio: Project 1 is perception on real photographs, this one is planning and control in simulation, and Project 3 joins them on hardware.
+
+**What the finished project looks like.** A public repository where a fresh clone plus one command reproduces the headline results table; trial CSVs, figures and a report that states its limits; a two-page summary; a short demo video; TF and architecture diagrams; and an updated page on the owner's portfolio website (the owner updates that page himself from the results).
+
+**What it is not.** It does not reimplement SLAM or Nav2 (the algorithms are used as published; the work is configuration, integration, custom behaviour, experiments and interpretation). It does not claim real-world performance: simulation hides sensor noise, wheel slip and lighting, and the report must say so. It makes no rescue, safety or life-saving claims.
+
+**Quality bar and ways of working.** Same as Project 1: work in phases with exit gates, write the protocol before any trial, report mixed or negative results as they are, keep every number traceable to a file in the repo, and commit under the owner's name only. The external drive can crash, so the journal in `docs/progress.md` and frequent pushes (section 9) are part of the job, not extras.
+
+**Handoffs between projects.** From Project 1: the discipline above, and the finding that the pretrained detector is the one to use (Project 3 uses it; this project does not need a detector). To Project 3: the trial runner, the Nav2 configuration, the transform design and, optionally, a simulated thermal camera model in Gazebo (clearly labelled simulated).
+
 ## 1. What this project is
 
 A simulated differential-drive robot maps an unknown environment (SLAM Toolbox), localises itself (AMCL) and navigates to goals (Nav2). The study part: **how do Nav2 planner and controller choices and a custom recovery behaviour change navigation success, collisions, time and path length across worlds of rising difficulty?**

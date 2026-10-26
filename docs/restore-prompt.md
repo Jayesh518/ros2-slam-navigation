@@ -7,7 +7,7 @@ Restore the Project 2 (ros2-slam-navigation) context and continue the work.
 
 Do this in order, without asking me anything that is already decided in the files:
 
-1. Read CLAUDE.md, PLAN.md, PHASES.md and docs/progress.md completely. They are the source of truth; treat the decisions listed in docs/progress.md as settled.
+1. Read CLAUDE.md, PLAN.md (section 0 explains what we are building and why), PHASES.md and docs/progress.md completely. They are the source of truth; treat the decisions listed in docs/progress.md as settled.
 2. Check the repository for damage: run `git status`, `git log --oneline -10`, `git fsck --no-dangling` and `git fetch`. Compare with origin/main: tell me if I have uncommitted files, unpushed commits or if the remote is ahead. If git reports corruption, follow the crash rules in PLAN.md section 9 (clone fresh into a new folder, do not repair in place).
 3. Run `bash scripts/check_env.sh` and compare with the environment recorded in docs/environment.md (if it exists). Tell me what changed or is missing. Install only what is missing and only after you have confirmed the package names in the official docs.
 4. Look for work that was in progress when the drive failed: files newer than the last commit, half-written results, a build folder that is stale. Do not delete anything; list it and tell me what you propose.

@@ -18,6 +18,9 @@ The external drive can crash, so this file is the memory of the project. Update 
 - [ ] Phase 6: extension
 - [ ] Phase 7: report and release
 
+## What this project is, in one paragraph
+A Nav2 configuration study in simulation: a differential-drive robot in Gazebo builds maps (SLAM Toolbox), localises (AMCL) and navigates (Nav2); we add our own robot and worlds, a trial runner and custom ROS 2 nodes, then measure how planner, controller and recovery choices change success, collisions, time and path length. It is Project 2 of 3 in a personal research-grade portfolio and prepares Project 3 (a physical rover). Full scenario: PLAN.md section 0.
+
 ## Decisions made (do not re-ask)
 - ROS 2 Jazzy + Gazebo Harmonic + Nav2 + SLAM Toolbox on Ubuntu 24.04 (verified against REP-2000 on 2026-10-26).
 - Gazebo and RViz are already installed on the drive; check, do not reinstall.
