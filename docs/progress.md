@@ -4,7 +4,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-26
-- Phase: 1 done (gate passed 2026-10-26). Phase 2 next, awaiting owner go-ahead.
+- Phase: 2 in progress (started 2026-10-26). Done so far: `scripts/env.sh` (clean env wrapper, workspace rebuilt clean), timing test.
 - Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
@@ -29,15 +29,18 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 ## Plan changes (dated; why; who decided)
 - 2026-10-26: decision rule changed from trial-level Wilson intervals to pair-level paired bootstrap (draft rule could never be met at n=20 per cell). Decided by owner ("do as u like"), proposed by Claude.
 
+- 2026-10-26: robot decision (was an open question): own differential-drive robot description, modelled on the TurtleBot 3 Burger as reference (owner: "use turtlebot 3 burger for reference"). Interpreted as: dimensions, sensor and drive parameters from the Burger so Nav2 defaults stay valid; stock Burger remains the cross-check.
+
 ## Ideas parked (suggested, not adopted)
 - None yet.
 
 ## Open questions
 - Which three worlds and which start/goal pairs (Phase 0).
-- Own robot description or a stock one for the baseline (decide in Phase 2; plan says own robot).
+- (resolved 2026-10-26: own robot modelled on TurtleBot 3 Burger.)
 
 ## Next steps
-1. Phase 2 (needs owner go-ahead): decide own robot vs stock (plan says own), build worlds A1/B1/C1, `scripts/env.sh` clean-env helper, trial runner, tests, CI. Measure wall-clock cost of a trial and real-time factor first.
+1. Compare success at real-time factor 1 vs 10 on a fixed set of trials (see environment.md Timing) before fixing the factor for the grid.
+2. Own robot description modelled on the TurtleBot 3 Burger (owner decision); build worlds A1/B1/C1; trial runner; metric unit tests; CI.
 
 ## Session log
 - 2026-10-26 (Windows laptop): wrote `PLAN.md`, `CLAUDE.md`, `PHASES.md` update, `scripts/check_env.sh`, this journal and `docs/restore-prompt.md`. No code run yet.
@@ -47,3 +50,4 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-26 (Ubuntu): Phase 1 work. `docs/environment.md` written (versions, licences, machine). `colcon build` on empty `src/` works. Smoke test: first run crashed RViz and Gazebo GUI (snap VS Code env leaks snap libs); fixed with clean-env launcher `scripts/smoke_test.sh`; Nav2 goal SUCCEEDED, /scan 5 Hz. Also noted: `~/.bashrc` sources `articuno_ws` (unrelated project) which sets Gazebo paths; not edited.
 - 2026-10-26 (Ubuntu): second smoke run; Claude took desktop screenshots: RViz showed map, scan, AMCL particles, Nav2 active; goal SUCCEEDED twice. Phase 1 gate passed. Note: stock tb3 world is a hexagon with 9 pillars, a useful reference for world C1.
 - 2026-10-26 (Ubuntu): added `docs/figures/` (Phase 1 figure, captions index), README figure section, and a CLAUDE.md rule: one final cropped screenshot per phase, temporary ones deleted after use. Temporary screenshots from the smoke test were deleted.
+- 2026-10-26 (Ubuntu): Phase 2 started. `scripts/env.sh` written; found the repo's first colcon build had baked `articuno_ws` into `install/` prefix chain, rebuilt in the clean env. Timing: headless stock sim runs at real-time factor 1 by default (59 s for one goal); raising to 10 via `gz service set_physics` gave 56 sim-s in 5.7 s wall. Owner chose TurtleBot 3 Burger as reference for the robot.
