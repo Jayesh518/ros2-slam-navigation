@@ -29,7 +29,7 @@ Nav2 planners and controllers needed by the protocol are installed with `navigat
 Installed on 2026-10-26 with `sudo apt install ros-jazzy-navigation2 ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox python3-pandas` (130 packages, no errors). Everything else was already present.
 
 ## Things to know
-- **`~/.bashrc` sources another workspace.** It runs `source ~/articuno_ws/install/setup.bash`, which sets `GZ_SIM_RESOURCE_PATH`, `GZ_SIM_SYSTEM_PLUGIN_PATH` and ament paths for an unrelated project. To keep this study reproducible, Project 2 commands run in a clean environment (the smoke test uses `env -u ...` and sources only `/opt/ros/jazzy/setup.bash`). `~/.bashrc` is not edited. A `scripts/env.sh` for the project is a Phase 2 item.
+- **`~/.bashrc` sources another workspace.** It runs `source ~/articuno_ws/install/setup.bash`, which sets `GZ_SIM_RESOURCE_PATH`, `GZ_SIM_SYSTEM_PLUGIN_PATH` and ament paths for an unrelated project. To keep this study reproducible, Project 2 commands run in a clean environment (the smoke test uses `env -i` and sources only `/opt/ros/jazzy/setup.bash`). `~/.bashrc` is not edited. A `scripts/env.sh` for the project is a Phase 2 item.
 - **Python:** the repo has a `.venv` (git-ignored). Inside it `python3` resolves there; pandas came from apt, so scripts that need pandas must use a Python that can see it (`/usr/bin/python3`, or the venv if it has it). The check reported pandas found with the venv active.
 - **Graphics:** hybrid NVIDIA + AMD. Trials run headless (`gz sim -s`), so the GPU is only needed for the GUI and the smoke test.
 - **Docker:** not installed; needed only in Phase 7 (optional until then).
