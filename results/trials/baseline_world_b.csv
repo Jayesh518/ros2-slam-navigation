@@ -1,0 +1,14 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+baseline-b03-r1,baseline,world_b,b03,1,12001,1,,SUCCEEDED,22.96,4.504,0.267,1,1,0,0,0.098,0.061,0,37.93,30.0,2026-10-26T15:36:34+00:00
+baseline-b10-r1,baseline,world_b,b10,1,12002,1,,SUCCEEDED,75.89,15.436,0.173,1,1,0,0,0.381,0.153,0,120.72,82.9,2026-10-26T15:37:04+00:00
+baseline-b15-r1,baseline,world_b,b15,1,12003,1,,SUCCEEDED,80.78,16.54,0.128,1,1,0,0,0.329,0.121,0,208.43,87.8,2026-10-26T15:38:27+00:00
+baseline-b19-r1,baseline,world_b,b19,1,12004,1,,SUCCEEDED,58.73,11.774,0.346,1,1,0,0,0.531,0.191,1,274.08,65.7,2026-10-26T15:39:55+00:00
+baseline-b02-r1,baseline,world_b,b02,1,12005,0,timeout,CANCELED,120.0,18.054,7.829,1,1,0,2,1.083,0.692,1,401.0,127.0,2026-10-26T15:41:01+00:00
+baseline-b11-r1,baseline,world_b,b11,1,12006,0,timeout,CANCELED,120.0,18.368,8.652,1,1,0,1,0.789,0.278,1,527.94,127.0,2026-10-26T15:43:08+00:00
+baseline-b13-r1,baseline,world_b,b13,1,12007,1,,SUCCEEDED,29.6,5.373,0.175,1,1,0,0,0.076,0.055,0,564.47,36.6,2026-10-26T15:45:15+00:00
+baseline-b14-r1,baseline,world_b,b14,1,12008,1,,SUCCEEDED,101.14,19.698,0.373,1,1,0,0,0.421,0.192,0,672.52,108.2,2026-10-26T15:45:51+00:00
+baseline-b04-r1,baseline,world_b,b04,1,12009,0,nav2_aborted,ABORTED,90.5,14.484,8.817,1,1,0,1,0.434,0.23,0,769.96,97.1,2026-10-26T15:47:39+00:00
+baseline-b18-r1,baseline,world_b,b18,1,12010,1,,SUCCEEDED,50.64,9.988,0.146,1,1,0,0,0.132,0.074,0,827.52,57.7,2026-10-26T15:49:17+00:00
+baseline-b20-r1,baseline,world_b,b20,1,12011,0,timeout,CANCELED,120.0,17.991,8.313,1,1,0,2,0.374,0.236,0,954.44,127.1,2026-10-26T15:50:14+00:00
+baseline-b08-r1,baseline,world_b,b08,1,12012,1,,SUCCEEDED,75.53,16.26,0.227,1,1,0,0,0.202,0.087,0,1036.91,82.6,2026-10-26T15:52:21+00:00
+baseline-b06-r1,baseline,world_b,b06,1,12013,1,,SUCCEEDED,102.63,20.807,0.024,1,1,0,0,0.481,0.223,0,1146.47,109.7,2026-10-26T15:53:44+00:00
