@@ -26,6 +26,12 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - Gazebo and RViz are already installed on the drive; check, do not reinstall.
 - Experiment style: one change at a time from a default-Nav2 baseline; draft grid and hypotheses in PLAN.md section 3 (still DRAFT until Phase 0).
 
+## Plan changes (dated; why; who decided)
+- None yet. The plan is a starting point: record every accepted improvement here and in PHASES.md.
+
+## Ideas parked (suggested, not adopted)
+- None yet.
+
 ## Open questions
 - Which three worlds and which start/goal pairs (Phase 0).
 - Own robot description or a stock one for the baseline (decide in Phase 2; plan says own robot).

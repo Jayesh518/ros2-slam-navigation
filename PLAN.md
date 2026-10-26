@@ -26,6 +26,15 @@ Written 2026-10-26 on the Windows laptop, to be read first by whoever (the owner
 
 **What it is not.** It does not reimplement SLAM or Nav2 (the algorithms are used as published; the work is configuration, integration, custom behaviour, experiments and interpretation). It does not claim real-world performance: simulation hides sensor noise, wheel slip and lighting, and the report must say so. It makes no rescue, safety or life-saving claims.
 
+**This plan is a starting point, not a fixed path.** Nothing in it is a rule except what `CLAUDE.md` lists. Claude Code is expected to think about the project, not just execute it: whenever it sees a better way (a stronger experiment, a simpler design, a missing control, a more useful metric, a better tool, a cheaper way to reach the same evidence, a risk the plan missed), it should say so, with the reason and the cost, and recommend one option. The owner decides. Good moments to propose changes: at every phase gate, when a result surprises, when something takes much longer than planned, and when the work shows that a draft item in section 3 is wrong.
+
+How changes are handled:
+- Before the protocol is frozen (Phase 0), anything may change; just keep section 3 consistent.
+- After `docs/protocol.md` is committed, a change to the question, metrics, hypotheses or decision rule is allowed but is written down as a dated change (what changed, why, and whether any trial had already been seen), never applied silently or backwards to make a result look better. Results seen before a change are reported as exploratory.
+- Every accepted change is recorded in the "Plan changes" list in `docs/progress.md` and in `PHASES.md`, and `PLAN.md` is edited so it always describes the current plan.
+- Suggestions that are declined are kept in "Ideas parked" in `docs/progress.md` so they are not proposed again without new reasons.
+- Improving the project can also mean cutting scope: say so if a part costs more than the evidence it adds.
+
 **Quality bar and ways of working.** Same as Project 1: work in phases with exit gates, write the protocol before any trial, report mixed or negative results as they are, keep every number traceable to a file in the repo, and commit under the owner's name only. The external drive can crash, so the journal in `docs/progress.md` and frequent pushes (section 9) are part of the job, not extras.
 
 **Handoffs between projects.** From Project 1: the discipline above, and the finding that the pretrained detector is the one to use (Project 3 uses it; this project does not need a detector). To Project 3: the trial runner, the Nav2 configuration, the transform design and, optionally, a simulated thermal camera model in Gazebo (clearly labelled simulated).

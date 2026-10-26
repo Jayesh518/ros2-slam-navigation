@@ -15,6 +15,8 @@ Do this in order, without asking me anything that is already decided in the file
 6. Then continue from that next step. Work in small steps. After each finished step: append a dated line to the session log in docs/progress.md, update "Current state" and "Next steps", then `git add`, commit (my identity only, no Co-Authored-By or any AI attribution line) and `git push origin main`.
 7. Obey the phase rules: stop at each exit gate, update PHASES.md, push, and ask before starting the next phase. Fix the protocol, metrics and hypotheses in docs/protocol.md before running any trial.
 
+Remember the plan is not a fixed path: if you see a better design, experiment, metric or tool, or a part that is not worth its cost, tell me with a recommendation and record what I accept in docs/progress.md (Plan changes) and PHASES.md. Never change the protocol silently once docs/protocol.md exists.
+
 Be efficient: do not re-explain the plan back to me, do not re-run steps already recorded as done unless step 2 or 3 shows they are broken, and prefer one clear question over many.
 ```
 
