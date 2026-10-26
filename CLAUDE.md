@@ -12,6 +12,7 @@ Read `docs/progress.md` (the journal), then `PLAN.md` (start with section 0, the
 - Fully personal project: no employer code, data, hardware, designs or documents, and no mention of employer products. Never copy confidential material.
 - SLAM Toolbox, AMCL and Nav2 are used as published; do not describe them as the owner's algorithms. The owner's work is configuration, integration, custom nodes, the trial runner, experiments and analysis.
 - Do not commit secrets, rosbags (`*.db3`, `*.mcap`), videos or build output.
+- Screenshots: at the end of every phase take one final screenshot of the result (the app window only, cropped; no desktop or personal items), save it as `docs/figures/phaseN-<what>.png`, add a caption row to `docs/figures/README.md` and link it from `README.md` (and later the report). Screenshots taken only to check something are deleted after use; never commit them.
 - No CGPA, phone number or home address anywhere. Contact is the public email on the portfolio only.
 - Verify versions and package names against the official ROS 2 Jazzy, Gazebo Harmonic and Nav2 documentation before installing; the docs win over `PLAN.md`.
 - Make no safety or life-saving claims; this is a simulation study.

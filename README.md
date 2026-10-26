@@ -23,6 +23,11 @@ maps/       saved maps
 docs/       report.md and diagrams/ (TF and architecture)
 ```
 
+## Progress figures
+One final screenshot per phase, with captions, in [docs/figures](docs/figures/README.md).
+
+![Phase 1: stock Nav2 smoke test in RViz 2 (map, costmaps, laser scan, AMCL particles; not our own robot yet)](docs/figures/phase1-smoke-test-rviz.png)
+
 ## Results
 None yet.
 
