@@ -1,0 +1,31 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    container: ros:jazzy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y python3-pytest python3-yaml python3-scipy python3-numpy python3-pil python3-matplotlib ros-jazzy-xacro
+      - name: Unit tests and study-file tests
+        run: |
+          . /opt/ros/jazzy/setup.sh
+          PYTHONPATH=src/nav_study_trials python3 -m pytest tests src/nav_study_trials/test -q
+      - name: Generated files are up to date
+        run: |
+          python3 scripts/make_worlds.py
+          python3 scripts/make_nav2_configs.py
+          git diff --exit-code -- src/nav_study_bringup/worlds configs/nav2
+      - name: Robot description parses
+        run: |
+          . /opt/ros/jazzy/setup.sh
+          colcon build --packages-select nav_study_robot nav_study_bringup nav_study_trials
+          . install/setup.sh
+          xacro "$(ros2 pkg prefix nav_study_robot)/share/nav_study_robot/urdf/nav_study_robot.urdf.xacro" > /dev/null
+          xacro "$(ros2 pkg prefix nav_study_robot)/share/nav_study_robot/urdf/nav_study_robot.sdf.xacro" > /dev/null

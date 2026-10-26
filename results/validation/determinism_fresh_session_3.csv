@@ -1,0 +1,2 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+baseline-a01-r1,baseline,world_a,a01,1,1001,1,,SUCCEEDED,34.49,6.482,0.292,1,1,0,0,0.177,0.146,0,49.3,41.5,2026-10-26T14:47:53+00:00

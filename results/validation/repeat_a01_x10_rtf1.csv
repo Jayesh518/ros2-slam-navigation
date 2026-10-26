@@ -1,0 +1,11 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+baseline-a01-r7,baseline,world_a,a01,7,1001,1,,SUCCEEDED,36.44,6.392,0.281,0,0,0.186,0.15,0,51.58,43.5,2026-10-26T14:22:36+00:00
+baseline-a01-r9,baseline,world_a,a01,9,1002,1,,SUCCEEDED,35.2,6.567,0.249,0,0,0.184,0.142,0,93.68,42.2,2026-10-26T14:23:20+00:00
+baseline-a01-r10,baseline,world_a,a01,10,1003,1,,SUCCEEDED,35.05,6.52,0.313,0,0,0.203,0.154,0,135.64,42.1,2026-10-26T14:24:02+00:00
+baseline-a01-r8,baseline,world_a,a01,8,1004,1,,SUCCEEDED,34.43,6.501,0.261,0,0,0.201,0.16,0,176.99,41.4,2026-10-26T14:24:44+00:00
+baseline-a01-r6,baseline,world_a,a01,6,1005,1,,SUCCEEDED,34.33,6.568,0.274,0,0,0.193,0.157,0,218.24,41.3,2026-10-26T14:25:25+00:00
+baseline-a01-r4,baseline,world_a,a01,4,1006,1,,SUCCEEDED,35.0,6.528,0.26,0,0,0.177,0.14,0,260.15,42.0,2026-10-26T14:26:07+00:00
+baseline-a01-r1,baseline,world_a,a01,1,1007,1,,SUCCEEDED,35.05,6.495,0.265,0,0,0.235,0.163,0,302.11,42.1,2026-10-26T14:26:49+00:00
+baseline-a01-r5,baseline,world_a,a01,5,1008,1,,SUCCEEDED,34.89,6.513,0.257,0,0,0.182,0.154,0,343.91,41.9,2026-10-26T14:27:31+00:00
+baseline-a01-r2,baseline,world_a,a01,2,1009,1,,SUCCEEDED,34.98,6.528,0.254,0,0,0.183,0.146,0,385.81,42.0,2026-10-26T14:28:13+00:00
+baseline-a01-r3,baseline,world_a,a01,3,1010,1,,SUCCEEDED,35.29,6.505,0.31,0,0,0.196,0.145,0,428.02,42.3,2026-10-26T14:28:55+00:00

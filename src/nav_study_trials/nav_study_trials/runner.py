@@ -32,7 +32,7 @@ from ros_gz_interfaces.msg import Contacts
 from nav_study_trials import metrics
 
 COLUMNS = ["trial_id", "config", "world", "pair", "repeat", "seed", "success", "failure_reason", "nav2_status", "time_s", "path_m",
-           "final_error_m", "collisions", "recovery_events", "loc_err_max_m", "loc_err_mean_m", "loc_failure", "sim_end_s", "wall_s", "started_utc"]
+           "final_error_m", "valid", "reset_attempts", "collisions", "recovery_events", "loc_err_max_m", "loc_err_mean_m", "loc_failure", "sim_end_s", "wall_s", "started_utc"]
 STATUS = {GoalStatus.STATUS_SUCCEEDED: "SUCCEEDED", GoalStatus.STATUS_ABORTED: "ABORTED", GoalStatus.STATUS_CANCELED: "CANCELED"}
 CONTACT_TOPICS = {"contact/base": "base", "contact/lidar": "lidar", "contact/wheel_left": "wheel_left", "contact/wheel_right": "wheel_right"}
 
@@ -122,6 +122,25 @@ class TrialRunner(Node):
             self.init_pub.publish(msg)
             self.spin_for(0.3)
 
+    def reset_localisation(self, x, y, yaw, attempts=5):
+        """Set the AMCL pose to the true start pose and check, against ground truth, that AMCL accepted it (error < 0.5 m).
+
+        The first pose is sometimes ignored right after a teleport (observed in validation); retry, and report how many attempts it took.
+        Returns the attempt number that worked, or 0 if none did (the trial is then marked invalid and not judged).
+        """
+        for attempt in range(1, attempts + 1):
+            self.latest_amcl = None
+            self.set_initial_pose(x, y, yaw)
+            end = self.now() + 6.0
+            while self.now() < end and (self.latest_amcl is None):
+                rclpy.spin_once(self, timeout_sec=0.05)
+            self.spin_for(1.0)
+            if self.latest_amcl is not None and self.gt is not None:
+                wx, wy, _ = metrics.map_to_world(self.latest_amcl[1], self.latest_amcl[2], 0.0, self.al)
+                if math.dist((wx, wy), self.gt[1:3]) < metrics.LOC_ERROR_THRESHOLD_M:
+                    return attempt
+        return 0
+
     def clear_costmaps(self):
         for c in self.clear:
             if c.wait_for_service(timeout_sec=2.0):
@@ -137,10 +156,14 @@ class TrialRunner(Node):
         self.stop_robot()
         self.teleport(s["x"], s["y"], s["yaw"])
         self.spin_for(2.0)
-        self.set_initial_pose(s["x"], s["y"], s["yaw"])
-        self.spin_for(3.0)
+        attempts = self.reset_localisation(s["x"], s["y"], s["yaw"])
+        self.spin_for(2.0)
         self.clear_costmaps()
         self.track, self.amcl_err, self.contacts, self.bt = [], [], [], []
+        if attempts == 0:  # reset could not be verified: do not judge navigation on a bad start
+            return {"trial_id": trial_id, "config": self.args.config, "world": self.args.world, "pair": pair["id"], "repeat": repeat, "seed": seed,
+                    "success": 0, "failure_reason": "invalid_reset", "nav2_status": "NOT_SENT", "valid": 0, "reset_attempts": 5,
+                    "sim_end_s": round(self.now(), 2), "wall_s": round(time.time() - wall0, 1), "started_utc": started}
         self.recording = True
         t0 = self.now()
 
@@ -185,7 +208,7 @@ class TrialRunner(Node):
         emax, emean = metrics.localisation_stats(errs)
         row = {"trial_id": trial_id, "config": self.args.config, "world": self.args.world, "pair": pair["id"], "repeat": repeat, "seed": seed,
                "success": int(success), "failure_reason": reason, "nav2_status": nav2_status, "time_s": round(t_done - t0, 2),
-               "path_m": round(metrics.path_length([(x, y) for _, x, y, _ in self.track]), 3), "final_error_m": round(err, 3),
+               "path_m": round(metrics.path_length([(x, y) for _, x, y, _ in self.track]), 3), "final_error_m": round(err, 3), "valid": 1, "reset_attempts": attempts,
                "collisions": metrics.count_collisions(self.contacts), "recovery_events": metrics.count_recoveries(self.bt),
                "loc_err_max_m": round(emax, 3) if errs else "", "loc_err_mean_m": round(emean, 3) if errs else "",
                "loc_failure": int(metrics.localisation_failure(self.amcl_err, t_done)), "sim_end_s": round(self.now(), 2),
