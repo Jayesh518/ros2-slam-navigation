@@ -90,7 +90,7 @@ That is 1 baseline + 2 planner + 2 controller + 1 recovery = 6 configurations x 
 - H2: the custom recovery behaviour raises success in the cluttered world at the cost of time.
 - H3: localisation error is highest in the most symmetric or feature-poor world, and failures there come mostly from localisation, not planning.
 
-**Decision rule (DRAFT):** a difference counts as real if the success-rate difference to baseline is at least 10 percentage points and its 95 percent interval excludes zero, or for time and path length if the paired difference has a confidence interval that excludes zero and a size above 5 percent of the baseline. Anything else is reported as no clear effect. Unsupported hypotheses are reported as unsupported.
+**Decision rule (superseded by `docs/protocol.md` section 8, pair-level paired bootstrap; kept here as the original draft):** a difference counts as real if the success-rate difference to baseline is at least 10 percentage points and its 95 percent interval excludes zero, or for time and path length if the paired difference has a confidence interval that excludes zero and a size above 5 percent of the baseline. Anything else is reported as no clear effect. Unsupported hypotheses are reported as unsupported.
 
 ## 4. Phases and exit gates
 

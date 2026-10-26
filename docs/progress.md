@@ -4,12 +4,12 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-26
-- Phase: none started. Plan written (`PLAN.md`), rules in `CLAUDE.md`, phases in `PHASES.md`.
-- Environment: Ubuntu 24.04 on an external SATA drive; Gazebo and RViz already installed there (per the owner). Nothing else verified yet.
+- Phase: 0 done (protocol v1 frozen 2026-10-26). Phase 1 next, awaiting owner go-ahead.
+- Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
 ## Checklist
-- [ ] Phase 0: `docs/protocol.md` written, draft items in PLAN.md section 3 finalised with the owner, committed before any trial
+- [x] Phase 0: `docs/protocol.md` written, draft items in PLAN.md section 3 finalised with the owner, committed before any trial
 - [ ] Phase 1: `scripts/check_env.sh` run, result in `docs/environment.md`, missing items installed, smoke test works
 - [ ] Phase 2: robot, worlds, trial runner, tests, CI
 - [ ] Phase 3: baseline
@@ -27,7 +27,7 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - Experiment style: one change at a time from a default-Nav2 baseline; draft grid and hypotheses in PLAN.md section 3 (still DRAFT until Phase 0).
 
 ## Plan changes (dated; why; who decided)
-- None yet. The plan is a starting point: record every accepted improvement here and in PHASES.md.
+- 2026-10-26: decision rule changed from trial-level Wilson intervals to pair-level paired bootstrap (draft rule could never be met at n=20 per cell). Decided by owner ("do as u like"), proposed by Claude.
 
 ## Ideas parked (suggested, not adopted)
 - None yet.
@@ -37,9 +37,11 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - Own robot description or a stock one for the baseline (decide in Phase 2; plan says own robot).
 
 ## Next steps
-1. On the Ubuntu drive: clone the repo, set the git identity, `gh auth login` (PLAN.md section 7).
-2. Run `bash scripts/check_env.sh`, note the result here.
-3. Phase 0: write `docs/protocol.md` with the owner, then commit and push.
+1. Phase 1: write `docs/environment.md` (versions, licences, GPU notes), check `colcon build` on an empty workspace, run the smoke test (stock Nav2 demo robot, one goal, RViz).
+2. Then the Phase 1 gate: update PHASES.md, push, ask for go-ahead for Phase 2.
 
 ## Session log
 - 2026-10-26 (Windows laptop): wrote `PLAN.md`, `CLAUDE.md`, `PHASES.md` update, `scripts/check_env.sh`, this journal and `docs/restore-prompt.md`. No code run yet.
+- 2026-10-26 (Ubuntu): environment check found 4 missing items; owner installed navigation2, nav2-bringup, slam-toolbox, python3-pandas via apt; re-check says all required present. Drafted `docs/protocol.md` v0 (decision rule changed from trial-level to pair-level paired bootstrap, see below). Not committed yet.
+- 2026-10-26: owner accepted the pair-level decision rule (Plan change: PLAN.md draft rule replaced in protocol v0), B = office world, asked for 1-2 candidate layouts per world with an option to change one. Layout options added to protocol draft; awaiting choice before freeze.
+- 2026-10-26: owner chose layouts A1, B1, C1 ("what u like"). Protocol v1 frozen; PHASES.md and PLAN.md updated. Phase 0 complete.
