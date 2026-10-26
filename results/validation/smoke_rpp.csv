@@ -1,0 +1,3 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+rpp-a01-r1,rpp,world_a,a01,1,99001,1,,SUCCEEDED,30.37,5.89,0.375,1,1,0,0,0.225,0.156,0,45.5,37.4,2026-10-26T16:46:20+00:00
+rpp-a02-r1,rpp,world_a,a02,1,99002,1,,SUCCEEDED,39.19,8.054,0.434,1,1,0,0,0.243,0.164,0,91.61,46.2,2026-10-26T16:46:57+00:00
