@@ -1,0 +1,22 @@
+# p_world = R(yaw) * p_map + (x, y); fitted by scripts/align_map.py from maps/*.pgm and the SDF worlds. Fixed for all trials.
+world_a:
+  x: -0.0
+  y: -0.1061
+  yaw: 0.04217
+  mean_dist_after_m: 0.0493
+  mean_dist_identity_m: 0.09
+  occupied_cells: 1359
+world_b:
+  x: 0.2219
+  y: -0.0921
+  yaw: 0.01035
+  mean_dist_after_m: 0.0364
+  mean_dist_identity_m: 0.0957
+  occupied_cells: 3257
+world_c:
+  x: -0.0
+  y: -0.0
+  yaw: 0.0
+  mean_dist_after_m: 0.0395
+  mean_dist_identity_m: 0.0395
+  occupied_cells: 1819

@@ -1,7 +1,7 @@
 """Start Gazebo with one of the study worlds, spawn the robot and run the bridge and robot_state_publisher.
 
 Example:  scripts/env.sh ros2 launch nav_study_bringup sim.launch.py world:=test_arena headless:=true
-Arguments: world (file name without .sdf in this package's worlds/), headless, x, y, yaw, rtf (Gazebo real-time factor).
+Arguments: world (file name without .sdf in this package's worlds/), headless, x, y, yaw, rtf (Gazebo real-time factor), seed (gz random seed).
 """
 import os
 
@@ -18,8 +18,9 @@ def _gz(context):
     world = os.path.join(share, 'worlds', LaunchConfiguration('world').perform(context) + '.sdf')
     headless = LaunchConfiguration('headless').perform(context).lower() == 'true'
     rtf = LaunchConfiguration('rtf').perform(context)
+    seed = LaunchConfiguration('seed').perform(context)
     actions = [ExecuteProcess(
-        cmd=['gz', 'sim', '-r', '-s', world] + (['--headless-rendering'] if headless else []),
+        cmd=['gz', 'sim', '-r', '-s', world, '--seed', seed] + (['--headless-rendering'] if headless else []),
         output='screen')]
     if not headless:
         actions.append(ExecuteProcess(cmd=['gz', 'sim', '-g'], output='screen'))
@@ -45,6 +46,7 @@ def generate_launch_description():
         DeclareLaunchArgument('y', default_value='0.0'),
         DeclareLaunchArgument('yaw', default_value='0.0'),
         DeclareLaunchArgument('rtf', default_value='1'),
+        DeclareLaunchArgument('seed', default_value='1'),
         OpaqueFunction(function=_gz),
         Node(package='robot_state_publisher', executable='robot_state_publisher', output='screen',
              parameters=[{'use_sim_time': True,

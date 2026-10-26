@@ -16,7 +16,7 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     here = get_package_share_directory('nav_study_bringup')
     nav2 = get_package_share_directory('nav2_bringup')
-    args = ['world', 'headless', 'x', 'y', 'yaw', 'rtf']
+    args = ['world', 'headless', 'x', 'y', 'yaw', 'rtf', 'seed']
     return LaunchDescription([
         DeclareLaunchArgument('world', default_value='world_a'),
         DeclareLaunchArgument('headless', default_value='true'),
@@ -24,6 +24,7 @@ def generate_launch_description():
         DeclareLaunchArgument('y', default_value='0.0'),
         DeclareLaunchArgument('yaw', default_value='0.0'),
         DeclareLaunchArgument('rtf', default_value='1'),
+        DeclareLaunchArgument('seed', default_value='1'),
         DeclareLaunchArgument('slam', default_value='False'),
         DeclareLaunchArgument('map', default_value=''),
         DeclareLaunchArgument('params_file', default_value=''),
