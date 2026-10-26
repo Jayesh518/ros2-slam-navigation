@@ -1,6 +1,6 @@
 # ROS 2 Mobile Robot: SLAM, Localization and Navigation
 
-**Status: Phase 2 of 7 (pipeline and validation) complete; no study results yet**
+**Status: Phase 3 of 7 (baseline) complete; the configuration comparison is next**
 
 A simulated differential-drive robot that maps an unknown environment, localizes itself, and navigates to goals while avoiding obstacles, built on mature ROS 2 packages (SLAM Toolbox, AMCL, Nav2).
 
@@ -32,8 +32,12 @@ One final screenshot per phase, with captions, in [docs/figures](docs/figures/RE
 
 ![The three study worlds (plans generated from the SDF files)](docs/figures/world-plans.png)
 
-## Results
-None yet.
+## Results so far
+Baseline (shipped Nav2 defaults, 60 trials): 56 of 60 reached the goal (93%, 95% interval 0.84 to 0.97); world A 20/20, world B 16/20, world C 20/20; no collisions. Details, limits and the four failures: [docs/baseline.md](docs/baseline.md).
+
+![Baseline success by world](docs/figures/phase3-baseline-success.png)
+
+The comparison of planners, controllers and the custom recovery behaviour (Phase 4) has not been run yet.
 
 ## Notes
 My contribution is configuration, integration, custom behaviours, experiments and interpretation, not a reimplementation of SLAM or Nav2.

@@ -1,3 +1,5 @@
 config,world,n_trials,n_invalid,n_valid,successes,success_rate,wilson_lo,wilson_hi,median_time_s,median_path_m,collisions_per_trial,trials_with_collision,recoveries_per_trial,mean_loc_err_m,loc_failures
 baseline,world_a,20,0,20,20,1,0.8389,1,44.37,8.415,0,0,0.1,0.1284,0
-baseline,all,20,0,20,20,1,0.8389,1,44.37,8.415,0,0,0.1,0.1284,0
+baseline,world_b,20,0,20,16,0.8,0.584,0.9193,64.32,12.99,0,0,0.3,0.1692,3
+baseline,world_c,20,0,20,20,1,0.8389,1,57.78,10.6,0,0,1.35,0.1274,0
+baseline,all,60,0,60,56,0.9333,0.8407,0.9738,53.88,10.53,0,0,0.5833,0.1417,3

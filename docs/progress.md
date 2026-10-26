@@ -4,7 +4,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-26
-- Phase: 3 in progress (owner approved 20 pairs and go-ahead 2026-10-26). Baseline runs: `scripts/run_config.sh baseline` (world A done 20/20; B and C running). Analysis: `scripts/analyse.py`. Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Worlds A1/B1/C1 generated and checked; Nav2 configs generated (`configs/nav2/`); SLAM Toolbox maps for all three worlds saved (`maps/`). Left: map-to-world alignment, start/goal pairs, trial runner, metric tests, CI, factor check with own robot.
+- Phase: 3 done (2026-10-26): baseline 56/60 (A 20/20, B 16/20, C 20/20), report `docs/baseline.md`. Phase 4 next, awaiting owner go-ahead and a decision on world C. Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Worlds A1/B1/C1 generated and checked; Nav2 configs generated (`configs/nav2/`); SLAM Toolbox maps for all three worlds saved (`maps/`). Left: map-to-world alignment, start/goal pairs, trial runner, metric tests, CI, factor check with own robot.
 - Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
@@ -12,7 +12,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 - [x] Phase 0: `docs/protocol.md` written, draft items in PLAN.md section 3 finalised with the owner, committed before any trial
 - [x] Phase 1: `scripts/check_env.sh` run, result in `docs/environment.md`, missing items installed, smoke test works
 - [x] Phase 2: robot, worlds, trial runner, tests, CI
-- [~] Phase 3: baseline (running)
+- [x] Phase 3: baseline
 - [ ] Phase 4: intervention
 - [ ] Phase 5: diagnosis
 - [ ] Phase 6: extension
@@ -35,6 +35,8 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 
 - 2026-10-26: PROPOSED, awaiting owner: replace 2 repeats x 10 pairs by 1 repeat x 20 pairs per world (same 360 trials). Reason: repeats of the same pair vary by only about 2 percent in time (protocol change log (j)), so the second repeat is nearly redundant, while more pairs widen what the results generalise to and tighten the pair-level interval. Cost: pairs file must be extended (10 more per world, same script and seed rule) before any trial.
 
+- 2026-10-26: PROPOSED, awaiting owner: the baseline is at the ceiling in worlds A and C (20/20), so H2 (custom recovery raises success in the cluttered world) cannot be shown in C1 as built. Options: (a) keep the frozen design and report H2 as untestable in C1 (cost: none, a weak outcome for H2); (b) add a fourth, harder world D = layout C2 from the protocol (dense random boxes, 20 pairs; 120 more trials, about 1.5 h) as a clearly labelled addition made after seeing the baseline, results for A to C reported as originally designed; (c) make C1 harder (closer pillars) and rerun its baseline (changes a frozen world after seeing results; not recommended). Recommended: (b).
+
 ## Ideas parked (suggested, not adopted)
 - None yet.
 
@@ -43,9 +45,9 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - (resolved 2026-10-26: own robot modelled on TurtleBot 3 Burger.)
 
 ## Next steps
-1. Owner decides: keep 2 repeats x 10 pairs, or 1 repeat x 20 pairs per world (see Plan changes, PROPOSED). If 20 pairs: extend `configs/pairs.yaml` first.
-2. Phase 3: baseline runs (`scripts/run_session.sh baseline world_x 1 1 2`) for the three worlds, then analysis script with Wilson intervals and a baseline figure.
-3. (done in Phase 2:) Nav2 baseline config for our robot (`configs/`), then the trial runner (explicit zero cmd_vel at the end), metric unit tests, CI.
+1. Owner decides how to handle the ceiling in worlds A and C (see Ideas / Plan changes, PROPOSED: add a harder fourth world, or accept that H2 is untestable in C1).
+2. Phase 4: run `scripts/run_config.sh <config>` for smac2d, thetastar, dwb, rpp (4 x 60 trials, about 1 h each); the custom recovery node (config `recovery`) must be written first (Phase 6 item pulled forward, or run the 5 others first).
+3. (done:) Nav2 baseline config for our robot (`configs/`), then the trial runner (explicit zero cmd_vel at the end), metric unit tests, CI.
 3. Repeat the real-time-factor check with our robot and baseline, then log the chosen factor in the protocol change log.
 4. Owner: open `cad/nav_study_robot_v1.step` in Fusion 360 and report anything odd.
 
@@ -64,3 +66,4 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-26 (Ubuntu): Phase 2 build-out. Added `scripts/align_map.py` (-> `configs/map_alignment.yaml`: A 2.4 deg, B 0.22 m shift, C identity), `scripts/make_pairs.py` (-> `configs/pairs.yaml`, 10 per world, seed 20261026), `src/nav_study_trials` (metrics.py + runner.py, 8 unit tests), `tests/test_study_files.py` (8 tests), `.github/workflows/ci.yml`, `scripts/run_session.sh`, `rtf_check_robot.sh`, `determinism_check.sh`. First end-to-end trials work. Protocol change log (g) success tolerance 0.5 m, (h) real-time factor 1, (i) reset verification, (j) repeatability. Validation CSVs in `results/validation/` (not study data). Left: CI result, Phase 2 screenshot, gate report.
 - 2026-10-26 (Ubuntu): Phase 2 gate. CI fixed twice (git missing in the ros:jazzy image; nav_study_robot installed an untracked empty launch/ dir) and is green. Final figure `docs/figures/phase2-robot-in-world-b.png`; README updated. Temporary screenshots deleted.
 - 2026-10-26 (Ubuntu): Owner chose 20 pairs per world (protocol change (k)); pairs extended (first 10 unchanged). Added `analysis.py` (pre-registered decision rule + 5 unit tests), `scripts/analyse.py`, `scripts/run_config.sh`. Baseline world A: 20/20 succeeded. World B running (first timeouts seen).
+- 2026-10-26 (Ubuntu): Phase 3 baseline complete: 60 trials, 56 succeeded; failures all in world B (3 timeouts, 1 abort; 2 with AMCL error above 0.5 m). Zero collisions. `docs/baseline.md` written, figure `phase3-baseline-success.png`. Open: world-C ceiling (proposal above).
