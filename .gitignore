@@ -32,3 +32,4 @@ rosbag2_*/
 *.mp4
 *.avi
 *.mov
+results/logs/
