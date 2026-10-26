@@ -23,10 +23,10 @@ WORLDS = ["world_a", "world_b", "world_c", "world_d"]
 POOLED = {"A-C": ["world_a", "world_b", "world_c"], "A-D": ["world_a", "world_b", "world_c", "world_d"]}  # A-C = original design; D added later (change log (l))
 ORDER = ["baseline", "smac2d", "thetastar", "dwb", "rpp", "recovery"]
 
-frames = [pd.read_csv(f) for f in sorted(glob.glob(str(ROOT / "results/trials/*.csv")))]
+frames = [pd.read_csv(f) for f in sorted(glob.glob(str(ROOT / "results/trials/*.csv"))) if Path(f).stat().st_size > 0]  # a file of a running session may still be empty
 if not frames:
     raise SystemExit("no trial files in results/trials/")
-df = pd.concat(frames, ignore_index=True)
+df = pd.concat([f for f in frames if len(f)], ignore_index=True)
 df["valid"] = df["valid"].fillna(1).astype(int)
 configs = [c for c in ORDER if c in set(df.config)]
 

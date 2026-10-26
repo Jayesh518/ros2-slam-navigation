@@ -1,0 +1,2 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+thetastar-a05-r1,thetastar,world_a,a05,1,11001,1,,SUCCEEDED,55.35,11.744,0.046,1,1,0,0,0.207,0.065,0,70.41,62.4,2026-10-26T18:19:11+00:00

@@ -1,0 +1,7 @@
+config,scope,label,success_diff,success_lo,success_hi,n_pairs,success_verdict,time_s_diff,time_s_lo,time_s_hi,time_s_n,time_s_verdict,path_m_diff,path_m_lo,path_m_hi,path_m_n,path_m_verdict
+smac2d,world_a,suggestive (per world),0,0,0,20,no clear effect,-6.493,-9.467,-3.915,20,real decrease,-0.9762,-1.604,-0.4581,20,real decrease
+smac2d,world_b,suggestive (per world),-0.25,-0.5,0,20,no clear effect,-4.247,-5.559,-2.894,10,real decrease,-0.5043,-0.6819,-0.3128,10,real decrease
+smac2d,world_c,suggestive (per world),0,0,0,20,no clear effect,-11.41,-16.85,-6.83,20,real decrease,-1.038,-1.725,-0.4899,20,real decrease
+smac2d,world_d,suggestive (per world; D is post-hoc),-0.05,-0.15,0,20,no clear effect,-3.315,-5.173,-1.803,19,real decrease,-0.5185,-0.8802,-0.2087,19,real decrease
+smac2d,A-C,"primary, original design",-0.08333,-0.1667,0,60,no clear effect,-8.011,-10.61,-5.761,50,real decrease,-0.9067,-1.278,-0.5816,50,real decrease
+smac2d,A-D,"primary, with post-hoc world D",-0.075,-0.1375,-0.0125,80,no clear effect,-6.718,-8.697,-4.969,69,real decrease,-0.7998,-1.089,-0.5507,69,real decrease

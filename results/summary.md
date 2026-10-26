@@ -10,6 +10,12 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 | baseline | world_d | 20/20 | 20 | 1.00 (0.84 to 1.00) | 38.5 | 7.89 | 0.00 | 0.05 | 0.081 |
 | baseline | A-C | 60/60 | 56 | 0.93 (0.84 to 0.97) | 53.9 | 10.53 | 0.00 | 0.58 | 0.142 |
 | baseline | A-D | 80/80 | 76 | 0.95 (0.88 to 0.98) | 47.9 | 9.87 | 0.00 | 0.45 | 0.127 |
+| smac2d | world_a | 20/20 | 20 | 1.00 (0.84 to 1.00) | 38.3 | 7.99 | 0.00 | 0.00 | 0.125 |
+| smac2d | world_b | 20/20 | 11 | 0.55 (0.34 to 0.74) | 51.1 | 10.88 | 0.00 | 0.60 | 0.224 |
+| smac2d | world_c | 20/20 | 20 | 1.00 (0.84 to 1.00) | 49.8 | 10.35 | 0.00 | 0.00 | 0.120 |
+| smac2d | world_d | 20/20 | 19 | 0.95 (0.76 to 0.99) | 37.2 | 7.76 | 0.00 | 0.00 | 0.084 |
+| smac2d | A-C | 60/60 | 51 | 0.85 (0.74 to 0.92) | 43.5 | 9.29 | 0.00 | 0.20 | 0.156 |
+| smac2d | A-D | 80/80 | 70 | 0.88 (0.78 to 0.93) | 42.3 | 8.84 | 0.00 | 0.15 | 0.138 |
 
 ## Failure reasons (valid trials)
 
@@ -17,3 +23,6 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 |---|---|---|---|
 | baseline | world_b | nav2_aborted | 1 |
 | baseline | world_b | timeout | 3 |
+| smac2d | world_b | nav2_aborted | 8 |
+| smac2d | world_b | timeout | 1 |
+| smac2d | world_d | nav2_aborted | 1 |
