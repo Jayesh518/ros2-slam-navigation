@@ -3,7 +3,7 @@
 Personal robotics project by Jayesh Chaudhari (GitHub `Jayesh518`): a Nav2 configuration study in simulation. This repo is public. It is part of a personal AI/ML and robotics portfolio.
 
 ## On session start
-Read `PLAN.md`, then `PHASES.md`. Give the owner a short briefing (where we stopped, what is done, the proposed next step) and wait for a go-ahead before doing work.
+Read `docs/progress.md` (the journal), then `PLAN.md` and `PHASES.md`. If the drive crashed or the session was restarted, follow `docs/restore-prompt.md`. Give the owner a short briefing (where we stopped, what is done, the proposed next step) and wait for a go-ahead before doing work.
 
 ## Rules (always)
 - Work in phases with exit gates (`PHASES.md`, plan in `PLAN.md`). At the end of a phase: update `PHASES.md`, commit and push, then stop and propose the next phase. Do not start the next phase without the owner's go-ahead.
@@ -15,3 +15,4 @@ Read `PLAN.md`, then `PHASES.md`. Give the owner a short briefing (where we stop
 - No CGPA, phone number or home address anywhere. Contact is the public email on the portfolio only.
 - Verify versions and package names against the official ROS 2 Jazzy, Gazebo Harmonic and Nav2 documentation before installing; the docs win over `PLAN.md`.
 - Make no safety or life-saving claims; this is a simulation study.
+- The external drive can crash. Keep `docs/progress.md` current after every meaningful step (dated session-log line, current state, next steps), and commit and push after each finished step and at least every 30 minutes of work. Gazebo and RViz are already installed on the drive: check with `scripts/check_env.sh`, install only what is missing.

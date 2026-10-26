@@ -21,7 +21,7 @@ Part 2 of 3. It follows `robust-computer-vision` (done) and feeds `autonomous-re
 | SLAM | `ros-jazzy-slam-toolbox` | Mapping. |
 | Localisation | AMCL (part of Nav2) | Localising on the saved map. |
 
-Verification rule: before installing, open the Jazzy install page and the Nav2 documentation for Jazzy and confirm package names and the Gazebo pairing. Record the exact versions (`ros2 --version` equivalents, `dpkg -l | grep ros-jazzy-navigation2`) in `docs/environment.md`. If something differs from this plan, the docs win and the change is logged in `PHASES.md`.
+**Already on the Ubuntu drive (owner, 2026-10-26): Gazebo and RViz.** Do not reinstall them. Run `scripts/check_env.sh` (section 8), record what is there, and install only what is reported missing. Verification rule: before installing anything, open the Jazzy install page and the Nav2 documentation for Jazzy and confirm package names and the Gazebo pairing. Record the exact versions (`ros2 --version` equivalents, `dpkg -l | grep ros-jazzy-navigation2`) in `docs/environment.md`. If something differs from this plan, the docs win and the change is logged in `PHASES.md`.
 
 ## 3. Phase 0 content to finalise (DRAFT)
 
@@ -61,7 +61,7 @@ Follows the standard shape in `PHASES.md`. Work stops at every gate: update `PHA
 
 **Phase 0, scope and protocol.** Deliver: `docs/protocol.md` with the question, worlds, start/goal file, metrics, trial counts, hypotheses and decision rule. Gate: written before any trial; ownership boundary stated; committed.
 
-**Phase 1, setup.** Deliver: Ubuntu 24.04 external drive working, ROS 2 Jazzy, Gazebo Harmonic, Nav2 and SLAM Toolbox installed; `docs/environment.md` with exact versions and licences (ROS 2, Gazebo, Nav2 and SLAM Toolbox are open source: record each licence from its repository); a smoke test (a stock Nav2 demo robot navigates one goal in Gazebo, RViz shows scan and map). Gate: the smoke test works; versions and licences recorded; GPU/driver notes recorded.
+**Phase 1, environment check and project setup.** Gazebo and RViz already exist, so this phase is a check, not an install. Deliver: `scripts/check_env.sh` output saved to `docs/environment.md` (exact versions, what was missing and what was installed, licences of ROS 2, Gazebo, Nav2 and SLAM Toolbox from their repositories, GPU and driver notes); the colcon workspace builds (`colcon build` on an empty `src/` and then on the first package); a smoke test (a stock Nav2 demo robot navigates one goal in Gazebo, RViz shows scan and map). Gate: the check script reports no missing required item; the smoke test works; versions and licences recorded.
 
 **Phase 2, pipeline and validation.** Deliver: own differential-drive robot description (URDF/SDF with LiDAR and odometry), a bringup launch file, the three worlds, an automated trial runner (sends a goal, watches ground truth, applies timeout, writes one CSV row per trial with the config name, world, pair, seed), unit tests for the metric code, CI (build and test in the `ros:jazzy` container). Gate: the same trial with the same seed gives the same CSV row (or the nondeterminism is measured and written down); tests pass; CI green.
 
@@ -101,7 +101,37 @@ Large files, rosbags (`*.db3`, `*.mcap`), videos and build output stay out of gi
 
 ## 7. Moving to the Ubuntu drive (first session checklist)
 
-1. On Windows: this repo is clean and pushed (it is, as of the commit that added this file). Easiest is to `git clone https://github.com/jayesh518/ros2-slam-navigation.git` on the Ubuntu drive; copying the folder (with `.git`) also works.
+1. On Windows: this repo is clean and pushed. Easiest is to `git clone https://github.com/jayesh518/ros2-slam-navigation.git` on the Ubuntu drive; copying the folder (with `.git`) also works.
 2. On Ubuntu: `git config user.name "Jayesh chaudhari"` and `git config user.email "127026542+Jayesh518@users.noreply.github.com"`, then sign in to GitHub (`gh auth login`) as `Jayesh518`.
 3. Open the folder in VS Code and start Claude Code there. It reads `CLAUDE.md` in this folder, then this plan and `PHASES.md`, and should brief the owner and wait for a go-ahead before starting Phase 0.
 4. Phase 0 first (write `docs/protocol.md` from section 3, edited with the owner), then Phase 1.
+
+## 8. Requirements list (project only)
+
+Run `bash scripts/check_env.sh`. It is read-only: it reports each item as OK, MISSING or WRONG and prints the version found. Install only what is MISSING, using the official Jazzy and Nav2 documentation.
+
+| # | Requirement | Needed for | Check |
+|---|---|---|---|
+| 1 | Ubuntu 24.04 LTS (Noble), 64-bit, on the external drive | everything | `lsb_release -rs` is 24.04 |
+| 2 | ROS 2 Jazzy (desktop or base plus RViz) | everything | `/opt/ros/jazzy/setup.bash` exists, `ros2` works |
+| 3 | Gazebo Harmonic and the ROS bridge (`ros-jazzy-ros-gz`) | simulation | `gz sim --versions` shows 8.x, `ros-jazzy-ros-gz-sim` installed |
+| 4 | RViz 2 | visual checks | `rviz2` found (already on the drive) |
+| 5 | Nav2 (`ros-jazzy-navigation2`, `ros-jazzy-nav2-bringup`) | navigation | packages installed |
+| 6 | SLAM Toolbox (`ros-jazzy-slam-toolbox`) | mapping | package installed |
+| 7 | Build tools: `colcon`, `rosdep`, `pytest`, `git`, `gh` | build, tests, push | commands found |
+| 8 | Python analysis: `numpy`, `pandas`, `matplotlib`, `scipy`, `pyyaml` | trial analysis | each imports |
+| 9 | At least 20 GB free on the drive | builds, logs | `df -h .` |
+| 10 | Network access to GitHub | push | `git ls-remote origin` |
+| 11 | NVIDIA driver (optional) | faster rendering; trials can run headless without it | `nvidia-smi` |
+| 12 | Docker (optional, Phase 7 only) | one-command reproduction | `docker --version` |
+
+Anything reported MISSING is installed, then the check is re-run and its output saved. If a required item cannot be installed, stop and tell the owner instead of working around it.
+
+## 9. Crash-proofing: the drive can fail
+
+The external drive sometimes crashes. Rules to lose as little as possible:
+- **`docs/progress.md` is the journal.** After every meaningful step (a file written, an install done, an experiment run, a decision made), append a dated line to the session log and keep "Current state" and "Next steps" accurate. This is cheaper than reconstructing from memory.
+- **Commit and push early and often**: after each finished step and at least every 30 minutes of work, in small commits (the owner's identity only, no attribution lines). The remote on GitHub is the backup.
+- **Small result files are committed** (trial CSVs, configs, figures). Large files (rosbags, videos, build output) are not, so keep the commands that regenerate them in `scripts/`.
+- **After a crash or re-login**, paste the restore prompt from `docs/restore-prompt.md` into Claude Code. It checks the repository for damage, compares the working tree with GitHub, re-runs the environment check, reads the journal and continues from the recorded next step.
+- If the repository is damaged (`git fsck` reports errors), do not repair it in place: clone fresh from GitHub into a new folder, copy over any uncommitted files that are still readable, and record what was lost in the journal.
