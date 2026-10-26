@@ -8,7 +8,11 @@ jobs:
     runs-on: ubuntu-24.04
     container: ros:jazzy
     steps:
+      - name: Install git (the ros:jazzy image has none; checkout then fetches a repository, not a tarball)
+        run: apt-get update && apt-get install -y git
       - uses: actions/checkout@v4
+      - name: Mark the workspace safe for git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install dependencies
         run: |
           apt-get update
