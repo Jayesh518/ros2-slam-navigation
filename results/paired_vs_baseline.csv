@@ -11,3 +11,12 @@ thetastar,world_c,suggestive (per world),0,0,0,20,no clear effect,-9.932,-14.93,
 thetastar,world_d,suggestive (per world; D is post-hoc),-0.05,-0.15,0,20,no clear effect,-3.408,-5.219,-1.91,19,real decrease,-0.5636,-0.9253,-0.25,19,real decrease
 thetastar,A-C,"primary, original design",0.05,0,0.1167,60,no clear effect,-6.954,-9.603,-4.495,56,real decrease,-0.7644,-1.139,-0.4191,56,real decrease
 thetastar,A-D,"primary, with post-hoc world D",0.025,-0.025,0.075,80,no clear effect,-6.055,-8.127,-4.138,75,real decrease,-0.7136,-1.013,-0.4526,75,real decrease
+dwb,world_a,suggestive (per world),0,0,0,20,no clear effect,1.226,-1.006,3.88,20,no clear effect,0.07125,-0.08585,0.295,20,no clear effect
+dwb,world_b,suggestive (per world),-0.25,-0.5,0,20,no clear effect,2.608,-0.427,7.365,10,no clear effect,-0.0691,-0.2333,0.1085,10,no clear effect
+dwb,world_c,suggestive (per world),0,0,0,20,no clear effect,-0.3655,-3.729,3.075,20,no clear effect,0.1536,-0.0335,0.3712,20,no clear effect
+dwb,world_d,suggestive (per world; D is post-hoc),0,0,0,20,no clear effect,3.185,1.089,6.31,20,real increase,0.06935,-0.09746,0.2876,20,no clear effect
+dwb,A-C,"primary, original design",-0.08333,-0.1667,0,60,no clear effect,0.8658,-0.9706,2.844,50,no clear effect,0.07614,-0.03246,0.2063,50,no clear effect
+dwb,A-D,"primary, with post-hoc world D",-0.0625,-0.125,0,80,no clear effect,1.528,-0.02407,3.162,70,no clear effect,0.0742,-0.021,0.1796,70,no clear effect
+rpp,world_a,suggestive (per world),0,0,0,1,no clear effect,13.66,13.66,13.66,1,real increase,1.02,1.02,1.02,1,real increase
+rpp,A-C,"primary, original design",0,0,0,1,no clear effect,13.66,13.66,13.66,1,real increase,1.02,1.02,1.02,1,real increase
+rpp,A-D,"primary, with post-hoc world D",0,0,0,1,no clear effect,13.66,13.66,13.66,1,real increase,1.02,1.02,1.02,1,real increase

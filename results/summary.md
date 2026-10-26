@@ -22,6 +22,15 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 | thetastar | world_d | 20/20 | 19 | 0.95 (0.76 to 0.99) | 36.6 | 7.58 | 0.00 | 0.35 | 0.081 |
 | thetastar | A-C | 60/60 | 59 | 0.98 (0.91 to 1.00) | 48.3 | 10.03 | 0.00 | 0.20 | 0.122 |
 | thetastar | A-D | 80/80 | 78 | 0.97 (0.91 to 0.99) | 44.3 | 9.32 | 0.00 | 0.24 | 0.112 |
+| dwb | world_a | 20/20 | 20 | 1.00 (0.84 to 1.00) | 42.0 | 8.18 | 0.00 | 0.30 | 0.133 |
+| dwb | world_b | 20/20 | 11 | 0.55 (0.34 to 0.74) | 56.6 | 11.28 | 0.00 | 1.50 | 0.425 |
+| dwb | world_c | 20/20 | 20 | 1.00 (0.84 to 1.00) | 57.2 | 10.54 | 0.00 | 0.65 | 0.140 |
+| dwb | world_d | 20/20 | 20 | 1.00 (0.84 to 1.00) | 41.2 | 7.96 | 0.00 | 0.05 | 0.087 |
+| dwb | A-C | 60/60 | 51 | 0.85 (0.74 to 0.92) | 52.9 | 10.44 | 0.00 | 0.82 | 0.233 |
+| dwb | A-D | 80/80 | 71 | 0.89 (0.80 to 0.94) | 48.0 | 9.64 | 0.00 | 0.62 | 0.196 |
+| rpp | world_a | 1/1 | 1 | 1.00 (0.21 to 1.00) | 71.2 | 13.09 | 0.00 | 0.00 | 0.126 |
+| rpp | A-C | 1/1 | 1 | 1.00 (0.21 to 1.00) | 71.2 | 13.09 | 0.00 | 0.00 | 0.126 |
+| rpp | A-D | 1/1 | 1 | 1.00 (0.21 to 1.00) | 71.2 | 13.09 | 0.00 | 0.00 | 0.126 |
 
 ## Failure reasons (valid trials)
 
@@ -29,6 +38,8 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 |---|---|---|---|
 | baseline | world_b | nav2_aborted | 1 |
 | baseline | world_b | timeout | 3 |
+| dwb | world_b | nav2_aborted | 4 |
+| dwb | world_b | timeout | 5 |
 | smac2d | world_b | nav2_aborted | 8 |
 | smac2d | world_b | timeout | 1 |
 | smac2d | world_d | nav2_aborted | 1 |

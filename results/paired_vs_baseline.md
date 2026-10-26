@@ -16,3 +16,12 @@ Unit = start/goal pair. Success: mean paired difference with 95% bootstrap inter
 | thetastar | world_d | 20 | -0.05 (-0.15 to +0.00) | no clear effect | -3.4 (-5.2 to -1.9), 19 | real decrease | -0.56 (-0.93 to -0.25), 19 | real decrease |
 | thetastar | A-C | 60 | +0.05 (+0.00 to +0.12) | no clear effect | -7.0 (-9.6 to -4.5), 56 | real decrease | -0.76 (-1.14 to -0.42), 56 | real decrease |
 | thetastar | A-D | 80 | +0.03 (-0.03 to +0.07) | no clear effect | -6.1 (-8.1 to -4.1), 75 | real decrease | -0.71 (-1.01 to -0.45), 75 | real decrease |
+| dwb | world_a | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +1.2 (-1.0 to +3.9), 20 | no clear effect | +0.07 (-0.09 to +0.29), 20 | no clear effect |
+| dwb | world_b | 20 | -0.25 (-0.50 to +0.00) | no clear effect | +2.6 (-0.4 to +7.4), 10 | no clear effect | -0.07 (-0.23 to +0.11), 10 | no clear effect |
+| dwb | world_c | 20 | +0.00 (+0.00 to +0.00) | no clear effect | -0.4 (-3.7 to +3.1), 20 | no clear effect | +0.15 (-0.03 to +0.37), 20 | no clear effect |
+| dwb | world_d | 20 | +0.00 (+0.00 to +0.00) | no clear effect | +3.2 (+1.1 to +6.3), 20 | real increase | +0.07 (-0.10 to +0.29), 20 | no clear effect |
+| dwb | A-C | 60 | -0.08 (-0.17 to +0.00) | no clear effect | +0.9 (-1.0 to +2.8), 50 | no clear effect | +0.08 (-0.03 to +0.21), 50 | no clear effect |
+| dwb | A-D | 80 | -0.06 (-0.12 to +0.00) | no clear effect | +1.5 (-0.0 to +3.2), 70 | no clear effect | +0.07 (-0.02 to +0.18), 70 | no clear effect |
+| rpp | world_a | 1 | +0.00 (+0.00 to +0.00) | no clear effect | +13.7 (+13.7 to +13.7), 1 | real increase | +1.02 (+1.02 to +1.02), 1 | real increase |
+| rpp | A-C | 1 | +0.00 (+0.00 to +0.00) | no clear effect | +13.7 (+13.7 to +13.7), 1 | real increase | +1.02 (+1.02 to +1.02), 1 | real increase |
+| rpp | A-D | 1 | +0.00 (+0.00 to +0.00) | no clear effect | +13.7 (+13.7 to +13.7), 1 | real increase | +1.02 (+1.02 to +1.02), 1 | real increase |
