@@ -4,13 +4,13 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-26
-- Phase: 1 in progress. Done: env check, `docs/environment.md`, colcon build on empty `src/`, smoke test (goal SUCCEEDED). Left: owner confirms RViz showed scan and map; then Phase 1 gate.
+- Phase: 1 done (gate passed 2026-10-26). Phase 2 next, awaiting owner go-ahead.
 - Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
 ## Checklist
 - [x] Phase 0: `docs/protocol.md` written, draft items in PLAN.md section 3 finalised with the owner, committed before any trial
-- [~] Phase 1 (nearly done): `scripts/check_env.sh` run, result in `docs/environment.md`, missing items installed, smoke test works
+- [x] Phase 1: `scripts/check_env.sh` run, result in `docs/environment.md`, missing items installed, smoke test works
 - [ ] Phase 2: robot, worlds, trial runner, tests, CI
 - [ ] Phase 3: baseline
 - [ ] Phase 4: intervention
@@ -37,8 +37,7 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - Own robot description or a stock one for the baseline (decide in Phase 2; plan says own robot).
 
 ## Next steps
-1. Owner: confirm RViz showed the scan and the map during the smoke test (re-run `scripts/smoke_test.sh` from a normal terminal if unsure).
-2. Phase 1 gate: update PHASES.md, push, propose Phase 2 (robot, worlds, trial runner, tests, CI).
+1. Phase 2 (needs owner go-ahead): decide own robot vs stock (plan says own), build worlds A1/B1/C1, `scripts/env.sh` clean-env helper, trial runner, tests, CI. Measure wall-clock cost of a trial and real-time factor first.
 
 ## Session log
 - 2026-10-26 (Windows laptop): wrote `PLAN.md`, `CLAUDE.md`, `PHASES.md` update, `scripts/check_env.sh`, this journal and `docs/restore-prompt.md`. No code run yet.
@@ -46,3 +45,4 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-26: owner accepted the pair-level decision rule (Plan change: PLAN.md draft rule replaced in protocol v0), B = office world, asked for 1-2 candidate layouts per world with an option to change one. Layout options added to protocol draft; awaiting choice before freeze.
 - 2026-10-26: owner chose layouts A1, B1, C1 ("what u like"). Protocol v1 frozen; PHASES.md and PLAN.md updated. Phase 0 complete.
 - 2026-10-26 (Ubuntu): Phase 1 work. `docs/environment.md` written (versions, licences, machine). `colcon build` on empty `src/` works. Smoke test: first run crashed RViz and Gazebo GUI (snap VS Code env leaks snap libs); fixed with clean-env launcher `scripts/smoke_test.sh`; Nav2 goal SUCCEEDED, /scan 5 Hz. Also noted: `~/.bashrc` sources `articuno_ws` (unrelated project) which sets Gazebo paths; not edited.
+- 2026-10-26 (Ubuntu): second smoke run; Claude took desktop screenshots: RViz showed map, scan, AMCL particles, Nav2 active; goal SUCCEEDED twice. Phase 1 gate passed. Note: stock tb3 world is a hexagon with 9 pillars, a useful reference for world C1.
