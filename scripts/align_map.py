@@ -81,7 +81,7 @@ def fit(world):
 
 
 out = {}
-for w in ("world_a", "world_b", "world_c"):
+for w in ("world_a", "world_b", "world_c", "world_d"):
     (x, y, yaw), c, c0, n = fit(w)
     out[w] = {"x": round(float(x), 4), "y": round(float(y), 4), "yaw": round(float(yaw), 5),
               "mean_dist_after_m": round(float(c), 4), "mean_dist_identity_m": round(float(c0), 4), "occupied_cells": int(n)}

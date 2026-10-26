@@ -75,9 +75,9 @@ existing = {}
 if (ROOT / "configs/pairs.yaml").exists():
     existing = yaml.safe_load((ROOT / "configs/pairs.yaml").read_text())["worlds"]
 result = {"seed": SEED, "seed_second_batch": SEED + 1, "min_straight_m": MIN_DIST, "frame": "world (Gazebo)", "worlds": {}}
-for w in ("world_a", "world_b", "world_c"):
+for w in ("world_a", "world_b", "world_c", "world_d"):
     keep = existing.get(w, [])
-    rng = np.random.default_rng(SEED if not keep else SEED + 1 + len(keep))
+    rng = np.random.default_rng(SEED if (not keep and w != "world_d") else (SEED + 100 if not keep else SEED + 1 + len(keep)))
     result["worlds"][w] = pairs_for(w, rng, keep)
     print(w, len(result["worlds"][w]), "pairs, straight distances", [p["straight_m"] for p in result["worlds"][w]])
 (ROOT / "configs/pairs.yaml").write_text("# Start/goal pairs, chosen once by scripts/make_pairs.py (seed below). Not changed after any trial.\n" + yaml.safe_dump(result, sort_keys=False))

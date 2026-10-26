@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Generate the three study worlds (protocol section 4: A1 open room, B1 office, C1 pillar grid) as Gazebo SDF.
+"""Generate the study worlds (protocol section 4: A1 open room, B1 office, C1 pillar grid; D = dense random clutter, protocol change log (l)) as Gazebo SDF.
 
-Usage: python3 scripts/make_worlds.py    -> writes src/nav_study_bringup/worlds/world_{a,b,c}.sdf
+Usage: python3 scripts/make_worlds.py    -> writes src/nav_study_bringup/worlds/world_{a,b,c,d}.sdf
 All worlds share the same header (physics, systems, light, ground), so only the geometry differs between trials.
 Walls and obstacles are 0.5 m high so the LiDAR plane (0.181 m) hits them. Layout numbers are in the dicts below.
 """
@@ -106,8 +106,46 @@ def world_c():
     return model("walls", b) + model("pillars", pillars)
 
 
+def world_d():
+    """D: 12 x 12 m room with 24 randomly placed boxes and cylinders (fixed seed 20261027): dense and not symmetric.
+
+    Rules: at least 0.8 m free between any two obstacles, 0.7 m between an obstacle and a wall, and a clear 1.2 m disc around the spawn point (0, 0).
+    """
+    import math
+    import random
+    rng = random.Random(20261027)
+    items = []  # (kind, x, y, a, b) with a, b = sizes (box) or radius (cylinder)
+
+    def extent(it):  # half-extents of the bounding box
+        return (it[3] / 2, it[4] / 2) if it[0] == "box" else (it[3], it[3])
+
+    def clear(a, b, gap):
+        ax, ay = extent(a); bx, by = extent(b)
+        return abs(a[1] - b[1]) - ax - bx >= gap or abs(a[2] - b[2]) - ay - by >= gap
+
+    tries = 0
+    while len(items) < 24 and tries < 20000:
+        tries += 1
+        if rng.random() < 0.7:
+            cand = ("box", round(rng.uniform(-5.0, 5.0), 2), round(rng.uniform(-5.0, 5.0), 2), round(rng.uniform(0.4, 1.0), 2), round(rng.uniform(0.4, 1.0), 2))
+        else:
+            cand = ("cyl", round(rng.uniform(-5.0, 5.0), 2), round(rng.uniform(-5.0, 5.0), 2), round(rng.uniform(0.2, 0.4), 2), 0)
+        ex, ey = extent(cand)
+        if abs(cand[1]) + ex > 6 - 0.7 or abs(cand[2]) + ey > 6 - 0.7:
+            continue
+        if math.hypot(max(abs(cand[1]) - ex, 0), max(abs(cand[2]) - ey, 0)) < 1.2:
+            continue
+        if all(clear(cand, o, 0.8) for o in items):
+            items.append(cand)
+    body = ""
+    for i, (kind, x, y, a, b) in enumerate(items):
+        body += box(f"box{i}", x, y, a, b, "0.55 0.45 0.35 1") if kind == "box" else cyl(f"cyl{i}", x, y, a, "0.35 0.5 0.7 1")
+    return model("walls", room(6, 6)) + model("clutter", body)
+
+
 for fname, title, fn in (("world_a", "World A1: open room with four obstacles", world_a),
                          ("world_b", "World B1: office with corridor, four rooms and doorways", world_b),
-                         ("world_c", "World C1: symmetric 4 x 4 pillar grid", world_c)):
+                         ("world_c", "World C1: symmetric 4 x 4 pillar grid", world_c),
+                         ("world_d", "World D: dense random clutter (fixed seed)", world_d)):
     (OUT / f"{fname}.sdf").write_text(HEADER.format(title=title) + fn() + FOOTER)
     print("wrote", OUT / f"{fname}.sdf")

@@ -10,9 +10,9 @@ from matplotlib.patches import Circle, Rectangle
 
 ROOT = Path(__file__).resolve().parents[1]
 WORLDS = ROOT / "src/nav_study_bringup/worlds"
-TITLES = {"world_a": "A1: open room, 4 obstacles", "world_b": "B1: office, corridor and doorways", "world_c": "C1: symmetric pillar grid"}
+TITLES = {"world_a": "A1: open room, 4 obstacles", "world_b": "B1: office, corridor and doorways", "world_c": "C1: symmetric pillar grid", "world_d": "D: dense random clutter"}
 
-fig, axes = plt.subplots(1, 3, figsize=(15, 5.4))
+fig, axes = plt.subplots(1, 4, figsize=(19, 5.2))
 for ax, name in zip(axes, TITLES):
     for col in ET.parse(WORLDS / f"{name}.sdf").getroot().iter("collision"):
         geom = col.find("geometry")

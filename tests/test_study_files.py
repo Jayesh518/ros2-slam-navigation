@@ -5,7 +5,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-WORLDS = ("world_a", "world_b", "world_c")
+WORLDS = ("world_a", "world_b", "world_c", "world_d")
 CONFIGS = ("baseline", "smac2d", "thetastar", "dwb", "rpp")
 
 

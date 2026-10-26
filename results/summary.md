@@ -7,7 +7,8 @@ Success rate with Wilson 95% interval; time and path are medians over successful
 | baseline | world_a | 20/20 | 20 | 1.00 (0.84 to 1.00) | 44.4 | 8.41 | 0.00 | 0.10 | 0.128 |
 | baseline | world_b | 20/20 | 16 | 0.80 (0.58 to 0.92) | 64.3 | 12.99 | 0.00 | 0.30 | 0.169 |
 | baseline | world_c | 20/20 | 20 | 1.00 (0.84 to 1.00) | 57.8 | 10.60 | 0.00 | 1.35 | 0.127 |
-| baseline | all | 60/60 | 56 | 0.93 (0.84 to 0.97) | 53.9 | 10.53 | 0.00 | 0.58 | 0.142 |
+| baseline | A-C | 60/60 | 56 | 0.93 (0.84 to 0.97) | 53.9 | 10.53 | 0.00 | 0.58 | 0.142 |
+| baseline | A-D | 60/60 | 56 | 0.93 (0.84 to 0.97) | 53.9 | 10.53 | 0.00 | 0.58 | 0.142 |
 
 ## Failure reasons (valid trials)
 

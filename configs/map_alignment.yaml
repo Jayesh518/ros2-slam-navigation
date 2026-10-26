@@ -20,3 +20,10 @@ world_c:
   mean_dist_after_m: 0.0395
   mean_dist_identity_m: 0.0395
   occupied_cells: 1819
+world_d:
+  x: -0.0785
+  y: -0.0
+  yaw: -0.00925
+  mean_dist_after_m: 0.0265
+  mean_dist_identity_m: 0.0413
+  occupied_cells: 3001
