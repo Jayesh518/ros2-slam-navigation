@@ -28,8 +28,8 @@ def test_pairs_file_matches_protocol():
     assert pairs["min_straight_m"] == 4.0
     for w in WORLDS:
         ps = pairs["worlds"][w]
-        assert len(ps) == 10, f"{w}: protocol fixes 10 pairs per world"
-        assert len({p["id"] for p in ps}) == 10
+        assert len(ps) == 20, f"{w}: protocol (change log k) fixes 20 pairs per world"
+        assert len({p["id"] for p in ps}) == 20
         for p in ps:
             d = math.dist((p["start"]["x"], p["start"]["y"]), (p["goal"]["x"], p["goal"]["y"]))
             assert d >= 4.0 - 0.02, p["id"]  # rounding to 0.01 m

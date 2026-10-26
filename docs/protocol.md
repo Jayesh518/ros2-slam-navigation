@@ -44,8 +44,8 @@ SLAM Toolbox, AMCL and Nav2 are used as published. The owner's work is the robot
   - C1* cluttered 12 x 12 m: a 4 x 4 grid of identical pillars (symmetric, feature-poor, stresses AMCL).
   - C2 cluttered room of randomly placed boxes (fixed seed), dense but not symmetric.
   **Chosen (2026-10-26): A1, B1, C1.** Changes after this are logged as changes.
-- Start/goal pairs: 10 per world, chosen once, checked as reachable, with straight-line distance of at least 4 m, written to `configs/pairs.yaml` and committed before any trial. They are not changed after results are seen.
-- Repeats: 2 trials per pair per configuration, so 20 trials per world per configuration. Each trial has a recorded seed.
+- Start/goal pairs: **20 per world (amended 2026-10-26, change log (k); was 10)**, chosen once, checked as reachable, with straight-line distance of at least 4 m, written to `configs/pairs.yaml` and committed before any trial. They are not changed after results are seen.
+- Repeats: **1 trial per pair per configuration (amended, change log (k); was 2)**, so 20 trials per world per configuration, as before. Each trial has a recorded seed.
 - Order: trials run in a randomised order (fixed shuffle seed) so drift in the machine is not confounded with a configuration.
 
 ## 5. Configurations (one change at a time from the baseline)
@@ -78,18 +78,18 @@ Total: 6 configurations x 3 worlds x 20 trials = 360 trials. If measured wall-cl
 H1 and H2 are statements about specific worlds. With 20 trials per cell they are tested at low power (see section 8), and the report says so.
 
 ## 8. Analysis and decision rule
-Unit of analysis: the start/goal pair. For each pair and configuration, success is the fraction of its 2 trials that succeeded (0, 0.5 or 1). Differences to baseline are paired by pair.
+Unit of analysis: the start/goal pair. For each pair and configuration, success is 1 or 0 (one trial per pair; amended, change log (k)). Differences to baseline are paired by pair.
 
-- **Primary comparisons (5):** each non-baseline configuration against the baseline, pooled over all 30 pairs (3 worlds x 10).
+- **Primary comparisons (5):** each non-baseline configuration against the baseline, pooled over all 60 pairs (3 worlds x 20; amended, change log (k)).
   - Success: paired mean difference in success fraction, with a 95 percent bootstrap interval over pairs (10,000 resamples, fixed seed). A difference counts as **real** if its size is at least 10 percentage points and the interval excludes zero.
   - Time to goal and path length: paired difference on pairs where both configurations succeeded, 95 percent bootstrap interval. Real if the interval excludes zero and the size is above 5 percent of the baseline value.
   - Anything else is reported as **no clear effect**.
-- **Per-world results (secondary, covers H1, H2, H3):** the same quantities within each world (10 pairs), reported with intervals and labelled **suggestive**, never "real", because they rest on 10 pairs.
+- **Per-world results (secondary, covers H1, H2, H3):** the same quantities within each world (20 pairs), reported with intervals and labelled **suggestive**, never "real", because they rest on 20 pairs per world.
 - **Descriptive:** per configuration and world, success rate with a Wilson 95 percent interval and the number of trials.
 - No correction for multiple comparisons; the report states that 5 primary comparisons were made and that intervals are unadjusted.
 - Unsupported hypotheses are reported as unsupported. Negative and mixed results are reported as they are.
 
-Why pairs and not trials as the unit: the two repeats of one pair are not independent, so treating 20 trials as 20 independent samples would give intervals that are too narrow.
+Why pairs as the unit: trials on the same pair are almost the same trial (change log (j)), so the pair, not the trial, is the independent sample.
 
 ## 9. Known limits (stated now, repeated in the report)
 Simulation hides real sensor noise, wheel slip, lighting and latency. Gazebo physics, AMCL particles and the Nav2 behaviour tree are not fully deterministic; the spread of repeated identical trials is measured in Phase 2. Three worlds and 10 pairs per world is a small sample of environments. Results hold for these worlds, this robot and these default parameters only.
@@ -104,4 +104,5 @@ Simulation hides real sensor noise, wheel slip, lighting and latency. Gazebo phy
 - 2026-10-26 (before any trial) (h): **real-time factor fixed at 1** (Gazebo default, no speed-up), after a check with the study robot and the baseline configuration (`results/validation/rtf_robot_f*.csv`, `scripts/rtf_check_robot.sh`; same 6 pairs of world A at factors 1, 2 and 4). Factors 2 and 4 made trials slower (about 10 percent at factor 2) and changed one route, because the planner and controller are CPU-bound; factor 10 on the stock robot changed outcomes (3 of 6 goals reached against 6 of 6). Cost: about 40 s wall per trial, so the 360-trial grid is roughly 5 to 6 hours plus about 1 minute start-up per session (36 sessions). Sample sizes in this check are small (6 trials per factor).
 - 2026-10-26 (before any trial) (i): **reset verification and validity.** The runner verifies, against ground truth, that AMCL accepted the true start pose (error below 0.5 m), retries up to 5 times, and otherwise records the trial with `valid=0`, `failure_reason=invalid_reset` and does not send a goal; invalid trials are excluded from success rates and their number is reported. Reason: in validation one trial started with AMCL 6 m off (the initial pose was ignored right after the teleport), which would have been counted as a navigation failure. The reset check uses ground truth only to validate the reset, never to help navigation.
 - 2026-10-26 (before any trial) (j): **repeatability measured.** Same pair (baseline, world A, a01) 10 times in one session: all succeeded, time 35.07 +- 0.57 s, path 6.512 +- 0.049 m. In 3 fresh sessions with the same seed: times 34.49 to 35.04 s, paths 6.48 to 6.64 m. Trials are not bit-identical (AMCL and Nav2 are not seedable) but the spread is small, about 2 percent in time. Consequence for the design: a second repeat of the same pair adds little information beyond the first; the pair is the effective unit (section 8 already analyses by pair). Whether to replace the second repeat by more pairs is raised with the owner at the Phase 2 gate; nothing is changed here.
+- 2026-10-26 (before any trial) (k): **20 pairs per world, 1 trial per pair (was 10 pairs x 2 repeats).** Reason: repeats of one pair varied by only about 2 percent in time and all succeeded (change log (j)), so the second repeat is nearly redundant, while more pairs cover more start/goal situations and give the paired comparison 60 independent units instead of 30. Total trials unchanged: 6 configurations x 3 worlds x 20 = 360. The first 10 pairs per world are the ones already in `configs/pairs.yaml`; 10 more per world (ids x11 to x20) were added with `scripts/make_pairs.py` (seed 20261026 + 1 + 10, same selection rules) and no existing pair was changed. Validation trials (`results/validation/`) used only pairs a01 to a06. Section 8 numbers updated accordingly (60 pooled pairs; per-world 20 pairs). The decision rule, thresholds and hypotheses are unchanged. Proposed by Claude, approved by the owner. No study trial had been run.
 

@@ -220,7 +220,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
     ap.add_argument("--world", required=True)
-    ap.add_argument("--repeats", type=int, default=2)
+    ap.add_argument("--repeats", type=int, default=1, help="trials per pair (protocol change log (k): 1)")
     ap.add_argument("--seed", type=int, default=1, help="session seed (also passed to gz sim); trial seed = seed*1000 + trial index")
     ap.add_argument("--out", required=True)
     ap.add_argument("--pairs", default="configs/pairs.yaml")

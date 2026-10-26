@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Choose the start/goal pairs once (protocol section 4): 10 per world, fixed seed, written to configs/pairs.yaml.
+"""Choose the start/goal pairs (protocol section 4 and change log (k)): 20 per world, fixed seeds, written to configs/pairs.yaml.
+
+The first 10 per world were drawn with SEED; the second 10 (ids x11..x20) were added before any trial with SEED + 1. Existing pairs are never redrawn:
+if configs/pairs.yaml exists, its pairs are kept and only missing ones are added.
 
 Rules: start and goal are in observed free space of the saved map (clearance 0.30 m from occupied or unknown map cells) and 0.45 m from true
 obstacles; straight-line distance at least 4 m; reachable for the robot (8-connected search on the true geometry inflated by 0.20 m).
@@ -17,7 +20,7 @@ from scipy import ndimage
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SEED, N, MIN_DIST = 20261026, 10, 4.0
+SEED, N, MIN_DIST = 20261026, 20, 4.0
 align = yaml.safe_load((ROOT / "configs/map_alignment.yaml").read_text())
 
 # reuse the SDF rasteriser from align_map.py without running its main part
@@ -27,7 +30,7 @@ exec(compile(src, "align_map_head", "exec"), ns)
 true_obstacles, RES = ns["true_obstacles"], ns["RES"]
 
 
-def pairs_for(world, rng):
+def pairs_for(world, rng, keep):
     mask, x0, y0 = true_obstacles(world)
     d_true = ndimage.distance_transform_edt(~mask) * RES
     meta = yaml.safe_load((ROOT / "maps" / f"{world}.yaml").read_text())
@@ -52,7 +55,7 @@ def pairs_for(world, rng):
         qi = (int((q[1] - y0) / RES), int((q[0] - x0) / RES))
         return lab[pi] != 0 and lab[pi] == lab[qi]
 
-    out = []
+    out = list(keep)
     tries = 0
     while len(out) < N and tries < 100000:
         tries += 1
@@ -68,9 +71,13 @@ def pairs_for(world, rng):
     return out
 
 
-rng = np.random.default_rng(SEED)
-result = {"seed": SEED, "min_straight_m": MIN_DIST, "frame": "world (Gazebo)", "worlds": {}}
+existing = {}
+if (ROOT / "configs/pairs.yaml").exists():
+    existing = yaml.safe_load((ROOT / "configs/pairs.yaml").read_text())["worlds"]
+result = {"seed": SEED, "seed_second_batch": SEED + 1, "min_straight_m": MIN_DIST, "frame": "world (Gazebo)", "worlds": {}}
 for w in ("world_a", "world_b", "world_c"):
-    result["worlds"][w] = pairs_for(w, rng)
+    keep = existing.get(w, [])
+    rng = np.random.default_rng(SEED if not keep else SEED + 1 + len(keep))
+    result["worlds"][w] = pairs_for(w, rng, keep)
     print(w, len(result["worlds"][w]), "pairs, straight distances", [p["straight_m"] for p in result["worlds"][w]])
 (ROOT / "configs/pairs.yaml").write_text("# Start/goal pairs, chosen once by scripts/make_pairs.py (seed below). Not changed after any trial.\n" + yaml.safe_dump(result, sort_keys=False))

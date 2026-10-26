@@ -3,7 +3,7 @@
 # Usage: scripts/run_session.sh <config> <world> <seed> <rtf> <repeats> [extra run_trials args, e.g. --only a01,a02]
 # Output: results/trials/<config>_<world>.csv (appended; one row per trial). Logs: results/logs/session_<config>_<world>.*
 cd "$(dirname "$0")/.." || exit 1
-C=${1:?config}; W=${2:?world}; SEED=${3:-1}; RTF=${4:-1}; REP=${5:-2}; shift 5
+C=${1:?config}; W=${2:?world}; SEED=${3:-1}; RTF=${4:-1}; REP=${5:-1}; shift 5
 mkdir -p results/trials results/logs
 bash scripts/stop_sim.sh
 (setsid scripts/env.sh ros2 launch nav_study_bringup nav.launch.py world:=$W map:=$PWD/maps/$W.yaml params_file:=$PWD/configs/nav2/$C.yaml \
