@@ -1,6 +1,6 @@
 # ROS 2 Mobile Robot: SLAM, Localization and Navigation
 
-**Status: Planned**
+**Status: Phase 2 of 7 (pipeline and validation) complete; no study results yet**
 
 A simulated differential-drive robot that maps an unknown environment, localizes itself, and navigates to goals while avoiding obstacles, built on mature ROS 2 packages (SLAM Toolbox, AMCL, Nav2).
 
@@ -27,6 +27,10 @@ docs/       report.md and diagrams/ (TF and architecture)
 One final screenshot per phase, with captions, in [docs/figures](docs/figures/README.md).
 
 ![Phase 1: stock Nav2 smoke test in RViz 2 (map, costmaps, laser scan, AMCL particles; not our own robot yet)](docs/figures/phase1-smoke-test-rviz.png)
+
+![Phase 2: our own Burger-based robot in the office world (Gazebo Sim)](docs/figures/phase2-robot-in-world-b.png)
+
+![The three study worlds (plans generated from the SDF files)](docs/figures/world-plans.png)
 
 ## Results
 None yet.
