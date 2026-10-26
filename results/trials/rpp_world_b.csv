@@ -1,0 +1,9 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+rpp-b03-r1,rpp,world_b,b03,1,12001,1,,SUCCEEDED,21.3,4.279,0.236,1,1,0,0,0.062,0.037,0,36.41,28.3,2026-10-26T21:20:56+00:00
+rpp-b10-r1,rpp,world_b,b10,1,12002,1,,SUCCEEDED,98.03,15.941,0.206,1,1,0,3,0.337,0.144,0,141.36,105.1,2026-10-26T21:21:25+00:00
+rpp-b15-r1,rpp,world_b,b15,1,12003,1,,SUCCEEDED,92.49,17.05,0.228,1,1,0,2,0.298,0.122,0,240.8,99.5,2026-10-26T21:23:10+00:00
+rpp-b19-r1,rpp,world_b,b19,1,12004,0,goal_not_reached_by_ground_truth,SUCCEEDED,101.22,12.93,0.725,1,1,0,6,1.614,0.528,1,348.95,108.2,2026-10-26T21:24:49+00:00
+rpp-b02-r1,rpp,world_b,b02,1,12005,0,timeout,CANCELED,120.0,20.521,3.892,1,1,0,2,0.584,0.327,1,475.89,127.0,2026-10-26T21:26:38+00:00
+rpp-b11-r1,rpp,world_b,b11,1,12006,0,nav2_aborted,ABORTED,118.13,15.854,8.274,1,1,0,6,2.514,1.325,1,600.96,125.2,2026-10-26T21:28:45+00:00
+rpp-b13-r1,rpp,world_b,b13,1,12007,1,,SUCCEEDED,32.43,5.242,0.254,1,1,0,0,0.128,0.073,0,640.33,39.4,2026-10-26T21:30:50+00:00
+rpp-b14-r1,rpp,world_b,b14,1,12008,0,nav2_aborted,ABORTED,50.08,6.951,5.604,1,1,0,0,2.107,0.624,1,697.32,57.1,2026-10-26T21:31:29+00:00
