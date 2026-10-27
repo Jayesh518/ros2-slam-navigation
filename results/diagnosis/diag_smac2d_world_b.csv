@@ -1,0 +1,10 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+smac2d-b14-r1,smac2d,world_b,b14,1,12001,0,timeout,CANCELED,120.0,17.646,5.854,1,1,0,3,2.07,0.609,1,135.1,127.0,2026-10-27T04:06:29+00:00
+smac2d-b02-r1,smac2d,world_b,b02,1,12002,0,timeout,CANCELED,120.0,19.508,7.992,1,1,0,2,1.315,0.795,1,262.06,127.0,2026-10-27T04:08:36+00:00
+smac2d-b08-r1,smac2d,world_b,b08,1,12003,1,,SUCCEEDED,72.5,15.673,0.173,1,1,0,0,0.263,0.107,0,341.49,79.5,2026-10-27T04:10:43+00:00
+smac2d-b04-r1,smac2d,world_b,b04,1,12004,0,timeout,CANCELED,120.0,23.055,5.211,1,1,0,0,0.318,0.159,0,468.42,127.0,2026-10-27T04:12:02+00:00
+smac2d-b06-r1,smac2d,world_b,b06,1,12005,0,nav2_aborted,ABORTED,87.45,12.017,8.883,1,1,0,6,2.192,1.103,1,562.81,94.5,2026-10-27T04:14:09+00:00
+smac2d-b16-r1,smac2d,world_b,b16,1,12006,0,nav2_aborted,ABORTED,61.46,13.305,1.272,1,1,0,0,0.502,0.16,1,631.2,68.5,2026-10-27T04:15:44+00:00
+smac2d-b11-r1,smac2d,world_b,b11,1,12007,0,timeout,CANCELED,120.0,18.55,8.051,1,1,0,4,1.996,0.582,1,758.12,127.0,2026-10-27T04:16:52+00:00
+smac2d-b09-r1,smac2d,world_b,b09,1,12008,1,,SUCCEEDED,63.62,13.511,0.139,1,1,0,0,0.289,0.121,0,828.69,70.6,2026-10-27T04:18:59+00:00
+smac2d-b15-r1,smac2d,world_b,b15,1,12009,1,,SUCCEEDED,75.45,15.961,0.121,1,1,0,0,0.256,0.107,0,911.06,82.5,2026-10-27T04:20:10+00:00

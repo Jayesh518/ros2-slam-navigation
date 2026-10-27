@@ -233,3 +233,9 @@ Shipped default = `/opt/ros/jazzy/share/nav2_bringup/params/nav2_params.yaml` (N
 | `controller_server.ros__parameters.FollowPath.vy_std` | `0.2` | `<absent>` |
 | `controller_server.ros__parameters.FollowPath.wz_max` | `1.9` | `<absent>` |
 | `controller_server.ros__parameters.FollowPath.wz_std` | `0.4` | `<absent>` |
+
+## diag_known vs baseline
+
+| parameter | baseline | diag_known |
+|---|---|---|
+| `planner_server.ros__parameters.GridBased.allow_unknown` | `True` | `False` |

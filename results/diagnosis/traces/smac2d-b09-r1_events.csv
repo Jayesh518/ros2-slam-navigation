@@ -1,0 +1,634 @@
+t_s,kind,detail
+0.01,bt,Fallback SUCCESS->IDLE
+0.01,bt,BackUp RUNNING->IDLE
+0.01,bt,RecoveryActions RUNNING->IDLE
+0.01,bt,RecoveryFallback RUNNING->IDLE
+0.01,bt,Sequence RUNNING->IDLE
+0.01,bt,NavigateRecovery RUNNING->IDLE
+0.01,bt,NavigateRecovery IDLE->RUNNING
+0.01,bt,ControllerSelector IDLE->SUCCESS
+0.01,bt,PlannerSelector IDLE->SUCCESS
+0.01,bt,RateController IDLE->RUNNING
+0.01,bt,ComputePathToPose IDLE->RUNNING
+0.01,bt,ComputePathToPose IDLE->RUNNING
+0.01,bt,NavigateWithReplanning IDLE->RUNNING
+0.43,plan,poses=239 length_m=13.38 end=(-4.92;-2.21)
+0.44,bt,ComputePathToPose RUNNING->SUCCESS
+0.44,bt,ComputePathToPose SUCCESS->IDLE
+0.44,bt,ComputePathToPose RUNNING->IDLE
+0.44,bt,ComputePathToPose IDLE->SUCCESS
+0.44,bt,RateController RUNNING->SUCCESS
+0.44,bt,ComputePathToPose SUCCESS->IDLE
+0.44,bt,FollowPath IDLE->RUNNING
+0.44,bt,FollowPath IDLE->RUNNING
+0.44,bt,RateController SUCCESS->RUNNING
+1.45,bt,ComputePathToPose IDLE->RUNNING
+1.45,bt,ComputePathToPose IDLE->RUNNING
+1.46,plan,poses=239 length_m=13.33 end=(-4.92;-2.21)
+1.48,bt,ComputePathToPose RUNNING->SUCCESS
+1.48,bt,ComputePathToPose SUCCESS->IDLE
+1.48,bt,ComputePathToPose RUNNING->IDLE
+1.48,bt,ComputePathToPose IDLE->SUCCESS
+1.48,bt,RateController RUNNING->SUCCESS
+1.48,bt,ComputePathToPose SUCCESS->IDLE
+1.48,bt,RateController SUCCESS->RUNNING
+2.48,bt,ComputePathToPose IDLE->RUNNING
+2.48,bt,ComputePathToPose IDLE->RUNNING
+2.49,plan,poses=239 length_m=13.33 end=(-4.92;-2.21)
+2.5,bt,ComputePathToPose RUNNING->SUCCESS
+2.5,bt,ComputePathToPose SUCCESS->IDLE
+2.5,bt,ComputePathToPose RUNNING->IDLE
+2.5,bt,ComputePathToPose IDLE->SUCCESS
+2.5,bt,RateController RUNNING->SUCCESS
+2.5,bt,ComputePathToPose SUCCESS->IDLE
+2.5,bt,RateController SUCCESS->RUNNING
+3.5,bt,ComputePathToPose IDLE->RUNNING
+3.5,bt,ComputePathToPose IDLE->RUNNING
+3.51,plan,poses=238 length_m=13.22 end=(-4.92;-2.21)
+3.52,bt,ComputePathToPose RUNNING->SUCCESS
+3.52,bt,ComputePathToPose SUCCESS->IDLE
+3.52,bt,ComputePathToPose RUNNING->IDLE
+3.52,bt,ComputePathToPose IDLE->SUCCESS
+3.52,bt,RateController RUNNING->SUCCESS
+3.52,bt,ComputePathToPose SUCCESS->IDLE
+3.52,bt,RateController SUCCESS->RUNNING
+4.54,bt,ComputePathToPose IDLE->RUNNING
+4.54,bt,ComputePathToPose IDLE->RUNNING
+4.54,plan,poses=232 length_m=12.93 end=(-4.92;-2.21)
+4.55,bt,ComputePathToPose RUNNING->SUCCESS
+4.55,bt,ComputePathToPose SUCCESS->IDLE
+4.55,bt,ComputePathToPose RUNNING->IDLE
+4.55,bt,ComputePathToPose IDLE->SUCCESS
+4.55,bt,RateController RUNNING->SUCCESS
+4.55,bt,ComputePathToPose SUCCESS->IDLE
+4.55,bt,RateController SUCCESS->RUNNING
+5.56,bt,ComputePathToPose IDLE->RUNNING
+5.56,bt,ComputePathToPose IDLE->RUNNING
+5.56,plan,poses=228 length_m=12.69 end=(-4.92;-2.21)
+5.57,bt,ComputePathToPose RUNNING->SUCCESS
+5.57,bt,ComputePathToPose SUCCESS->IDLE
+5.57,bt,ComputePathToPose RUNNING->IDLE
+5.57,bt,ComputePathToPose IDLE->SUCCESS
+5.57,bt,RateController RUNNING->SUCCESS
+5.57,bt,ComputePathToPose SUCCESS->IDLE
+5.57,bt,RateController SUCCESS->RUNNING
+6.58,bt,ComputePathToPose IDLE->RUNNING
+6.58,bt,ComputePathToPose IDLE->RUNNING
+6.59,plan,poses=224 length_m=12.46 end=(-4.92;-2.21)
+6.61,bt,ComputePathToPose RUNNING->SUCCESS
+6.61,bt,ComputePathToPose SUCCESS->IDLE
+6.61,bt,ComputePathToPose RUNNING->IDLE
+6.61,bt,ComputePathToPose IDLE->SUCCESS
+6.61,bt,RateController RUNNING->SUCCESS
+6.61,bt,ComputePathToPose SUCCESS->IDLE
+6.61,bt,RateController SUCCESS->RUNNING
+7.61,bt,ComputePathToPose IDLE->RUNNING
+7.61,bt,ComputePathToPose IDLE->RUNNING
+7.61,plan,poses=222 length_m=12.28 end=(-4.92;-2.21)
+7.63,bt,ComputePathToPose RUNNING->SUCCESS
+7.63,bt,ComputePathToPose SUCCESS->IDLE
+7.63,bt,ComputePathToPose RUNNING->IDLE
+7.63,bt,ComputePathToPose IDLE->SUCCESS
+7.63,bt,RateController RUNNING->SUCCESS
+7.63,bt,ComputePathToPose SUCCESS->IDLE
+7.63,bt,RateController SUCCESS->RUNNING
+8.63,bt,ComputePathToPose IDLE->RUNNING
+8.63,bt,ComputePathToPose IDLE->RUNNING
+8.64,plan,poses=220 length_m=12.07 end=(-4.92;-2.21)
+8.65,bt,ComputePathToPose RUNNING->SUCCESS
+8.65,bt,ComputePathToPose SUCCESS->IDLE
+8.65,bt,ComputePathToPose RUNNING->IDLE
+8.65,bt,ComputePathToPose IDLE->SUCCESS
+8.65,bt,RateController RUNNING->SUCCESS
+8.65,bt,ComputePathToPose SUCCESS->IDLE
+8.65,bt,RateController SUCCESS->RUNNING
+9.65,bt,ComputePathToPose IDLE->RUNNING
+9.65,bt,ComputePathToPose IDLE->RUNNING
+9.66,plan,poses=217 length_m=11.86 end=(-4.92;-2.21)
+9.67,bt,ComputePathToPose RUNNING->SUCCESS
+9.67,bt,ComputePathToPose SUCCESS->IDLE
+9.67,bt,ComputePathToPose RUNNING->IDLE
+9.67,bt,ComputePathToPose IDLE->SUCCESS
+9.67,bt,RateController RUNNING->SUCCESS
+9.67,bt,ComputePathToPose SUCCESS->IDLE
+9.67,bt,RateController SUCCESS->RUNNING
+10.69,bt,ComputePathToPose IDLE->RUNNING
+10.69,bt,ComputePathToPose IDLE->RUNNING
+10.69,plan,poses=214 length_m=11.65 end=(-4.92;-2.21)
+10.7,bt,ComputePathToPose RUNNING->SUCCESS
+10.7,bt,ComputePathToPose SUCCESS->IDLE
+10.7,bt,ComputePathToPose RUNNING->IDLE
+10.7,bt,ComputePathToPose IDLE->SUCCESS
+10.7,bt,RateController RUNNING->SUCCESS
+10.7,bt,ComputePathToPose SUCCESS->IDLE
+10.7,bt,RateController SUCCESS->RUNNING
+11.71,bt,ComputePathToPose IDLE->RUNNING
+11.71,bt,ComputePathToPose IDLE->RUNNING
+11.71,plan,poses=210 length_m=11.39 end=(-4.92;-2.21)
+11.72,bt,ComputePathToPose RUNNING->SUCCESS
+11.72,bt,ComputePathToPose SUCCESS->IDLE
+11.72,bt,ComputePathToPose RUNNING->IDLE
+11.72,bt,ComputePathToPose IDLE->SUCCESS
+11.72,bt,RateController RUNNING->SUCCESS
+11.72,bt,ComputePathToPose SUCCESS->IDLE
+11.72,bt,RateController SUCCESS->RUNNING
+12.74,bt,ComputePathToPose IDLE->RUNNING
+12.74,bt,ComputePathToPose IDLE->RUNNING
+12.74,plan,poses=207 length_m=11.16 end=(-4.92;-2.21)
+12.76,bt,ComputePathToPose RUNNING->SUCCESS
+12.76,bt,ComputePathToPose SUCCESS->IDLE
+12.76,bt,ComputePathToPose RUNNING->IDLE
+12.76,bt,ComputePathToPose IDLE->SUCCESS
+12.76,bt,RateController RUNNING->SUCCESS
+12.76,bt,ComputePathToPose SUCCESS->IDLE
+12.76,bt,RateController SUCCESS->RUNNING
+13.75,bt,ComputePathToPose IDLE->RUNNING
+13.75,bt,ComputePathToPose IDLE->RUNNING
+13.76,plan,poses=204 length_m=10.94 end=(-4.92;-2.21)
+13.78,bt,ComputePathToPose RUNNING->SUCCESS
+13.78,bt,ComputePathToPose SUCCESS->IDLE
+13.78,bt,ComputePathToPose RUNNING->IDLE
+13.78,bt,ComputePathToPose IDLE->SUCCESS
+13.78,bt,RateController RUNNING->SUCCESS
+13.78,bt,ComputePathToPose SUCCESS->IDLE
+13.78,bt,RateController SUCCESS->RUNNING
+14.78,bt,ComputePathToPose IDLE->RUNNING
+14.78,bt,ComputePathToPose IDLE->RUNNING
+14.79,plan,poses=201 length_m=10.74 end=(-4.92;-2.21)
+14.8,bt,ComputePathToPose RUNNING->SUCCESS
+14.8,bt,ComputePathToPose SUCCESS->IDLE
+14.8,bt,ComputePathToPose RUNNING->IDLE
+14.8,bt,ComputePathToPose IDLE->SUCCESS
+14.8,bt,RateController RUNNING->SUCCESS
+14.8,bt,ComputePathToPose SUCCESS->IDLE
+14.8,bt,RateController SUCCESS->RUNNING
+15.8,bt,ComputePathToPose IDLE->RUNNING
+15.8,bt,ComputePathToPose IDLE->RUNNING
+15.81,plan,poses=196 length_m=10.49 end=(-4.92;-2.21)
+15.82,bt,ComputePathToPose RUNNING->SUCCESS
+15.82,bt,ComputePathToPose SUCCESS->IDLE
+15.82,bt,ComputePathToPose RUNNING->IDLE
+15.82,bt,ComputePathToPose IDLE->SUCCESS
+15.82,bt,RateController RUNNING->SUCCESS
+15.82,bt,ComputePathToPose SUCCESS->IDLE
+15.82,bt,RateController SUCCESS->RUNNING
+16.84,bt,ComputePathToPose IDLE->RUNNING
+16.84,bt,ComputePathToPose IDLE->RUNNING
+16.84,plan,poses=191 length_m=10.24 end=(-4.92;-2.21)
+16.85,bt,ComputePathToPose RUNNING->SUCCESS
+16.85,bt,ComputePathToPose SUCCESS->IDLE
+16.85,bt,ComputePathToPose RUNNING->IDLE
+16.85,bt,ComputePathToPose IDLE->SUCCESS
+16.85,bt,RateController RUNNING->SUCCESS
+16.85,bt,ComputePathToPose SUCCESS->IDLE
+16.85,bt,RateController SUCCESS->RUNNING
+17.86,bt,ComputePathToPose IDLE->RUNNING
+17.86,bt,ComputePathToPose IDLE->RUNNING
+17.86,plan,poses=186 length_m=9.98 end=(-4.92;-2.21)
+17.87,bt,ComputePathToPose RUNNING->SUCCESS
+17.87,bt,ComputePathToPose SUCCESS->IDLE
+17.87,bt,ComputePathToPose RUNNING->IDLE
+17.87,bt,ComputePathToPose IDLE->SUCCESS
+17.87,bt,RateController RUNNING->SUCCESS
+17.87,bt,ComputePathToPose SUCCESS->IDLE
+17.87,bt,RateController SUCCESS->RUNNING
+18.88,bt,ComputePathToPose IDLE->RUNNING
+18.88,bt,ComputePathToPose IDLE->RUNNING
+18.89,plan,poses=183 length_m=9.76 end=(-4.92;-2.21)
+18.91,bt,ComputePathToPose RUNNING->SUCCESS
+18.91,bt,ComputePathToPose SUCCESS->IDLE
+18.91,bt,ComputePathToPose RUNNING->IDLE
+18.91,bt,ComputePathToPose IDLE->SUCCESS
+18.91,bt,RateController RUNNING->SUCCESS
+18.91,bt,ComputePathToPose SUCCESS->IDLE
+18.91,bt,RateController SUCCESS->RUNNING
+19.9,bt,ComputePathToPose IDLE->RUNNING
+19.9,bt,ComputePathToPose IDLE->RUNNING
+19.91,plan,poses=180 length_m=9.55 end=(-4.92;-2.21)
+19.93,bt,ComputePathToPose RUNNING->SUCCESS
+19.93,bt,ComputePathToPose SUCCESS->IDLE
+19.93,bt,ComputePathToPose RUNNING->IDLE
+19.93,bt,ComputePathToPose IDLE->SUCCESS
+19.93,bt,RateController RUNNING->SUCCESS
+19.93,bt,ComputePathToPose SUCCESS->IDLE
+19.93,bt,RateController SUCCESS->RUNNING
+20.93,bt,ComputePathToPose IDLE->RUNNING
+20.93,bt,ComputePathToPose IDLE->RUNNING
+20.94,plan,poses=176 length_m=9.30 end=(-4.92;-2.21)
+20.95,bt,ComputePathToPose RUNNING->SUCCESS
+20.95,bt,ComputePathToPose SUCCESS->IDLE
+20.95,bt,ComputePathToPose RUNNING->IDLE
+20.95,bt,ComputePathToPose IDLE->SUCCESS
+20.95,bt,RateController RUNNING->SUCCESS
+20.95,bt,ComputePathToPose SUCCESS->IDLE
+20.95,bt,RateController SUCCESS->RUNNING
+21.95,bt,ComputePathToPose IDLE->RUNNING
+21.95,bt,ComputePathToPose IDLE->RUNNING
+21.96,plan,poses=171 length_m=9.05 end=(-4.92;-2.21)
+21.97,bt,ComputePathToPose RUNNING->SUCCESS
+21.97,bt,ComputePathToPose SUCCESS->IDLE
+21.97,bt,ComputePathToPose RUNNING->IDLE
+21.97,bt,ComputePathToPose IDLE->SUCCESS
+21.97,bt,RateController RUNNING->SUCCESS
+21.97,bt,ComputePathToPose SUCCESS->IDLE
+21.97,bt,RateController SUCCESS->RUNNING
+22.99,bt,ComputePathToPose IDLE->RUNNING
+22.99,bt,ComputePathToPose IDLE->RUNNING
+22.99,plan,poses=167 length_m=8.85 end=(-4.92;-2.21)
+23.0,bt,ComputePathToPose RUNNING->SUCCESS
+23.0,bt,ComputePathToPose SUCCESS->IDLE
+23.0,bt,ComputePathToPose RUNNING->IDLE
+23.0,bt,ComputePathToPose IDLE->SUCCESS
+23.0,bt,RateController RUNNING->SUCCESS
+23.0,bt,ComputePathToPose SUCCESS->IDLE
+23.0,bt,RateController SUCCESS->RUNNING
+24.01,bt,ComputePathToPose IDLE->RUNNING
+24.01,bt,ComputePathToPose IDLE->RUNNING
+24.01,plan,poses=162 length_m=8.60 end=(-4.92;-2.21)
+24.02,bt,ComputePathToPose RUNNING->SUCCESS
+24.02,bt,ComputePathToPose SUCCESS->IDLE
+24.02,bt,ComputePathToPose RUNNING->IDLE
+24.02,bt,ComputePathToPose IDLE->SUCCESS
+24.02,bt,RateController RUNNING->SUCCESS
+24.02,bt,ComputePathToPose SUCCESS->IDLE
+24.02,bt,RateController SUCCESS->RUNNING
+25.03,bt,ComputePathToPose IDLE->RUNNING
+25.03,bt,ComputePathToPose IDLE->RUNNING
+25.04,plan,poses=158 length_m=8.40 end=(-4.92;-2.21)
+25.06,bt,ComputePathToPose RUNNING->SUCCESS
+25.06,bt,ComputePathToPose SUCCESS->IDLE
+25.06,bt,ComputePathToPose RUNNING->IDLE
+25.06,bt,ComputePathToPose IDLE->SUCCESS
+25.06,bt,RateController RUNNING->SUCCESS
+25.06,bt,ComputePathToPose SUCCESS->IDLE
+25.06,bt,RateController SUCCESS->RUNNING
+26.05,bt,ComputePathToPose IDLE->RUNNING
+26.05,bt,ComputePathToPose IDLE->RUNNING
+26.06,plan,poses=154 length_m=8.20 end=(-4.92;-2.21)
+26.08,bt,ComputePathToPose RUNNING->SUCCESS
+26.08,bt,ComputePathToPose SUCCESS->IDLE
+26.08,bt,ComputePathToPose RUNNING->IDLE
+26.08,bt,ComputePathToPose IDLE->SUCCESS
+26.08,bt,RateController RUNNING->SUCCESS
+26.08,bt,ComputePathToPose SUCCESS->IDLE
+26.08,bt,RateController SUCCESS->RUNNING
+27.08,bt,ComputePathToPose IDLE->RUNNING
+27.08,bt,ComputePathToPose IDLE->RUNNING
+27.09,plan,poses=149 length_m=7.95 end=(-4.92;-2.21)
+27.11,bt,ComputePathToPose RUNNING->SUCCESS
+27.11,bt,ComputePathToPose SUCCESS->IDLE
+27.11,bt,ComputePathToPose RUNNING->IDLE
+27.11,bt,ComputePathToPose IDLE->SUCCESS
+27.11,bt,RateController RUNNING->SUCCESS
+27.11,bt,ComputePathToPose SUCCESS->IDLE
+27.11,bt,RateController SUCCESS->RUNNING
+28.1,bt,ComputePathToPose IDLE->RUNNING
+28.1,bt,ComputePathToPose IDLE->RUNNING
+28.11,plan,poses=146 length_m=7.80 end=(-4.92;-2.21)
+28.12,bt,ComputePathToPose RUNNING->SUCCESS
+28.12,bt,ComputePathToPose SUCCESS->IDLE
+28.12,bt,ComputePathToPose RUNNING->IDLE
+28.12,bt,ComputePathToPose IDLE->SUCCESS
+28.12,bt,RateController RUNNING->SUCCESS
+28.12,bt,ComputePathToPose SUCCESS->IDLE
+28.12,bt,RateController SUCCESS->RUNNING
+29.14,bt,ComputePathToPose IDLE->RUNNING
+29.14,bt,ComputePathToPose IDLE->RUNNING
+29.14,plan,poses=142 length_m=7.60 end=(-4.92;-2.21)
+29.15,bt,ComputePathToPose RUNNING->SUCCESS
+29.15,bt,ComputePathToPose SUCCESS->IDLE
+29.15,bt,ComputePathToPose RUNNING->IDLE
+29.15,bt,ComputePathToPose IDLE->SUCCESS
+29.15,bt,RateController RUNNING->SUCCESS
+29.15,bt,ComputePathToPose SUCCESS->IDLE
+29.15,bt,RateController SUCCESS->RUNNING
+30.16,bt,ComputePathToPose IDLE->RUNNING
+30.16,bt,ComputePathToPose IDLE->RUNNING
+30.16,plan,poses=137 length_m=7.35 end=(-4.92;-2.21)
+30.17,bt,ComputePathToPose RUNNING->SUCCESS
+30.17,bt,ComputePathToPose SUCCESS->IDLE
+30.17,bt,ComputePathToPose RUNNING->IDLE
+30.17,bt,ComputePathToPose IDLE->SUCCESS
+30.17,bt,RateController RUNNING->SUCCESS
+30.17,bt,ComputePathToPose SUCCESS->IDLE
+30.17,bt,RateController SUCCESS->RUNNING
+31.18,bt,ComputePathToPose IDLE->RUNNING
+31.18,bt,ComputePathToPose IDLE->RUNNING
+31.19,plan,poses=133 length_m=7.15 end=(-4.92;-2.21)
+31.21,bt,ComputePathToPose RUNNING->SUCCESS
+31.21,bt,ComputePathToPose SUCCESS->IDLE
+31.21,bt,ComputePathToPose RUNNING->IDLE
+31.21,bt,ComputePathToPose IDLE->SUCCESS
+31.21,bt,RateController RUNNING->SUCCESS
+31.21,bt,ComputePathToPose SUCCESS->IDLE
+31.21,bt,RateController SUCCESS->RUNNING
+32.2,bt,ComputePathToPose IDLE->RUNNING
+32.2,bt,ComputePathToPose IDLE->RUNNING
+32.21,plan,poses=129 length_m=6.95 end=(-4.92;-2.21)
+32.23,bt,ComputePathToPose RUNNING->SUCCESS
+32.23,bt,ComputePathToPose SUCCESS->IDLE
+32.23,bt,ComputePathToPose RUNNING->IDLE
+32.23,bt,ComputePathToPose IDLE->SUCCESS
+32.23,bt,RateController RUNNING->SUCCESS
+32.23,bt,ComputePathToPose SUCCESS->IDLE
+32.23,bt,RateController SUCCESS->RUNNING
+33.23,bt,ComputePathToPose IDLE->RUNNING
+33.23,bt,ComputePathToPose IDLE->RUNNING
+33.24,plan,poses=124 length_m=6.70 end=(-4.92;-2.21)
+33.25,bt,ComputePathToPose RUNNING->SUCCESS
+33.25,bt,ComputePathToPose SUCCESS->IDLE
+33.25,bt,ComputePathToPose RUNNING->IDLE
+33.25,bt,ComputePathToPose IDLE->SUCCESS
+33.25,bt,RateController RUNNING->SUCCESS
+33.25,bt,ComputePathToPose SUCCESS->IDLE
+33.25,bt,RateController SUCCESS->RUNNING
+34.25,bt,ComputePathToPose IDLE->RUNNING
+34.25,bt,ComputePathToPose IDLE->RUNNING
+34.26,plan,poses=120 length_m=6.50 end=(-4.92;-2.21)
+34.27,bt,ComputePathToPose RUNNING->SUCCESS
+34.27,bt,ComputePathToPose SUCCESS->IDLE
+34.27,bt,ComputePathToPose RUNNING->IDLE
+34.27,bt,ComputePathToPose IDLE->SUCCESS
+34.27,bt,RateController RUNNING->SUCCESS
+34.27,bt,ComputePathToPose SUCCESS->IDLE
+34.27,bt,RateController SUCCESS->RUNNING
+35.29,bt,ComputePathToPose IDLE->RUNNING
+35.29,bt,ComputePathToPose IDLE->RUNNING
+35.29,plan,poses=116 length_m=6.30 end=(-4.92;-2.21)
+35.3,bt,ComputePathToPose RUNNING->SUCCESS
+35.3,bt,ComputePathToPose SUCCESS->IDLE
+35.3,bt,ComputePathToPose RUNNING->IDLE
+35.3,bt,ComputePathToPose IDLE->SUCCESS
+35.3,bt,RateController RUNNING->SUCCESS
+35.3,bt,ComputePathToPose SUCCESS->IDLE
+35.3,bt,RateController SUCCESS->RUNNING
+36.31,bt,ComputePathToPose IDLE->RUNNING
+36.31,bt,ComputePathToPose IDLE->RUNNING
+36.31,plan,poses=111 length_m=6.05 end=(-4.92;-2.21)
+36.32,bt,ComputePathToPose RUNNING->SUCCESS
+36.32,bt,ComputePathToPose SUCCESS->IDLE
+36.32,bt,ComputePathToPose RUNNING->IDLE
+36.32,bt,ComputePathToPose IDLE->SUCCESS
+36.32,bt,RateController RUNNING->SUCCESS
+36.32,bt,ComputePathToPose SUCCESS->IDLE
+36.32,bt,RateController SUCCESS->RUNNING
+37.33,bt,ComputePathToPose IDLE->RUNNING
+37.33,bt,ComputePathToPose IDLE->RUNNING
+37.33,plan,poses=106 length_m=5.80 end=(-4.92;-2.21)
+37.36,bt,ComputePathToPose RUNNING->SUCCESS
+37.36,bt,ComputePathToPose SUCCESS->IDLE
+37.36,bt,ComputePathToPose RUNNING->IDLE
+37.36,bt,ComputePathToPose IDLE->SUCCESS
+37.36,bt,RateController RUNNING->SUCCESS
+37.36,bt,ComputePathToPose SUCCESS->IDLE
+37.36,bt,RateController SUCCESS->RUNNING
+38.36,bt,ComputePathToPose IDLE->RUNNING
+38.36,bt,ComputePathToPose IDLE->RUNNING
+38.36,plan,poses=101 length_m=5.55 end=(-4.92;-2.21)
+38.38,bt,ComputePathToPose RUNNING->SUCCESS
+38.38,bt,ComputePathToPose SUCCESS->IDLE
+38.38,bt,ComputePathToPose RUNNING->IDLE
+38.38,bt,ComputePathToPose IDLE->SUCCESS
+38.38,bt,RateController RUNNING->SUCCESS
+38.38,bt,ComputePathToPose SUCCESS->IDLE
+38.38,bt,RateController SUCCESS->RUNNING
+39.38,bt,ComputePathToPose IDLE->RUNNING
+39.38,bt,ComputePathToPose IDLE->RUNNING
+39.39,plan,poses=97 length_m=5.35 end=(-4.92;-2.21)
+39.4,bt,ComputePathToPose RUNNING->SUCCESS
+39.4,bt,ComputePathToPose SUCCESS->IDLE
+39.4,bt,ComputePathToPose RUNNING->IDLE
+39.4,bt,ComputePathToPose IDLE->SUCCESS
+39.4,bt,RateController RUNNING->SUCCESS
+39.4,bt,ComputePathToPose SUCCESS->IDLE
+39.4,bt,RateController SUCCESS->RUNNING
+40.4,bt,ComputePathToPose IDLE->RUNNING
+40.4,bt,ComputePathToPose IDLE->RUNNING
+40.41,plan,poses=92 length_m=5.10 end=(-4.92;-2.21)
+40.42,bt,ComputePathToPose RUNNING->SUCCESS
+40.42,bt,ComputePathToPose SUCCESS->IDLE
+40.42,bt,ComputePathToPose RUNNING->IDLE
+40.42,bt,ComputePathToPose IDLE->SUCCESS
+40.42,bt,RateController RUNNING->SUCCESS
+40.42,bt,ComputePathToPose SUCCESS->IDLE
+40.42,bt,RateController SUCCESS->RUNNING
+41.44,bt,ComputePathToPose IDLE->RUNNING
+41.44,bt,ComputePathToPose IDLE->RUNNING
+41.44,plan,poses=88 length_m=4.90 end=(-4.92;-2.21)
+41.45,bt,ComputePathToPose RUNNING->SUCCESS
+41.45,bt,ComputePathToPose SUCCESS->IDLE
+41.45,bt,ComputePathToPose RUNNING->IDLE
+41.45,bt,ComputePathToPose IDLE->SUCCESS
+41.45,bt,RateController RUNNING->SUCCESS
+41.45,bt,ComputePathToPose SUCCESS->IDLE
+41.45,bt,RateController SUCCESS->RUNNING
+42.46,bt,ComputePathToPose IDLE->RUNNING
+42.46,bt,ComputePathToPose IDLE->RUNNING
+42.46,plan,poses=84 length_m=4.70 end=(-4.92;-2.21)
+42.47,bt,ComputePathToPose RUNNING->SUCCESS
+42.47,bt,ComputePathToPose SUCCESS->IDLE
+42.47,bt,ComputePathToPose RUNNING->IDLE
+42.47,bt,ComputePathToPose IDLE->SUCCESS
+42.47,bt,RateController RUNNING->SUCCESS
+42.47,bt,ComputePathToPose SUCCESS->IDLE
+42.47,bt,RateController SUCCESS->RUNNING
+43.49,bt,ComputePathToPose IDLE->RUNNING
+43.49,bt,ComputePathToPose IDLE->RUNNING
+43.49,plan,poses=80 length_m=4.50 end=(-4.92;-2.21)
+43.51,bt,ComputePathToPose RUNNING->SUCCESS
+43.51,bt,ComputePathToPose SUCCESS->IDLE
+43.51,bt,ComputePathToPose RUNNING->IDLE
+43.51,bt,ComputePathToPose IDLE->SUCCESS
+43.51,bt,RateController RUNNING->SUCCESS
+43.51,bt,ComputePathToPose SUCCESS->IDLE
+43.51,bt,RateController SUCCESS->RUNNING
+44.5,bt,ComputePathToPose IDLE->RUNNING
+44.5,bt,ComputePathToPose IDLE->RUNNING
+44.51,plan,poses=76 length_m=4.30 end=(-4.92;-2.21)
+44.53,bt,ComputePathToPose RUNNING->SUCCESS
+44.53,bt,ComputePathToPose SUCCESS->IDLE
+44.53,bt,ComputePathToPose RUNNING->IDLE
+44.53,bt,ComputePathToPose IDLE->SUCCESS
+44.53,bt,RateController RUNNING->SUCCESS
+44.53,bt,ComputePathToPose SUCCESS->IDLE
+44.53,bt,RateController SUCCESS->RUNNING
+45.53,bt,ComputePathToPose IDLE->RUNNING
+45.53,bt,ComputePathToPose IDLE->RUNNING
+45.54,plan,poses=71 length_m=4.05 end=(-4.92;-2.21)
+45.55,bt,ComputePathToPose RUNNING->SUCCESS
+45.55,bt,ComputePathToPose SUCCESS->IDLE
+45.55,bt,ComputePathToPose RUNNING->IDLE
+45.55,bt,ComputePathToPose IDLE->SUCCESS
+45.55,bt,RateController RUNNING->SUCCESS
+45.55,bt,ComputePathToPose SUCCESS->IDLE
+45.55,bt,RateController SUCCESS->RUNNING
+46.55,bt,ComputePathToPose IDLE->RUNNING
+46.55,bt,ComputePathToPose IDLE->RUNNING
+46.56,plan,poses=67 length_m=3.85 end=(-4.92;-2.21)
+46.57,bt,ComputePathToPose RUNNING->SUCCESS
+46.57,bt,ComputePathToPose SUCCESS->IDLE
+46.57,bt,ComputePathToPose RUNNING->IDLE
+46.57,bt,ComputePathToPose IDLE->SUCCESS
+46.57,bt,RateController RUNNING->SUCCESS
+46.57,bt,ComputePathToPose SUCCESS->IDLE
+46.57,bt,RateController SUCCESS->RUNNING
+47.59,bt,ComputePathToPose IDLE->RUNNING
+47.59,bt,ComputePathToPose IDLE->RUNNING
+47.59,plan,poses=63 length_m=3.65 end=(-4.92;-2.21)
+47.6,bt,ComputePathToPose RUNNING->SUCCESS
+47.6,bt,ComputePathToPose SUCCESS->IDLE
+47.6,bt,ComputePathToPose RUNNING->IDLE
+47.6,bt,ComputePathToPose IDLE->SUCCESS
+47.6,bt,RateController RUNNING->SUCCESS
+47.6,bt,ComputePathToPose SUCCESS->IDLE
+47.6,bt,RateController SUCCESS->RUNNING
+48.61,bt,ComputePathToPose IDLE->RUNNING
+48.61,bt,ComputePathToPose IDLE->RUNNING
+48.61,plan,poses=59 length_m=3.45 end=(-4.92;-2.21)
+48.62,bt,ComputePathToPose RUNNING->SUCCESS
+48.62,bt,ComputePathToPose SUCCESS->IDLE
+48.62,bt,ComputePathToPose RUNNING->IDLE
+48.62,bt,ComputePathToPose IDLE->SUCCESS
+48.62,bt,RateController RUNNING->SUCCESS
+48.62,bt,ComputePathToPose SUCCESS->IDLE
+48.62,bt,RateController SUCCESS->RUNNING
+49.63,bt,ComputePathToPose IDLE->RUNNING
+49.63,bt,ComputePathToPose IDLE->RUNNING
+49.63,plan,poses=54 length_m=3.21 end=(-4.92;-2.21)
+49.66,bt,ComputePathToPose RUNNING->SUCCESS
+49.66,bt,ComputePathToPose SUCCESS->IDLE
+49.66,bt,ComputePathToPose RUNNING->IDLE
+49.66,bt,ComputePathToPose IDLE->SUCCESS
+49.66,bt,RateController RUNNING->SUCCESS
+49.66,bt,ComputePathToPose SUCCESS->IDLE
+49.66,bt,RateController SUCCESS->RUNNING
+50.65,bt,ComputePathToPose IDLE->RUNNING
+50.65,bt,ComputePathToPose IDLE->RUNNING
+50.65,plan,poses=50 length_m=3.01 end=(-4.92;-2.21)
+50.68,bt,ComputePathToPose RUNNING->SUCCESS
+50.68,bt,ComputePathToPose SUCCESS->IDLE
+50.68,bt,ComputePathToPose RUNNING->IDLE
+50.68,bt,ComputePathToPose IDLE->SUCCESS
+50.68,bt,RateController RUNNING->SUCCESS
+50.68,bt,ComputePathToPose SUCCESS->IDLE
+50.68,bt,RateController SUCCESS->RUNNING
+51.68,bt,ComputePathToPose IDLE->RUNNING
+51.68,bt,ComputePathToPose IDLE->RUNNING
+51.69,plan,poses=46 length_m=2.78 end=(-4.92;-2.21)
+51.7,bt,ComputePathToPose RUNNING->SUCCESS
+51.7,bt,ComputePathToPose SUCCESS->IDLE
+51.7,bt,ComputePathToPose RUNNING->IDLE
+51.7,bt,ComputePathToPose IDLE->SUCCESS
+51.7,bt,RateController RUNNING->SUCCESS
+51.7,bt,ComputePathToPose SUCCESS->IDLE
+51.7,bt,RateController SUCCESS->RUNNING
+52.7,bt,ComputePathToPose IDLE->RUNNING
+52.7,bt,ComputePathToPose IDLE->RUNNING
+52.71,plan,poses=41 length_m=2.60 end=(-4.92;-2.21)
+52.72,bt,ComputePathToPose RUNNING->SUCCESS
+52.72,bt,ComputePathToPose SUCCESS->IDLE
+52.72,bt,ComputePathToPose RUNNING->IDLE
+52.72,bt,ComputePathToPose IDLE->SUCCESS
+52.72,bt,RateController RUNNING->SUCCESS
+52.72,bt,ComputePathToPose SUCCESS->IDLE
+52.72,bt,RateController SUCCESS->RUNNING
+53.74,bt,ComputePathToPose IDLE->RUNNING
+53.74,bt,ComputePathToPose IDLE->RUNNING
+53.74,plan,poses=38 length_m=2.41 end=(-4.92;-2.21)
+53.75,bt,ComputePathToPose RUNNING->SUCCESS
+53.75,bt,ComputePathToPose SUCCESS->IDLE
+53.75,bt,ComputePathToPose RUNNING->IDLE
+53.75,bt,ComputePathToPose IDLE->SUCCESS
+53.75,bt,RateController RUNNING->SUCCESS
+53.75,bt,ComputePathToPose SUCCESS->IDLE
+53.75,bt,RateController SUCCESS->RUNNING
+54.76,plan,poses=35 length_m=2.20 end=(-4.92;-2.21)
+54.76,bt,ComputePathToPose IDLE->RUNNING
+54.76,bt,ComputePathToPose IDLE->RUNNING
+54.77,bt,ComputePathToPose RUNNING->SUCCESS
+54.77,bt,ComputePathToPose SUCCESS->IDLE
+54.77,bt,ComputePathToPose RUNNING->IDLE
+54.77,bt,ComputePathToPose IDLE->SUCCESS
+54.77,bt,RateController RUNNING->SUCCESS
+54.77,bt,ComputePathToPose SUCCESS->IDLE
+54.77,bt,RateController SUCCESS->RUNNING
+55.78,bt,ComputePathToPose IDLE->RUNNING
+55.78,bt,ComputePathToPose IDLE->RUNNING
+55.78,plan,poses=32 length_m=2.03 end=(-4.92;-2.21)
+55.81,bt,ComputePathToPose RUNNING->SUCCESS
+55.81,bt,ComputePathToPose SUCCESS->IDLE
+55.81,bt,ComputePathToPose RUNNING->IDLE
+55.81,bt,ComputePathToPose IDLE->SUCCESS
+55.81,bt,RateController RUNNING->SUCCESS
+55.81,bt,ComputePathToPose SUCCESS->IDLE
+55.81,bt,RateController SUCCESS->RUNNING
+56.8,bt,ComputePathToPose IDLE->RUNNING
+56.8,bt,ComputePathToPose IDLE->RUNNING
+56.8,plan,poses=26 length_m=1.64 end=(-4.92;-2.21)
+56.83,bt,ComputePathToPose RUNNING->SUCCESS
+56.83,bt,ComputePathToPose SUCCESS->IDLE
+56.83,bt,ComputePathToPose RUNNING->IDLE
+56.83,bt,ComputePathToPose IDLE->SUCCESS
+56.83,bt,RateController RUNNING->SUCCESS
+56.83,bt,ComputePathToPose SUCCESS->IDLE
+56.83,bt,RateController SUCCESS->RUNNING
+57.83,bt,ComputePathToPose IDLE->RUNNING
+57.83,bt,ComputePathToPose IDLE->RUNNING
+57.83,plan,poses=22 length_m=1.42 end=(-4.92;-2.21)
+57.86,bt,ComputePathToPose RUNNING->SUCCESS
+57.86,bt,ComputePathToPose SUCCESS->IDLE
+57.86,bt,ComputePathToPose RUNNING->IDLE
+57.86,bt,ComputePathToPose IDLE->SUCCESS
+57.86,bt,RateController RUNNING->SUCCESS
+57.86,bt,ComputePathToPose SUCCESS->IDLE
+57.86,bt,RateController SUCCESS->RUNNING
+58.85,bt,ComputePathToPose IDLE->RUNNING
+58.85,bt,ComputePathToPose IDLE->RUNNING
+58.86,plan,poses=19 length_m=1.24 end=(-4.92;-2.21)
+58.88,bt,ComputePathToPose RUNNING->SUCCESS
+58.88,bt,ComputePathToPose SUCCESS->IDLE
+58.88,bt,ComputePathToPose RUNNING->IDLE
+58.88,bt,ComputePathToPose IDLE->SUCCESS
+58.88,bt,RateController RUNNING->SUCCESS
+58.88,bt,ComputePathToPose SUCCESS->IDLE
+58.88,bt,RateController SUCCESS->RUNNING
+59.89,plan,poses=16 length_m=1.03 end=(-4.92;-2.21)
+59.89,bt,ComputePathToPose IDLE->RUNNING
+59.89,bt,ComputePathToPose IDLE->RUNNING
+59.9,bt,ComputePathToPose RUNNING->SUCCESS
+59.9,bt,ComputePathToPose SUCCESS->IDLE
+59.9,bt,ComputePathToPose RUNNING->IDLE
+59.9,bt,ComputePathToPose IDLE->SUCCESS
+59.9,bt,RateController RUNNING->SUCCESS
+59.9,bt,ComputePathToPose SUCCESS->IDLE
+59.9,bt,RateController SUCCESS->RUNNING
+60.91,plan,poses=13 length_m=0.81 end=(-4.92;-2.21)
+60.91,bt,ComputePathToPose IDLE->RUNNING
+60.91,bt,ComputePathToPose IDLE->RUNNING
+60.92,bt,ComputePathToPose RUNNING->SUCCESS
+60.92,bt,ComputePathToPose SUCCESS->IDLE
+60.92,bt,ComputePathToPose RUNNING->IDLE
+60.92,bt,ComputePathToPose IDLE->SUCCESS
+60.92,bt,RateController RUNNING->SUCCESS
+60.92,bt,ComputePathToPose SUCCESS->IDLE
+60.92,bt,RateController SUCCESS->RUNNING
+61.93,bt,ComputePathToPose IDLE->RUNNING
+61.93,bt,ComputePathToPose IDLE->RUNNING
+61.93,plan,poses=9 length_m=0.57 end=(-4.92;-2.21)
+61.96,bt,ComputePathToPose RUNNING->SUCCESS
+61.96,bt,ComputePathToPose SUCCESS->IDLE
+61.96,bt,ComputePathToPose RUNNING->IDLE
+61.96,bt,ComputePathToPose IDLE->SUCCESS
+61.96,bt,RateController RUNNING->SUCCESS
+61.96,bt,ComputePathToPose SUCCESS->IDLE
+61.96,bt,RateController SUCCESS->RUNNING
+62.95,bt,ComputePathToPose IDLE->RUNNING
+62.95,bt,ComputePathToPose IDLE->RUNNING
+62.95,plan,poses=6 length_m=0.35 end=(-4.92;-2.21)
+62.98,bt,ComputePathToPose RUNNING->SUCCESS
+62.98,bt,ComputePathToPose SUCCESS->IDLE
+62.98,bt,ComputePathToPose RUNNING->IDLE
+62.98,bt,ComputePathToPose IDLE->SUCCESS
+62.98,bt,RateController RUNNING->SUCCESS
+62.98,bt,ComputePathToPose SUCCESS->IDLE
+62.98,bt,RateController SUCCESS->RUNNING

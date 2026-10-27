@@ -15,5 +15,11 @@ All 32 world-B failures are long crossings of the office: every failed pair has 
 - Reading the traces: where the robot stops or loops (position against the map and walls), which behaviour-tree node was active, whether the plan end moved, AMCL error over time, nearest obstacle at the moment of the stall, collision-monitor state.
 - Traces (small CSVs) are committed; rosbags are not used.
 
+## Hypothesis test fixed before running (2026-10-27)
+Observation from the 36 traces (see Findings): plan flips happen near the unmapped divider wall at x = 0 and the saved map is unknown there, while every planner ships `allow_unknown: true`. Hypothesis **HU**: the flips (and most failures) are caused by the planner routing through unknown map cells. Diagnostic configuration `diag_known` = baseline with ONE change, `planner_server.GridBased.allow_unknown: false` (`scripts/make_nav2_configs.py`, `configs/nav2/diag_known.yaml`). Run on the 6 pairs the baseline failed (b02, b04, b06, b11, b14, b20) and 2 it solved (b15, b16), one trial each, session seed 12.
+- **If HU is right:** plan flips near the divider disappear (0 to 1 per trial) and most of the 6 failed pairs succeed.
+- **If HU is wrong:** flips and failures persist; the cause lies elsewhere (e.g. costmap marking and clearing, or controller behaviour).
+- A caveat that applies either way: with unknown space forbidden, goals or routes inside unmapped patches become unreachable, so a new kind of failure is possible; this is a diagnostic, not a recommendation to change the baseline.
+
 ## Findings
 (to be filled in)
