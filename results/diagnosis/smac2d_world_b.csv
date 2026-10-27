@@ -1,0 +1,2 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+smac2d-b14-r1,smac2d,world_b,b14,1,12001,0,timeout,CANCELED,120.0,17.646,5.854,1,1,0,3,2.07,0.609,1,135.1,127.0,2026-10-27T04:06:29+00:00

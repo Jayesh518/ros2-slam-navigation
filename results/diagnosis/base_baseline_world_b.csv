@@ -1,0 +1,9 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc
+baseline-b11-r1,baseline,world_b,b11,1,12001,0,timeout,CANCELED,120.0,23.659,1.704,1,1,0,0,0.365,0.16,0,133.21,125.1,2026-10-27T03:50:58+00:00
+baseline-b04-r1,baseline,world_b,b04,1,12002,0,timeout,CANCELED,120.0,19.854,8.476,1,1,0,1,0.305,0.217,0,260.16,127.0,2026-10-27T03:53:03+00:00
+baseline-b02-r1,baseline,world_b,b02,1,12003,0,timeout,CANCELED,120.0,16.89,7.574,1,1,0,3,0.991,0.611,1,387.1,127.0,2026-10-27T03:55:10+00:00
+baseline-b16-r1,baseline,world_b,b16,1,12004,1,,SUCCEEDED,76.07,15.712,0.293,1,1,0,0,0.241,0.105,0,470.12,83.1,2026-10-27T03:57:17+00:00
+baseline-b14-r1,baseline,world_b,b14,1,12005,0,timeout,CANCELED,120.0,17.635,6.615,1,1,0,1,0.398,0.225,0,597.04,127.0,2026-10-27T03:58:40+00:00
+baseline-b15-r1,baseline,world_b,b15,1,12006,1,,SUCCEEDED,81.13,16.643,0.165,1,1,0,0,0.218,0.096,0,685.11,88.2,2026-10-27T04:00:47+00:00
+baseline-b06-r1,baseline,world_b,b06,1,12007,0,nav2_aborted,ABORTED,108.86,14.812,8.859,1,1,0,6,2.048,0.98,1,800.9,115.9,2026-10-27T04:02:16+00:00
+baseline-b20-r1,baseline,world_b,b20,1,12008,0,nav2_aborted,ABORTED,100.63,14.643,7.799,1,1,0,1,2.715,0.328,1,908.48,107.7,2026-10-27T04:04:11+00:00
