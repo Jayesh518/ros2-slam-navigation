@@ -4,7 +4,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 
 ## Current state
 - Date of last update: 2026-10-27
-- Phase: 4 done (gate 2026-10-27): 400 trials, report `docs/results.md`. Phase 5 (diagnosis) next, awaiting owner go-ahead. Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Worlds A1/B1/C1 generated and checked; Nav2 configs generated (`configs/nav2/`); SLAM Toolbox maps for all three worlds saved (`maps/`). Left: map-to-world alignment, start/goal pairs, trial runner, metric tests, CI, factor check with own robot.
+- Phase: 5 done (gate 2026-10-27): diagnosis in `docs/diagnosis.md` (most world-B failures = plan flipping at an unmapped wall; two failures unexplained). Phase 6 next, awaiting owner go-ahead. Earlier: Phase 4 400 trials, `docs/results.md`. Done so far: `scripts/env.sh`, timing and real-time-factor check (stock robot), own Burger-based robot (`src/nav_study_robot`, URDF/SDF/bridge, tested in `test_arena`), STEP CAD file for Fusion 360 (`cad/`). Worlds A1/B1/C1 generated and checked; Nav2 configs generated (`configs/nav2/`); SLAM Toolbox maps for all three worlds saved (`maps/`). Left: map-to-world alignment, start/goal pairs, trial runner, metric tests, CI, factor check with own robot.
 - Environment: Ubuntu 24.04 external drive. `scripts/check_env.sh` reports all required items present (Nav2 1.3.13, SLAM Toolbox 2.8.5, Gazebo 8.15.0, pandas) after installing the 4 missing ones on 2026-10-26.
 - Last commit: see `git log -1`.
 
@@ -14,7 +14,7 @@ The external drive can crash, so this file is the memory of the project. Update 
 - [x] Phase 2: robot, worlds, trial runner, tests, CI
 - [x] Phase 3: baseline
 - [x] Phase 4: intervention
-- [ ] Phase 5: diagnosis
+- [x] Phase 5: diagnosis
 - [ ] Phase 6: extension
 - [ ] Phase 7: report and release
 
@@ -40,15 +40,15 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-27: ADDED (Phase 6), proposed by Claude, approved by owner: hardware-matched check. Reason: the study robot has a 3.5 m, 5 Hz LiDAR, the Project 3 reference hardware (owner's BOM) has an RPLIDAR C1 (about 12 m, about 10 Hz) and ~200 mm plates, so the conclusions' external validity is open. Cost: robot variant parameters, about 60 trials on world B, about 1.5 h. To be logged in the protocol before any trial; labelled an extension; the 400 trials are unchanged. BOM `docs/bom.md` = Project 3 reference hardware, robot not built unless owner says otherwise. Owner's go-ahead for Phase 5 given the same day.
 
 ## Ideas parked (suggested, not adopted)
-- None yet.
+- None parked. PROPOSED, awaiting owner (from Phase 5): world B's saved map has unobserved room centres and a missing divider wall, which drives most failures. Options: (a) keep as is and state it as a limit (cost: none; the study then measures behaviour with an imperfect map); (b) re-map world B with a fuller tour and re-run the 100 world-B trials (cost: about 2.5 h; changes the study after seeing results, so it would be logged as an extension next to the original, not replacing it); (c) report `allow_unknown: false` for all configurations in world B as an extension (about 100 trials, about 2.5 h). Recommended: (a) for the main result plus (b) as a labelled extension only if time allows after Phase 6.
 
 ## Open questions
 - Which three worlds and which start/goal pairs (Phase 0).
 - (resolved 2026-10-26: own robot modelled on TurtleBot 3 Burger.)
 
 ## Next steps
-1. Phase 5: explain the world-B failures (smac2d aborts, dwb/rpp localisation loss) from logs; needs short per-trial traces (the runner stores only summaries) - see proposal in the gate report.
-2. Phase 6: custom recovery node + `recovery` configuration (a second Nav2 config file with the node, then 80 trials, same pairs); H2 can then be tested only in B (post-hoc choice) because A, C, D are at the ceiling.
+1. (done 2026-10-27) Phase 5 diagnosis.
+2. Phase 6 (proposed order): (a) recovery node that detects plan flipping, fixed in the protocol first; (b) hardware-matched check (RPLIDAR C1 parameters); (c) optional mission node and simulated thermal camera. Also decide how to treat the incomplete world-B map (see Ideas). Custom recovery node + `recovery` configuration (a second Nav2 config file with the node, then 80 trials, same pairs); H2 can then be tested only in B (post-hoc choice) because A, C, D are at the ceiling.
 3. (done:) Nav2 baseline config for our robot (`configs/`), then the trial runner (explicit zero cmd_vel at the end), metric unit tests, CI.
 3. Repeat the real-time-factor check with our robot and baseline, then log the chosen factor in the protocol change log.
 4. Owner: open `cad/nav_study_robot_v1.step` in Fusion 360 and report anything odd.
@@ -73,3 +73,4 @@ A Nav2 configuration study in simulation: a differential-drive robot in Gazebo b
 - 2026-10-26 (Ubuntu): Baseline in world D: 20/20 (median time 38.5 s, mean AMCL error 0.08 m, no collisions). So the post-hoc world D did NOT create headroom: baseline success is 20/20 in A, C and D; only B (16/20) leaves room. Consequence for H2: untestable in C1 and D; B is the only world with failures to remove (a post-hoc choice of test world, to be labelled as such). Phase 4 runs continue (`scripts/run_phase4.sh`, started 16:48 UTC, about 5 to 6 h): comparisons of time, path and recoveries remain meaningful, and any drop in success is detectable.
 - 2026-10-27 (Ubuntu): Phase 4 complete: smac2d, thetastar, dwb, rpp over A to D (400 trials incl. baseline; 0 invalid, 0 collisions). Decision rule applied: success no clear effect for any variant except rpp A to C (-0.10, at threshold); smac2d and thetastar real decreases in time (-6.7, -6.1 s) and path (-0.80, -0.71 m); rpp real increase in time (+4.4 s). H1, H3 not supported; H2 not tested. Per-world rows are labelled suggestive in the tables. Report `docs/results.md`; figures phase4-*. Checked report numbers against the data (fixed 8 to 7 for dwb loc-failures; path saving 7 percent).
 - 2026-10-27 (Phase 5 in progress): runner got optional `--trace-dir` (5 Hz trace + event log); `scripts/run_diagnosis.sh`, `scripts/diagnose_traces.py`; scope in `docs/diagnosis.md`. Baseline re-runs done (8 trials: 6 failed again, 2 succeeded). Finding so far: every failed baseline re-run shows 3 to 21 flips of the global plan between a short route (8 to 11 m) and the door route (about 16 m), always near x -1.6, |y| 2.5 to 3.2; the saved map of the rooms is mostly unknown east of x -2 and lacks the divider wall at x=0, and all planners ship `allow_unknown: true`, so the planner routes through the missing wall until the LiDAR marks it (obstacle_max_range 2.5 m). Hypothesis, to be tested with allow_unknown false on the failed pairs. Other configurations queued (28 trials). If the session restarts: results/diagnosis/ holds finished sessions; rerun the missing configs with scripts/run_diagnosis.sh.
+- 2026-10-27 (Phase 5 gate): 36 diagnosis re-runs (baseline 8, smac2d 9, dwb 9, rpp 9, thetastar 1) with traces, hypothesis test `diag_known` (8 trials, prediction fixed first): 0 flips, 6/8 success, 2 unexplained aborts (b06, b16). Figure `docs/figures/phase5-plan-flipping.png` (scripts/plot_diagnosis.py). Phase 4 numbers unchanged; results.md got a pointer note. Committed and pushed; stopped at the gate.

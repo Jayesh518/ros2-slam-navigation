@@ -39,6 +39,8 @@ In words:
 - **H3** (localisation error is highest in the most symmetric world, with failures there mostly from localisation): **not supported.** There were no failures at all in C1 for any configuration, and the baseline's mean AMCL error in C1 (0.13 m) is about the same as in A1 (0.13 m) and below B1 (0.17 m). The localisation problem showed up in B1 instead (next section).
 
 ## What stands out (for Phase 5 to explain; descriptions, not tested claims)
+*Update 2026-10-27: Phase 5 explained most of the world-B failures; see `docs/diagnosis.md`. The mechanisms suggested below (controller rotation near doorways, planner tolerance) were not what the traces showed; the numbers above are unchanged.*
+
 - **Localisation fails in the office for DWB and RPP.** In world B, mean AMCL error is 0.42 m (dwb) and 0.46 m (rpp) against 0.17 m (baseline), 0.22 m (smac2d), 0.12 m (thetastar). AMCL error exceeded 0.5 m near the end of 7 of dwb's 9 failures and 9 of rpp's 9 failures. Baseline failures in B were mixed (2 of 4 with large AMCL error), and smac2d's were mostly aborts (8 of 9) with large AMCL error in only 4 trials. Possible mechanism: how these controllers rotate and move near doorways changes what the LiDAR sees; not yet checked.
 - **Smac2D aborts in the office** (8 of 9 failures are Nav2 aborts): consistent with the planner failing to find or keep a path through the 1 m doorways, possibly an interaction with the costmap inflation and the shipped planner tolerance; not yet checked.
 - **Theta\* did best** in the only world with room to improve (19 of 20 in B), with the lowest AMCL error there (0.12 m).

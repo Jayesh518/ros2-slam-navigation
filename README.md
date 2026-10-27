@@ -37,12 +37,14 @@ Baseline (shipped Nav2 defaults: NavFn planner, MPPI controller) against four va
 
 - Success was at or near 100% in the open room, the pillar grid and the dense-clutter world for every configuration; all differences are in the office world (baseline 16/20, Smac2D 11/20, Theta\* 19/20, DWB 11/20, RPP 11/20). By the pre-registered rule no variant changed success clearly, except Regulated Pure Pursuit in the original three worlds (-10 points, exactly at the threshold).
 - Smac2D and Theta\* found routes about 7% shorter and 6 to 7 s faster than the baseline; Regulated Pure Pursuit was about 4 s slower.
-- DWB and Regulated Pure Pursuit failures in the office coincide with large localisation error (cause not yet diagnosed).
-- Not yet done: the custom recovery behaviour (Phase 6) and the diagnosis of the failures (Phase 5). Results are from simulation only.
+- Diagnosis ([docs/diagnosis.md](docs/diagnosis.md), exploratory): most office failures are the global planner flipping between a short route through a wall that is missing from the saved map and the long route through a doorway; the robot oscillates until the time limit. With unknown space forbidden the flips disappeared in all 8 test trials and 5 of the 6 failed pairs succeeded, but two pairs still failed for a reason not yet found. So the office differences between configurations are largely about behaviour with an incomplete map.
+- Not yet done: the custom recovery behaviour and the hardware-matched check (Phase 6). Results are from simulation only.
 
 ![Success by configuration and world](docs/figures/phase4-success-by-config.png)
 
 ![Paired differences to the baseline](docs/figures/phase4-paired-differences.png)
+
+![Phase 5: plan flipping at the unmapped wall, baseline against allow_unknown false](docs/figures/phase5-plan-flipping.png)
 
 ## Notes
 My contribution is configuration, integration, custom behaviours, experiments and interpretation, not a reimplementation of SLAM or Nav2.
