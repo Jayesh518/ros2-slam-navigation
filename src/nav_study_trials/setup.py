@@ -16,5 +16,6 @@ setup(
     description='Trial runner and metric code for the Nav2 configuration study.',
     license='Apache-2.0',
     entry_points={'console_scripts': ['run_trials = nav_study_trials.runner:main',
-                                      'plan_flip_guard = nav_study_trials.plan_flip_guard:main']},
+                                      'plan_flip_guard = nav_study_trials.plan_flip_guard:main',
+                                      'waypoint_mission = nav_study_trials.waypoint_mission:main']},
 )
