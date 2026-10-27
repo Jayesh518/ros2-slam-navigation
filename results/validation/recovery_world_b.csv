@@ -1,0 +1,3 @@
+trial_id,config,world,pair,repeat,seed,success,failure_reason,nav2_status,time_s,path_m,final_error_m,valid,reset_attempts,collisions,recovery_events,loc_err_max_m,loc_err_mean_m,loc_failure,sim_end_s,wall_s,started_utc,guard_triggers
+recovery-b04-r1,recovery,world_b,b04,1,12001,1,,SUCCEEDED,117.5,23.904,0.177,1,1,0,0,0.325,0.133,0,132.77,124.6,2026-10-27T05:47:28+00:00,1
+recovery-b14-r1,recovery,world_b,b14,1,12002,1,,SUCCEEDED,104.88,20.328,0.315,1,1,0,0,0.287,0.143,0,244.59,111.9,2026-10-27T05:49:33+00:00,3
