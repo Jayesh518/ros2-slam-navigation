@@ -30,6 +30,7 @@ from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_sensor_data
 from ros_gz_interfaces.msg import Contacts
 from sensor_msgs.msg import LaserScan
+from std_msgs.msg import String
 
 from nav_study_trials import metrics
 
@@ -64,6 +65,9 @@ class TrialRunner(Node):
             self.create_subscription(LaserScan, "scan", self._on_scan, qos_profile_sensor_data)
             self.create_subscription(PathMsg, "plan", self._on_plan, 10)
             self.create_subscription(CollisionMonitorState, "collision_monitor_state", self._on_cm, 10)
+        self.guard_triggers = 0
+        if args.guard:  # recovery configuration: count the triggers of the plan_flip_guard node (docs/protocol.md change (n))
+            self.create_subscription(String, "plan_flip_guard/events", self._on_guard, 10)
         self.create_subscription(Odometry, "ground_truth", self._on_gt, 10)
         self.create_subscription(PoseWithCovarianceStamped, "amcl_pose", self._on_amcl, 10)
         self.create_subscription(BehaviorTreeLog, "behavior_tree_log", self._on_bt, 50)
@@ -110,6 +114,10 @@ class TrialRunner(Node):
             wx = [metrics.map_to_world(x, y, 0.0, self.al)[:2] for x, y in pts]
             length = sum(math.dist(a, b) for a, b in zip(wx, wx[1:]))
             self.events.append((self.now(), "plan", f"poses={len(pts)} length_m={length:.2f} end=({wx[-1][0]:.2f};{wx[-1][1]:.2f})"))
+
+    def _on_guard(self, msg):
+        if self.recording and msg.data == "trigger":
+            self.guard_triggers += 1
 
     def _on_cm(self, msg):
         self.cm_state = f"{msg.action_type}:{msg.polygon_name}"
@@ -210,6 +218,7 @@ class TrialRunner(Node):
         self.clear_costmaps()
         self.track, self.amcl_err, self.contacts, self.bt = [], [], [], []
         self.trace, self.events, self.last_trace_t, self.cm_state = [], [], -1.0, ""
+        self.guard_triggers = 0
         if attempts == 0:  # reset could not be verified: do not judge navigation on a bad start
             return {"trial_id": trial_id, "config": self.args.config, "world": self.args.world, "pair": pair["id"], "repeat": repeat, "seed": seed,
                     "success": 0, "failure_reason": "invalid_reset", "nav2_status": "NOT_SENT", "valid": 0, "reset_attempts": 5,
@@ -265,6 +274,8 @@ class TrialRunner(Node):
                "loc_err_max_m": round(emax, 3) if errs else "", "loc_err_mean_m": round(emean, 3) if errs else "",
                "loc_failure": int(metrics.localisation_failure(self.amcl_err, t_done)), "sim_end_s": round(self.now(), 2),
                "wall_s": round(time.time() - wall0, 1), "started_utc": started}
+        if self.args.guard:
+            row["guard_triggers"] = self.guard_triggers
         return row
 
 
@@ -278,6 +289,7 @@ def main(argv=None):
     ap.add_argument("--pairs", default="configs/pairs.yaml")
     ap.add_argument("--alignment", default="configs/map_alignment.yaml")
     ap.add_argument("--only", default="", help="comma-separated pair ids to run (default all of the world)")
+    ap.add_argument("--guard", action="store_true", help="the plan_flip_guard node is running: add a guard_triggers column")
     ap.add_argument("--trace-dir", default="", help="write a 5 Hz trace and an event log per trial here (diagnosis; off by default)")
     ap.add_argument("--timeout", type=float, default=metrics.TIMEOUT_S)
     ap.add_argument("--tolerance", type=float, default=metrics.SUCCESS_TOLERANCE_M)
@@ -296,7 +308,7 @@ def main(argv=None):
     out.parent.mkdir(parents=True, exist_ok=True)
     new = not out.exists()
     with out.open("a", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=COLUMNS)
+        w = csv.DictWriter(f, fieldnames=COLUMNS + (["guard_triggers"] if args.guard else []))
         if new:
             w.writeheader()
         for i, (pair, rep) in enumerate(trials, 1):

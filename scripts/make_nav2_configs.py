@@ -79,6 +79,8 @@ for name, overlay in VARIANTS.items():
         setp(cfg, k, v)
     (CFG / f"{name}.yaml").write_text(yaml.safe_dump(cfg, sort_keys=False))
 (CFG / "baseline.yaml").write_text(yaml.safe_dump(baseline, sort_keys=False))
+# `recovery` (Phase 6, protocol change (n)): Nav2 parameters identical to the baseline; the difference is the plan_flip_guard node launched next to Nav2
+(CFG / "recovery.yaml").write_text(yaml.safe_dump(baseline, sort_keys=False))
 
 # Phase 5 diagnostic configurations (not part of the study grid, never analysed with the Phase 4 tables): baseline plus ONE change used to test a
 # hypothesis about the failures (docs/diagnosis.md).
@@ -129,4 +131,4 @@ for name in [*VARIANTS, *DIAGNOSTIC]:
     cfg = yaml.safe_load((CFG / f"{name}.yaml").read_text())
     lines += [f"\n## {name} vs baseline\n", "| parameter | baseline | " + name + " |", "|---|---|---|"] + diff(baseline, cfg)
 (CFG / "CHANGES.md").write_text("\n".join(lines) + "\n")
-print("wrote", ", ".join(f"{n}.yaml" for n in ["baseline", *VARIANTS]), "and CHANGES.md")
+print("wrote", ", ".join(f"{n}.yaml" for n in ["baseline", "recovery", *VARIANTS]), "and CHANGES.md")

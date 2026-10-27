@@ -15,5 +15,6 @@ setup(
     maintainer_email='127026542+Jayesh518@users.noreply.github.com',
     description='Trial runner and metric code for the Nav2 configuration study.',
     license='Apache-2.0',
-    entry_points={'console_scripts': ['run_trials = nav_study_trials.runner:main']},
+    entry_points={'console_scripts': ['run_trials = nav_study_trials.runner:main',
+                                      'plan_flip_guard = nav_study_trials.plan_flip_guard:main']},
 )

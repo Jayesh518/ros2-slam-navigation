@@ -9,6 +9,8 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.conditions import IfCondition
+from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
@@ -29,6 +31,7 @@ def generate_launch_description():
         DeclareLaunchArgument('map', default_value=''),
         DeclareLaunchArgument('params_file', default_value=''),
         DeclareLaunchArgument('use_rviz', default_value='false'),
+        DeclareLaunchArgument('guard', default_value='false'),  # recovery configuration: start the plan_flip_guard node
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(here, 'launch', 'sim.launch.py')),
             launch_arguments={a: LaunchConfiguration(a) for a in args}.items()),
@@ -41,4 +44,6 @@ def generate_launch_description():
                 'use_sim_time': 'True',
                 'autostart': 'True',
             }.items()),
+        Node(package='nav_study_trials', executable='plan_flip_guard', name='plan_flip_guard', output='screen',
+             parameters=[{'use_sim_time': True}], condition=IfCondition(LaunchConfiguration('guard'))),
     ])
