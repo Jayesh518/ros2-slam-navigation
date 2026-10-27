@@ -88,3 +88,13 @@ def test_cad_and_simulation_share_robot_parameters():
     assert abs(p["wheel"]["separation"] + p["wheel"]["width"] - 0.178) < 1e-9  # Burger overall width
     assert abs(p["lidar"]["z0"] + p["lidar"]["height"] - 0.192) < 1e-9          # Burger overall height
     assert (ROOT / "cad/nav_study_robot_v1.step").stat().st_size > 10_000
+
+
+def test_check_pairs_file_is_fresh_and_complete():
+    check = load("configs/pairs_check.yaml")["worlds"]["world_b"]
+    orig = load("configs/pairs.yaml")["worlds"]["world_b"]
+    assert [p["id"] for p in check] == [f"k{i:02d}" for i in range(1, 21)]
+    for p in check:
+        assert p["straight_m"] >= 4.0
+        assert not any(abs(p["start"]["x"] - o["start"]["x"]) < 1 and abs(p["start"]["y"] - o["start"]["y"]) < 1
+                       and abs(p["goal"]["x"] - o["goal"]["x"]) < 1 and abs(p["goal"]["y"] - o["goal"]["y"]) < 1 for o in orig)
