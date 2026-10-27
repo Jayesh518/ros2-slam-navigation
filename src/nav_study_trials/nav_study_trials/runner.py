@@ -21,13 +21,15 @@ import yaml
 from action_msgs.msg import GoalStatus
 from geometry_msgs.msg import PoseWithCovarianceStamped, Twist
 from nav2_msgs.action import NavigateToPose
-from nav2_msgs.msg import BehaviorTreeLog
+from nav2_msgs.msg import BehaviorTreeLog, CollisionMonitorState
 from nav2_msgs.srv import ClearEntireCostmap
-from nav_msgs.msg import Odometry
+from nav_msgs.msg import Odometry, Path as PathMsg
 from rclpy.action import ActionClient
 from rclpy.node import Node
 from rclpy.parameter import Parameter
+from rclpy.qos import qos_profile_sensor_data
 from ros_gz_interfaces.msg import Contacts
+from sensor_msgs.msg import LaserScan
 
 from nav_study_trials import metrics
 
@@ -53,6 +55,15 @@ class TrialRunner(Node):
         self.gt = None          # latest (t, x, y, yaw) in the world frame
         self.track, self.amcl_err, self.contacts, self.bt = [], [], [], []
         self.latest_amcl = None
+        # optional per-trial trace for diagnosis (Phase 5); off unless --trace-dir is given, and it does not change what is measured
+        self.trace, self.events = [], []
+        self.cmd, self.scan_min, self.cm_state = (0.0, 0.0), math.nan, ""
+        self.last_trace_t = -1.0
+        if args.trace_dir:
+            self.create_subscription(Twist, "cmd_vel", self._on_cmd, 10)
+            self.create_subscription(LaserScan, "scan", self._on_scan, qos_profile_sensor_data)
+            self.create_subscription(PathMsg, "plan", self._on_plan, 10)
+            self.create_subscription(CollisionMonitorState, "collision_monitor_state", self._on_cm, 10)
         self.create_subscription(Odometry, "ground_truth", self._on_gt, 10)
         self.create_subscription(PoseWithCovarianceStamped, "amcl_pose", self._on_amcl, 10)
         self.create_subscription(BehaviorTreeLog, "behavior_tree_log", self._on_bt, 50)
@@ -73,6 +84,11 @@ class TrialRunner(Node):
         self.gt = (self.now(), p.position.x, p.position.y, yaw_of(p.orientation))
         if self.recording:
             self.track.append(self.gt)
+            if self.args.trace_dir and self.gt[0] - self.last_trace_t >= 0.2:  # 5 Hz
+                self.last_trace_t = self.gt[0]
+                a = self.latest_amcl
+                ax, ay = (metrics.map_to_world(a[1], a[2], 0.0, self.al)[:2]) if a else (math.nan, math.nan)
+                self.trace.append((self.gt[0], self.gt[1], self.gt[2], self.gt[3], ax, ay, self.cmd[0], self.cmd[1], self.scan_min, self.cm_state))
 
     def _on_amcl(self, msg):
         p = msg.pose.pose
@@ -80,6 +96,23 @@ class TrialRunner(Node):
         if self.recording and self.gt is not None:
             wx, wy, _ = metrics.map_to_world(p.position.x, p.position.y, 0.0, self.al)
             self.amcl_err.append((self.now(), math.dist((wx, wy), self.gt[1:3])))
+
+    def _on_cmd(self, msg):
+        self.cmd = (msg.linear.x, msg.angular.z)
+
+    def _on_scan(self, msg):
+        r = [x for x in msg.ranges if math.isfinite(x) and x >= msg.range_min]
+        self.scan_min = min(r) if r else math.nan
+
+    def _on_plan(self, msg):
+        if self.recording and msg.poses:
+            pts = [(p.pose.position.x, p.pose.position.y) for p in msg.poses]
+            wx = [metrics.map_to_world(x, y, 0.0, self.al)[:2] for x, y in pts]
+            length = sum(math.dist(a, b) for a, b in zip(wx, wx[1:]))
+            self.events.append((self.now(), "plan", f"poses={len(pts)} length_m={length:.2f} end=({wx[-1][0]:.2f};{wx[-1][1]:.2f})"))
+
+    def _on_cm(self, msg):
+        self.cm_state = f"{msg.action_type}:{msg.polygon_name}"
 
     def _on_contacts(self, msg, part):
         if self.recording:
@@ -89,6 +122,8 @@ class TrialRunner(Node):
     def _on_bt(self, msg):
         if self.recording:
             self.bt += [(e.node_name, e.previous_status, e.current_status) for e in msg.event_log]
+            if self.args.trace_dir:
+                self.events += [(self.now(), "bt", f"{e.node_name} {e.previous_status}->{e.current_status}") for e in msg.event_log]
 
     # --- helpers ---------------------------------------------------------------------------------------------------------------------
     def spin_for(self, seconds):
@@ -149,6 +184,20 @@ class TrialRunner(Node):
                 while not fut.done() and time.time() < end:
                     rclpy.spin_once(self, timeout_sec=0.05)
 
+    def write_trace(self, trial_id, t0, t_done):
+        d = Path(self.args.trace_dir)
+        d.mkdir(parents=True, exist_ok=True)
+        with (d / f"{trial_id}_trace.csv").open("w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["t_s", "x", "y", "yaw", "amcl_x", "amcl_y", "cmd_v", "cmd_w", "scan_min_m", "collision_monitor"])
+            for t, *rest in self.trace:
+                w.writerow([round(t - t0, 2)] + [round(v, 3) if isinstance(v, float) else v for v in rest])
+        with (d / f"{trial_id}_events.csv").open("w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["t_s", "kind", "detail"])
+            for t, kind, detail in self.events:
+                w.writerow([round(t - t0, 2), kind, detail])
+
     # --- one trial -------------------------------------------------------------------------------------------------------------------
     def run_trial(self, pair, repeat, trial_id, seed):
         s, g = pair["start"], pair["goal"]
@@ -160,6 +209,7 @@ class TrialRunner(Node):
         self.spin_for(2.0)
         self.clear_costmaps()
         self.track, self.amcl_err, self.contacts, self.bt = [], [], [], []
+        self.trace, self.events, self.last_trace_t, self.cm_state = [], [], -1.0, ""
         if attempts == 0:  # reset could not be verified: do not judge navigation on a bad start
             return {"trial_id": trial_id, "config": self.args.config, "world": self.args.world, "pair": pair["id"], "repeat": repeat, "seed": seed,
                     "success": 0, "failure_reason": "invalid_reset", "nav2_status": "NOT_SENT", "valid": 0, "reset_attempts": 5,
@@ -200,6 +250,8 @@ class TrialRunner(Node):
         self.stop_robot()
         self.spin_for(1.0)
         self.recording = False
+        if self.args.trace_dir:
+            self.write_trace(trial_id, t0, t_done)
 
         final = self.gt[1:3] if self.gt else (math.nan, math.nan)
         err = metrics.goal_error(final, (g["x"], g["y"]))
@@ -226,6 +278,7 @@ def main(argv=None):
     ap.add_argument("--pairs", default="configs/pairs.yaml")
     ap.add_argument("--alignment", default="configs/map_alignment.yaml")
     ap.add_argument("--only", default="", help="comma-separated pair ids to run (default all of the world)")
+    ap.add_argument("--trace-dir", default="", help="write a 5 Hz trace and an event log per trial here (diagnosis; off by default)")
     ap.add_argument("--timeout", type=float, default=metrics.TIMEOUT_S)
     ap.add_argument("--tolerance", type=float, default=metrics.SUCCESS_TOLERANCE_M)
     args = ap.parse_args(argv)

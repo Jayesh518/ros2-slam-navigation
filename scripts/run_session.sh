@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run one (configuration, world) session: start the simulation + Nav2 + AMCL on the saved map, run the trial runner, stop everything.
 # Usage: scripts/run_session.sh <config> <world> <seed> <rtf> <repeats> [extra run_trials args, e.g. --only a01,a02]
-# Output: results/trials/<config>_<world>.csv (appended; one row per trial). Logs: results/logs/session_<config>_<world>.*
+# Output: ${OUT_DIR:-results/trials}/<config>_<world>.csv (appended; one row per trial). Logs: results/logs/session_<config>_<world>.*
 cd "$(dirname "$0")/.." || exit 1
 C=${1:?config}; W=${2:?world}; SEED=${3:-1}; RTF=${4:-1}; REP=${5:-1}; shift 5
 mkdir -p results/trials results/logs
@@ -18,6 +18,6 @@ for i in $(seq 1 120); do
 done
 sleep 3
 pkill -f "topic pub -r 1 /initialpose" 2>/dev/null
-scripts/env.sh ros2 run nav_study_trials run_trials --config $C --world $W --repeats $REP --seed $SEED --out results/trials/${C}_$W.csv "$@" 2>&1 \
+scripts/env.sh ros2 run nav_study_trials run_trials --config $C --world $W --repeats $REP --seed $SEED --out ${OUT_DIR:-results/trials}/${C}_$W.csv "$@" 2>&1 \
   | tee results/logs/session_${C}_$W.runner.log
 bash scripts/stop_sim.sh
